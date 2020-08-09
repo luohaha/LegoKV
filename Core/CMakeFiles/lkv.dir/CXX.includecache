@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/luoyixin/Github/LuoKV/Core/Base/base.cpp
+base.h
+/Users/luoyixin/Github/LuoKV/Core/Base/base.h
+
+/Users/luoyixin/Github/LuoKV/Core/Base/base.h
+stdio.h
+/Users/luoyixin/Github/LuoKV/Core/Base/stdio.h
+stdlib.h
+/Users/luoyixin/Github/LuoKV/Core/Base/stdlib.h
+
+/Users/luoyixin/Github/LuoKV/Core/lkv.cpp
+lkv.h
+/Users/luoyixin/Github/LuoKV/Core/lkv.h
+base.h
+/Users/luoyixin/Github/LuoKV/Core/base.h
+
+/Users/luoyixin/Github/LuoKV/Core/lkv.h
+stdio.h
+/Users/luoyixin/Github/LuoKV/Core/stdio.h
+stdlib.h
+/Users/luoyixin/Github/LuoKV/Core/stdlib.h
+
+Base/base.h
+stdio.h
+Base/stdio.h
+stdlib.h
+Base/stdlib.h
+
