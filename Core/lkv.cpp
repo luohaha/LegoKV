@@ -9,13 +9,19 @@
 using namespace Base;
 using namespace StorageEngine;
 
-int main()
+int LuoKV::Get(const Base::BaseType &key,
+               Base::BaseType *value)
 {
-  LOG.log_print(INFO, ERR_SUCCESS, "hello lkv");
-  StorageEngine::IStorageEngine *se = new LevelDBImpl("/tmp/asd/");
-  se->Put(BaseType("name"), BaseType("luohaha"));
-  BaseType ret;
-  se->Get(BaseType("name"), &ret);
-  printf("ret : %s\n", ret.buf.c_str());
-  return 0;
+  return se_->Get(key, value);
+}
+
+int LuoKV::Put(const Base::BaseType &key,
+               const Base::BaseType &value)
+{
+  return se_->Put(key, value);
+}
+
+int LuoKV::Delete(const Base::BaseType &key)
+{
+  return se_->Delete(key);
 }

@@ -57,9 +57,33 @@ include CMakeFiles/lkv.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/lkv.dir/flags.make
 
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: CMakeFiles/lkv.dir/flags.make
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Test/test_luokv.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lkv.dir/Test/test_luokv.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lkv.dir/Test/test_luokv.cpp.o -c /Users/luoyixin/Github/LuoKV/Core/Test/test_luokv.cpp
+
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lkv.dir/Test/test_luokv.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/luoyixin/Github/LuoKV/Core/Test/test_luokv.cpp > CMakeFiles/lkv.dir/Test/test_luokv.cpp.i
+
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lkv.dir/Test/test_luokv.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/luoyixin/Github/LuoKV/Core/Test/test_luokv.cpp -o CMakeFiles/lkv.dir/Test/test_luokv.cpp.s
+
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.requires:
+
+.PHONY : CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.requires
+
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.provides: CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.requires
+	$(MAKE) -f CMakeFiles/lkv.dir/build.make CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.provides.build
+.PHONY : CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.provides
+
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.provides.build: CMakeFiles/lkv.dir/Test/test_luokv.cpp.o
+
+
 CMakeFiles/lkv.dir/lkv.cpp.o: CMakeFiles/lkv.dir/flags.make
 CMakeFiles/lkv.dir/lkv.cpp.o: lkv.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lkv.dir/lkv.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lkv.dir/lkv.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lkv.dir/lkv.cpp.o -c /Users/luoyixin/Github/LuoKV/Core/lkv.cpp
 
 CMakeFiles/lkv.dir/lkv.cpp.i: cmake_force
@@ -83,7 +107,7 @@ CMakeFiles/lkv.dir/lkv.cpp.o.provides.build: CMakeFiles/lkv.dir/lkv.cpp.o
 
 CMakeFiles/lkv.dir/Base/base.cpp.o: CMakeFiles/lkv.dir/flags.make
 CMakeFiles/lkv.dir/Base/base.cpp.o: Base/base.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lkv.dir/Base/base.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lkv.dir/Base/base.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lkv.dir/Base/base.cpp.o -c /Users/luoyixin/Github/LuoKV/Core/Base/base.cpp
 
 CMakeFiles/lkv.dir/Base/base.cpp.i: cmake_force
@@ -107,7 +131,7 @@ CMakeFiles/lkv.dir/Base/base.cpp.o.provides.build: CMakeFiles/lkv.dir/Base/base.
 
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: CMakeFiles/lkv.dir/flags.make
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Storage/leveldb_impl.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o -c /Users/luoyixin/Github/LuoKV/Core/Storage/leveldb_impl.cpp
 
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.i: cmake_force
@@ -131,6 +155,7 @@ CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o.provides.build: CMakeFiles/lkv.dir
 
 # Object files for target lkv
 lkv_OBJECTS = \
+"CMakeFiles/lkv.dir/Test/test_luokv.cpp.o" \
 "CMakeFiles/lkv.dir/lkv.cpp.o" \
 "CMakeFiles/lkv.dir/Base/base.cpp.o" \
 "CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o"
@@ -138,12 +163,13 @@ lkv_OBJECTS = \
 # External object files for target lkv
 lkv_EXTERNAL_OBJECTS =
 
+lkv: CMakeFiles/lkv.dir/Test/test_luokv.cpp.o
 lkv: CMakeFiles/lkv.dir/lkv.cpp.o
 lkv: CMakeFiles/lkv.dir/Base/base.cpp.o
 lkv: CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o
 lkv: CMakeFiles/lkv.dir/build.make
 lkv: CMakeFiles/lkv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable lkv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable lkv"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lkv.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -151,6 +177,7 @@ CMakeFiles/lkv.dir/build: lkv
 
 .PHONY : CMakeFiles/lkv.dir/build
 
+CMakeFiles/lkv.dir/requires: CMakeFiles/lkv.dir/Test/test_luokv.cpp.o.requires
 CMakeFiles/lkv.dir/requires: CMakeFiles/lkv.dir/lkv.cpp.o.requires
 CMakeFiles/lkv.dir/requires: CMakeFiles/lkv.dir/Base/base.cpp.o.requires
 CMakeFiles/lkv.dir/requires: CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o.requires

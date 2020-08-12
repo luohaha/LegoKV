@@ -3,6 +3,7 @@
 
 CMakeFiles/lkv.dir/Base/base.cpp.o: Base/base.cpp
 CMakeFiles/lkv.dir/Base/base.cpp.o: Base/base.h
+CMakeFiles/lkv.dir/Base/base.cpp.o: Base/errcode.h
 CMakeFiles/lkv.dir/Base/base.cpp.o: LibsHeaders/leveldb/db.h
 CMakeFiles/lkv.dir/Base/base.cpp.o: LibsHeaders/leveldb/export.h
 CMakeFiles/lkv.dir/Base/base.cpp.o: LibsHeaders/leveldb/iterator.h
@@ -14,6 +15,7 @@ CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Storage/leveldb_impl.cpp
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Storage/leveldb_impl.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Storage/storage_engine.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Base/base.h
+CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: Base/errcode.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/db.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/export.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/iterator.h
@@ -21,9 +23,24 @@ CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/options.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/slice.h
 CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o: LibsHeaders/leveldb/status.h
 
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Test/test_luokv.cpp
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Base/base.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Base/errcode.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/db.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/export.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/iterator.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/options.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/slice.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: LibsHeaders/leveldb/status.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Storage/leveldb_impl.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: Storage/storage_engine.h
+CMakeFiles/lkv.dir/Test/test_luokv.cpp.o: lkv.h
+
+CMakeFiles/lkv.dir/lkv.cpp.o: Storage/leveldb_impl.h
 CMakeFiles/lkv.dir/lkv.cpp.o: lkv.cpp
 CMakeFiles/lkv.dir/lkv.cpp.o: lkv.h
 CMakeFiles/lkv.dir/lkv.cpp.o: Base/base.h
+CMakeFiles/lkv.dir/lkv.cpp.o: Base/errcode.h
 CMakeFiles/lkv.dir/lkv.cpp.o: LibsHeaders/leveldb/db.h
 CMakeFiles/lkv.dir/lkv.cpp.o: LibsHeaders/leveldb/export.h
 CMakeFiles/lkv.dir/lkv.cpp.o: LibsHeaders/leveldb/iterator.h
