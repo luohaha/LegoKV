@@ -1,6 +1,5 @@
 #include "lkv.h"
 #include "base.h"
-#include "leveldb_impl.h"
 
 using namespace Base;
 using namespace StorageEngine;

@@ -150,6 +150,33 @@ Base/base.cpp.s:
 	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Base/base.cpp.s
 .PHONY : Base/base.cpp.s
 
+Consensus/simple_consensus_impl.o: Consensus/simple_consensus_impl.cpp.o
+
+.PHONY : Consensus/simple_consensus_impl.o
+
+# target to build an object file
+Consensus/simple_consensus_impl.cpp.o:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.o
+.PHONY : Consensus/simple_consensus_impl.cpp.o
+
+Consensus/simple_consensus_impl.i: Consensus/simple_consensus_impl.cpp.i
+
+.PHONY : Consensus/simple_consensus_impl.i
+
+# target to preprocess a source file
+Consensus/simple_consensus_impl.cpp.i:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.i
+.PHONY : Consensus/simple_consensus_impl.cpp.i
+
+Consensus/simple_consensus_impl.s: Consensus/simple_consensus_impl.cpp.s
+
+.PHONY : Consensus/simple_consensus_impl.s
+
+# target to generate assembly for a file
+Consensus/simple_consensus_impl.cpp.s:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.s
+.PHONY : Consensus/simple_consensus_impl.cpp.s
+
 Storage/leveldb_impl.o: Storage/leveldb_impl.cpp.o
 
 .PHONY : Storage/leveldb_impl.o
@@ -243,6 +270,9 @@ help:
 	@echo "... Base/base.o"
 	@echo "... Base/base.i"
 	@echo "... Base/base.s"
+	@echo "... Consensus/simple_consensus_impl.o"
+	@echo "... Consensus/simple_consensus_impl.i"
+	@echo "... Consensus/simple_consensus_impl.s"
 	@echo "... Storage/leveldb_impl.o"
 	@echo "... Storage/leveldb_impl.i"
 	@echo "... Storage/leveldb_impl.s"
