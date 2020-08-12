@@ -5,53 +5,65 @@
 #ifndef LUOKV_BASE_H
 #define LUOKV_BASE_H
 
-// 基础头文件
+// base include
 
 #include "stdio.h"
 #include "stdlib.h"
-
-// 错误码定义
-
-#define ERR_SUCCESS 0
-#define ERR_UNEXPECTED 1
+#include <cassert>
+#include "leveldb/db.h"
+#include "errcode.h"
 
 namespace Base
 {
-// 日志打印宏定义
+
+  struct BaseType
+  {
+    BaseType() {}
+    BaseType(const std::string &str) : buf(str) {}
+    BaseType &operator=(const BaseType &b)
+    {
+      buf = b.buf;
+      return *this;
+    }
+    BaseType &operator=(const std::string &s)
+    {
+      buf = s;
+      return *this;
+    }
+    std::string buf;
+  };
+
+  // log print
   enum LogLevel : int
-    {
-        DEBUG = 0,
-        INFO,
-        WARN,
-        ERROR
-    };
-    
-    // level map
-    static const char *log_level_map[4] 
-      = {"DEBUG", "INFO", "WARN", "ERROR"};
+  {
+    DEBUG = 0,
+    INFO,
+    WARN,
+    ERROR
+  };
 
-    // err info map
-    static const char *err_info_map[2]
-      = {"ERR_SUCCESS", "ERR_UNEXPECTED"};
+  // level map
+  static const char *log_level_map[4] = {"DEBUG", "INFO", "WARN", "ERROR"};
 
-    class LogPrint
+  class LogPrint
+  {
+  public:
+    LogPrint() {}
+    ~LogPrint() {}
+    void log_print(LogLevel level, int errno, const char *msg, ...);
+    static LogPrint &get_instance()
     {
-    public:
-        LogPrint() {}
-        ~LogPrint() {}
-        void log_print(LogLevel level, int errno, const char *msg, ...);
-	static LogPrint &get_instance() 
-	{ 
-	  static LogPrint log_p;
-	  return log_p;
-	}
-    private:
-	LogLevel level_;
-    };
-}
+      static LogPrint log_p;
+      return log_p;
+    }
+
+  private:
+    LogLevel level_;
+  };
+} // namespace Base
 
 #define LOG Base::LogPrint::get_instance()
 
-#define LOG_OUT(type, msg ...)
+#define LOG_OUT(type, msg...)
 
 #endif //LUOKV_BASE_H

@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/lkv.dir/lkv.cpp.o"
   "CMakeFiles/lkv.dir/Base/base.cpp.o"
+  "CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o"
   "lkv.pdb"
   "lkv"
 )

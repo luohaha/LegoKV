@@ -6,5 +6,5 @@ CXX_FLAGS = -std=c++11 -O2 -isysroot /Applications/Xcode.app/Contents/Developer/
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/luoyixin/Github/LuoKV/Core/Base -I/Users/luoyixin/Github/LuoKV/Core 
+CXX_INCLUDES = -I/Users/luoyixin/Github/LuoKV/Core/Base -I/Users/luoyixin/Github/LuoKV/Core -I/Users/luoyixin/Github/LuoKV/Core/Storage -I/Users/luoyixin/Github/LuoKV/Core/LibsHeaders 
 

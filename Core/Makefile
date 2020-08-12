@@ -150,6 +150,33 @@ Base/base.cpp.s:
 	$(MAKE) -f CMakeFiles/lkv.dir/build.make CMakeFiles/lkv.dir/Base/base.cpp.s
 .PHONY : Base/base.cpp.s
 
+Storage/leveldb_impl.o: Storage/leveldb_impl.cpp.o
+
+.PHONY : Storage/leveldb_impl.o
+
+# target to build an object file
+Storage/leveldb_impl.cpp.o:
+	$(MAKE) -f CMakeFiles/lkv.dir/build.make CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.o
+.PHONY : Storage/leveldb_impl.cpp.o
+
+Storage/leveldb_impl.i: Storage/leveldb_impl.cpp.i
+
+.PHONY : Storage/leveldb_impl.i
+
+# target to preprocess a source file
+Storage/leveldb_impl.cpp.i:
+	$(MAKE) -f CMakeFiles/lkv.dir/build.make CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.i
+.PHONY : Storage/leveldb_impl.cpp.i
+
+Storage/leveldb_impl.s: Storage/leveldb_impl.cpp.s
+
+.PHONY : Storage/leveldb_impl.s
+
+# target to generate assembly for a file
+Storage/leveldb_impl.cpp.s:
+	$(MAKE) -f CMakeFiles/lkv.dir/build.make CMakeFiles/lkv.dir/Storage/leveldb_impl.cpp.s
+.PHONY : Storage/leveldb_impl.cpp.s
+
 lkv.o: lkv.cpp.o
 
 .PHONY : lkv.o
@@ -189,6 +216,9 @@ help:
 	@echo "... Base/base.o"
 	@echo "... Base/base.i"
 	@echo "... Base/base.s"
+	@echo "... Storage/leveldb_impl.o"
+	@echo "... Storage/leveldb_impl.i"
+	@echo "... Storage/leveldb_impl.s"
 	@echo "... lkv.o"
 	@echo "... lkv.i"
 	@echo "... lkv.s"

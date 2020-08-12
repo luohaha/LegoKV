@@ -6,13 +6,15 @@
 
 namespace Base
 {
-    void LogPrint::log_print(LogLevel level, 
-			     int errno, 
-			     const char *msg, ...)
+  // TODO support variant arg
+  void LogPrint::log_print(LogLevel level,
+                           int errno,
+                           const char *msg, ...)
+  {
+    if (level >= level_)
     {
-      if (level >= level_) {
-	printf("[%s][%s] %s \n", 
-	       log_level_map[level], err_info_map[errno], msg);
-      }
+      printf("[%s][%s] %s \n",
+             log_level_map[level], err_info_map[errno], msg);
     }
-}
+  }
+} // namespace Base
