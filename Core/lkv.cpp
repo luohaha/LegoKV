@@ -6,6 +6,9 @@
 #include "base.h"
 #include "leveldb_impl.h"
 
+namespace lkv 
+{
+
 using namespace Base;
 using namespace StorageEngine;
 using namespace Consensus;
@@ -31,4 +34,6 @@ int LuoKV::Delete(const Base::BaseType &key)
   ConsensusType v(OP_DEL, key.buf);
   return cons_->Propose(v, 
   [&](bool a, const ConsensusType &b) -> int { return se_->Delete(key); });
+}
+
 }

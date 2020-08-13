@@ -1,6 +1,7 @@
 #include "lkv.h"
 #include "base.h"
 
+using namespace lkv;
 using namespace Base;
 using namespace StorageEngine;
 

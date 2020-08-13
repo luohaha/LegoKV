@@ -4,6 +4,8 @@
 #include "base.h"
 #include <functional>
 
+namespace lkv 
+{
 namespace Consensus
 {
 
@@ -28,6 +30,7 @@ class IConsensus
                       std::function<int (bool, const ConsensusType &)> cb) = 0;
 };
 
+}
 }
 
 #endif

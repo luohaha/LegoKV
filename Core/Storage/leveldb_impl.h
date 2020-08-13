@@ -7,6 +7,8 @@
 
 #include "storage_engine.h"
 
+namespace lkv 
+{
 namespace StorageEngine
 {
   class LevelDBImpl : public IStorageEngine
@@ -24,6 +26,7 @@ namespace StorageEngine
   private:
     leveldb::DB* db_;
   };
+}
 }
 
 #endif

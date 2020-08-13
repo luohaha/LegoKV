@@ -4,6 +4,8 @@
 
 #include "leveldb_impl.h"
 
+namespace lkv 
+{
 using namespace Base;
 using namespace leveldb;
 
@@ -44,4 +46,5 @@ namespace StorageEngine
     return s.ok() ? ERR_SUCCESS : ERR_UNEXPECTED;
   }
 
+}
 }

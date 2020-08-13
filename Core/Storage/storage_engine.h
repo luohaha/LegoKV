@@ -7,6 +7,8 @@
 
 #include "base.h"
 
+namespace lkv 
+{
 namespace StorageEngine
 {
 
@@ -18,6 +20,7 @@ class IStorageEngine
   virtual int Delete(const Base::BaseType &key) = 0;
 };
 
+}
 }
 
 #endif //LUOKV_STORAGE_ENGINE_H

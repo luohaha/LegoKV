@@ -4,6 +4,8 @@
 
 #include "base.h"
 
+namespace lkv 
+{
 namespace Base
 {
   // TODO support variant arg
@@ -18,3 +20,4 @@ namespace Base
     }
   }
 } // namespace Base
+} // lkv

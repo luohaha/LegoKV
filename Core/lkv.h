@@ -8,6 +8,9 @@
 #include "Storage/leveldb_impl.h"
 #include "Consensus/simple_consensus_impl.h"
 
+namespace lkv 
+{
+    
 class LuoKV
 {
 public:
@@ -26,6 +29,8 @@ private:
     StorageEngine::IStorageEngine *se_;
     Consensus::IConsensus *cons_;
 };
+
+}
 
 
 #endif //LUOKV_LKV_H

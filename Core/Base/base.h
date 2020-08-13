@@ -13,6 +13,8 @@
 #include "leveldb/db.h"
 #include "errcode.h"
 
+namespace lkv 
+{
 namespace Base
 {
 
@@ -61,8 +63,9 @@ namespace Base
     LogLevel level_;
   };
 } // namespace Base
+}
 
-#define LOG Base::LogPrint::get_instance()
+#define LOG lkv::Base::LogPrint::get_instance()
 
 #define LOG_OUT(type, msg...)
 
