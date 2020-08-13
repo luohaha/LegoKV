@@ -8,6 +8,7 @@ include_directories(${PROJECT_SOURCE_DIR}/Base/
 		    ${PROJECT_SOURCE_DIR} 
 		    ${PROJECT_SOURCE_DIR}/Storage/
 			${PROJECT_SOURCE_DIR}/Consensus/ 
+			${PROJECT_SOURCE_DIR}/Conf/
 		    ${PROJECT_SOURCE_DIR}/LibsHeaders/)
 link_directories(${PROJECT_SOURCE_DIR}/../Libs)
 # 指定生成目标
