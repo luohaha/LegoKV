@@ -12,6 +12,8 @@
 #include <cassert>
 #include "leveldb/db.h"
 #include "errcode.h"
+#include <vector>
+#include <map>
 
 namespace lkv 
 {

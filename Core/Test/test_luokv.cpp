@@ -4,14 +4,20 @@
 using namespace lkv;
 using namespace Base;
 using namespace StorageEngine;
+using namespace Conf;
+using namespace Consensus;
 
 int main()
 {
   LOG.log_print(INFO, ERR_SUCCESS, "hello lkv");
-  StorageEngine::IStorageEngine *se = new LevelDBImpl("/tmp/asd/");
-  se->Put(BaseType("name"), BaseType("luohaha"));
+  IStorageEngine *se = new LevelDBImpl("/tmp/asd/");
+  IConsensus *cons = new SimpleConsensusImpl();
+  IConf *conf = new JsonConfImpl("/tmp/lkv.conf");
+  LuoKV lkv;
+  lkv.SetConf(conf).SetStorageEngine(se).SetConsensus(cons);
+  lkv.Put(BaseType("name"), BaseType("luohaha"));
   BaseType ret;
-  se->Get(BaseType("name"), &ret);
+  lkv.Get(BaseType("name"), &ret);
   printf("ret : %s\n", ret.buf.c_str());
   return 0;
 }

@@ -1,3 +1,5 @@
+#ifndef CONF_H
+#define CONF_H
 #include "base.h"
 
 namespace lkv
@@ -7,14 +9,14 @@ namespace Conf
 
 struct GlobalConf
 {
-    // {consensus group -> location}
-    std::vector<std::vector<string>> globalConsensusGroup;
+    // { consensus group name -> consensus group {addr1, addr2, ...} }
+    std::map<std::string, std::vector<std::string>> globalConsensusGroup;
 };
 
 struct ConfType
 {
     std::string location;
-    int32_t curConsensusGroup;
+    std::string curConsensusGroup;
     struct GlobalConf gconf;
 };
 
@@ -26,3 +28,5 @@ public:
 
 }
 }
+
+#endif

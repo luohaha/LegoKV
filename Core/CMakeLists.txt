@@ -17,5 +17,6 @@ Test/test_luokv.cpp
 lkv.cpp 
 Base/base.cpp 
 Storage/leveldb_impl.cpp
-Consensus/simple_consensus_impl.cpp)
-TARGET_LINK_LIBRARIES(test_luolkv libleveldb.a)
+Consensus/simple_consensus_impl.cpp
+Conf/json_conf_impl.cpp)
+TARGET_LINK_LIBRARIES(test_luolkv libleveldb.a libjsoncpp_static.a)

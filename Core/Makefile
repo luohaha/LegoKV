@@ -150,6 +150,33 @@ Base/base.cpp.s:
 	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Base/base.cpp.s
 .PHONY : Base/base.cpp.s
 
+Conf/json_conf_impl.o: Conf/json_conf_impl.cpp.o
+
+.PHONY : Conf/json_conf_impl.o
+
+# target to build an object file
+Conf/json_conf_impl.cpp.o:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.o
+.PHONY : Conf/json_conf_impl.cpp.o
+
+Conf/json_conf_impl.i: Conf/json_conf_impl.cpp.i
+
+.PHONY : Conf/json_conf_impl.i
+
+# target to preprocess a source file
+Conf/json_conf_impl.cpp.i:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.i
+.PHONY : Conf/json_conf_impl.cpp.i
+
+Conf/json_conf_impl.s: Conf/json_conf_impl.cpp.s
+
+.PHONY : Conf/json_conf_impl.s
+
+# target to generate assembly for a file
+Conf/json_conf_impl.cpp.s:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.s
+.PHONY : Conf/json_conf_impl.cpp.s
+
 Consensus/simple_consensus_impl.o: Consensus/simple_consensus_impl.cpp.o
 
 .PHONY : Consensus/simple_consensus_impl.o
@@ -270,6 +297,9 @@ help:
 	@echo "... Base/base.o"
 	@echo "... Base/base.i"
 	@echo "... Base/base.s"
+	@echo "... Conf/json_conf_impl.o"
+	@echo "... Conf/json_conf_impl.i"
+	@echo "... Conf/json_conf_impl.s"
 	@echo "... Consensus/simple_consensus_impl.o"
 	@echo "... Consensus/simple_consensus_impl.i"
 	@echo "... Consensus/simple_consensus_impl.s"

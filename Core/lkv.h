@@ -7,15 +7,18 @@
 
 #include "Storage/leveldb_impl.h"
 #include "Consensus/simple_consensus_impl.h"
+#include "Conf/json_conf_impl.h"
 
 namespace lkv 
 {
-    
+
 class LuoKV
 {
 public:
     LuoKV() {}
     ~LuoKV() {}
+    LuoKV &SetConf(Conf::IConf *conf)
+    { conf_ = conf; return *this; }
     LuoKV &SetStorageEngine(StorageEngine::IStorageEngine *se)
     { se_ = se; return *this; }
     LuoKV &SetConsensus(Consensus::IConsensus *cons)
@@ -28,6 +31,7 @@ public:
 private:
     StorageEngine::IStorageEngine *se_;
     Consensus::IConsensus *cons_;
+    Conf::IConf *conf_;
 };
 
 }
