@@ -18,7 +18,7 @@ public:
     LuoKV() {}
     ~LuoKV() {}
     LuoKV &SetConf(Conf::IConf *conf)
-    { conf_ = conf; return *this; }
+    { conf_ = conf; conf->LoadConf(); return *this; }
     LuoKV &SetStorageEngine(StorageEngine::IStorageEngine *se)
     { se_ = se; return *this; }
     LuoKV &SetConsensus(Consensus::IConsensus *cons)

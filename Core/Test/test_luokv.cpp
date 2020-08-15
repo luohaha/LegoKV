@@ -15,9 +15,10 @@ int main()
   IConf *conf = new JsonConfImpl("/tmp/lkv.conf");
   LuoKV lkv;
   lkv.SetConf(conf).SetStorageEngine(se).SetConsensus(cons);
+  static_cast<JsonConfImpl*>(conf)->PrintConf();
   lkv.Put(BaseType("name"), BaseType("luohaha"));
   BaseType ret;
   lkv.Get(BaseType("name"), &ret);
-  printf("ret : %s\n", ret.buf.c_str());
+  printf("name : %s\n", ret.buf.c_str());
   return 0;
 }
