@@ -204,6 +204,33 @@ Consensus/simple_consensus_impl.cpp.s:
 	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.s
 .PHONY : Consensus/simple_consensus_impl.cpp.s
 
+Router/simple_dhash_impl.o: Router/simple_dhash_impl.cpp.o
+
+.PHONY : Router/simple_dhash_impl.o
+
+# target to build an object file
+Router/simple_dhash_impl.cpp.o:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.o
+.PHONY : Router/simple_dhash_impl.cpp.o
+
+Router/simple_dhash_impl.i: Router/simple_dhash_impl.cpp.i
+
+.PHONY : Router/simple_dhash_impl.i
+
+# target to preprocess a source file
+Router/simple_dhash_impl.cpp.i:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.i
+.PHONY : Router/simple_dhash_impl.cpp.i
+
+Router/simple_dhash_impl.s: Router/simple_dhash_impl.cpp.s
+
+.PHONY : Router/simple_dhash_impl.s
+
+# target to generate assembly for a file
+Router/simple_dhash_impl.cpp.s:
+	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.s
+.PHONY : Router/simple_dhash_impl.cpp.s
+
 Storage/leveldb_impl.o: Storage/leveldb_impl.cpp.o
 
 .PHONY : Storage/leveldb_impl.o
@@ -303,6 +330,9 @@ help:
 	@echo "... Consensus/simple_consensus_impl.o"
 	@echo "... Consensus/simple_consensus_impl.i"
 	@echo "... Consensus/simple_consensus_impl.s"
+	@echo "... Router/simple_dhash_impl.o"
+	@echo "... Router/simple_dhash_impl.i"
+	@echo "... Router/simple_dhash_impl.s"
 	@echo "... Storage/leveldb_impl.o"
 	@echo "... Storage/leveldb_impl.i"
 	@echo "... Storage/leveldb_impl.s"

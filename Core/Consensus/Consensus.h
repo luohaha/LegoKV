@@ -19,15 +19,21 @@ enum OpType
 struct ConsensusType
 {
     OpType op;
-    std::string buf;
-    ConsensusType(const OpType o, const std::string &b) : op(o), buf(b) {}
+    std::string key;
+    std::string value;
+    ConsensusType(const OpType o, const std::string &k) : op(o), key(k) {}
+    ConsensusType(const OpType o, const std::string &k, const std::string &v) 
+    : op(o), key(k), value(v) {}
 };
 
 class IConsensus
 {
  public:
-  virtual int Propose(const ConsensusType &value,
-                      std::function<int (bool, const ConsensusType &)> cb) = 0;
+  virtual int Propose(const std::string &consensus_group,
+                      const ConsensusType &value,
+                      std::function<int (bool, const std::string &, const ConsensusType &)> cb) = 0;
+  virtual std::string &ChooseReadProvider(const std::string &consensus_group) = 0;
+  virtual std::string &ChooseModifyProvider(const std::string &consensus_group) = 0;
 };
 
 }

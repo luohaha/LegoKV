@@ -8,6 +8,7 @@
 #include "Storage/leveldb_impl.h"
 #include "Consensus/simple_consensus_impl.h"
 #include "Conf/json_conf_impl.h"
+#include "Router/simple_dhash_impl.h"
 
 namespace lkv 
 {
@@ -23,6 +24,8 @@ public:
     { se_ = se; return *this; }
     LuoKV &SetConsensus(Consensus::IConsensus *cons)
     { cons_ = cons; return *this; }
+    LuoKV &SetRouter(Router::IRouter *router)
+    { router_ = router; return *this; }
     int Get(const Base::BaseType &key, 
 		    Base::BaseType *value);
     int Put(const Base::BaseType &key, 
@@ -31,6 +34,7 @@ public:
 private:
     StorageEngine::IStorageEngine *se_;
     Consensus::IConsensus *cons_;
+    Router::IRouter *router_;
     Conf::IConf *conf_;
 };
 

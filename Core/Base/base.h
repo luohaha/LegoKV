@@ -34,6 +34,7 @@ namespace Base
       buf = s;
       return *this;
     }
+    uint32_t Hash() const { return std::hash<std::string>{}(buf); }
     std::string buf;
   };
 

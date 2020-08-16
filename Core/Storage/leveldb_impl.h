@@ -18,11 +18,16 @@ namespace StorageEngine
     { init(path); }
     ~LevelDBImpl() { delete db_; }
     void init(const std::string &path);
-    virtual int Get(const Base::BaseType &key, 
+    virtual int Get(const std::string &consensus_group,
+        const Base::BaseType &key, 
 		    Base::BaseType *value) override;
-    virtual int Put(const Base::BaseType &key, 
+    virtual int Put(const std::string &consensus_group,
+        const Base::BaseType &key, 
 		    const Base::BaseType &value) override;
-    virtual int Delete(const Base::BaseType &key) override;
+    virtual int Delete(const std::string &consensus_group,
+        const Base::BaseType &key) override;
+    virtual int Apply(const std::string &consensus_group,
+                      const Consensus::ConsensusType &value) override;
   private:
     leveldb::DB* db_;
   };
