@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_luolkv
+# Target rules for targets named test_legokv
 
 # Build rule for target.
-test_luolkv: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_luolkv
-.PHONY : test_luolkv
+test_legokv: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_legokv
+.PHONY : test_legokv
 
 # fast build rule for target.
-test_luolkv/fast:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/build
-.PHONY : test_luolkv/fast
+test_legokv/fast:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/build
+.PHONY : test_legokv/fast
 
 Base/base.o: Base/base.cpp.o
 
@@ -129,7 +129,7 @@ Base/base.o: Base/base.cpp.o
 
 # target to build an object file
 Base/base.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Base/base.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Base/base.cpp.o
 .PHONY : Base/base.cpp.o
 
 Base/base.i: Base/base.cpp.i
@@ -138,7 +138,7 @@ Base/base.i: Base/base.cpp.i
 
 # target to preprocess a source file
 Base/base.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Base/base.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Base/base.cpp.i
 .PHONY : Base/base.cpp.i
 
 Base/base.s: Base/base.cpp.s
@@ -147,7 +147,7 @@ Base/base.s: Base/base.cpp.s
 
 # target to generate assembly for a file
 Base/base.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Base/base.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Base/base.cpp.s
 .PHONY : Base/base.cpp.s
 
 Conf/json_conf_impl.o: Conf/json_conf_impl.cpp.o
@@ -156,7 +156,7 @@ Conf/json_conf_impl.o: Conf/json_conf_impl.cpp.o
 
 # target to build an object file
 Conf/json_conf_impl.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Conf/json_conf_impl.cpp.o
 .PHONY : Conf/json_conf_impl.cpp.o
 
 Conf/json_conf_impl.i: Conf/json_conf_impl.cpp.i
@@ -165,7 +165,7 @@ Conf/json_conf_impl.i: Conf/json_conf_impl.cpp.i
 
 # target to preprocess a source file
 Conf/json_conf_impl.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Conf/json_conf_impl.cpp.i
 .PHONY : Conf/json_conf_impl.cpp.i
 
 Conf/json_conf_impl.s: Conf/json_conf_impl.cpp.s
@@ -174,7 +174,7 @@ Conf/json_conf_impl.s: Conf/json_conf_impl.cpp.s
 
 # target to generate assembly for a file
 Conf/json_conf_impl.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Conf/json_conf_impl.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Conf/json_conf_impl.cpp.s
 .PHONY : Conf/json_conf_impl.cpp.s
 
 Consensus/simple_consensus_impl.o: Consensus/simple_consensus_impl.cpp.o
@@ -183,7 +183,7 @@ Consensus/simple_consensus_impl.o: Consensus/simple_consensus_impl.cpp.o
 
 # target to build an object file
 Consensus/simple_consensus_impl.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Consensus/simple_consensus_impl.cpp.o
 .PHONY : Consensus/simple_consensus_impl.cpp.o
 
 Consensus/simple_consensus_impl.i: Consensus/simple_consensus_impl.cpp.i
@@ -192,7 +192,7 @@ Consensus/simple_consensus_impl.i: Consensus/simple_consensus_impl.cpp.i
 
 # target to preprocess a source file
 Consensus/simple_consensus_impl.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Consensus/simple_consensus_impl.cpp.i
 .PHONY : Consensus/simple_consensus_impl.cpp.i
 
 Consensus/simple_consensus_impl.s: Consensus/simple_consensus_impl.cpp.s
@@ -201,7 +201,7 @@ Consensus/simple_consensus_impl.s: Consensus/simple_consensus_impl.cpp.s
 
 # target to generate assembly for a file
 Consensus/simple_consensus_impl.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Consensus/simple_consensus_impl.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Consensus/simple_consensus_impl.cpp.s
 .PHONY : Consensus/simple_consensus_impl.cpp.s
 
 Router/simple_dhash_impl.o: Router/simple_dhash_impl.cpp.o
@@ -210,7 +210,7 @@ Router/simple_dhash_impl.o: Router/simple_dhash_impl.cpp.o
 
 # target to build an object file
 Router/simple_dhash_impl.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Router/simple_dhash_impl.cpp.o
 .PHONY : Router/simple_dhash_impl.cpp.o
 
 Router/simple_dhash_impl.i: Router/simple_dhash_impl.cpp.i
@@ -219,7 +219,7 @@ Router/simple_dhash_impl.i: Router/simple_dhash_impl.cpp.i
 
 # target to preprocess a source file
 Router/simple_dhash_impl.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Router/simple_dhash_impl.cpp.i
 .PHONY : Router/simple_dhash_impl.cpp.i
 
 Router/simple_dhash_impl.s: Router/simple_dhash_impl.cpp.s
@@ -228,7 +228,7 @@ Router/simple_dhash_impl.s: Router/simple_dhash_impl.cpp.s
 
 # target to generate assembly for a file
 Router/simple_dhash_impl.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Router/simple_dhash_impl.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Router/simple_dhash_impl.cpp.s
 .PHONY : Router/simple_dhash_impl.cpp.s
 
 Storage/leveldb_impl.o: Storage/leveldb_impl.cpp.o
@@ -237,7 +237,7 @@ Storage/leveldb_impl.o: Storage/leveldb_impl.cpp.o
 
 # target to build an object file
 Storage/leveldb_impl.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Storage/leveldb_impl.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Storage/leveldb_impl.cpp.o
 .PHONY : Storage/leveldb_impl.cpp.o
 
 Storage/leveldb_impl.i: Storage/leveldb_impl.cpp.i
@@ -246,7 +246,7 @@ Storage/leveldb_impl.i: Storage/leveldb_impl.cpp.i
 
 # target to preprocess a source file
 Storage/leveldb_impl.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Storage/leveldb_impl.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Storage/leveldb_impl.cpp.i
 .PHONY : Storage/leveldb_impl.cpp.i
 
 Storage/leveldb_impl.s: Storage/leveldb_impl.cpp.s
@@ -255,35 +255,35 @@ Storage/leveldb_impl.s: Storage/leveldb_impl.cpp.s
 
 # target to generate assembly for a file
 Storage/leveldb_impl.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Storage/leveldb_impl.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Storage/leveldb_impl.cpp.s
 .PHONY : Storage/leveldb_impl.cpp.s
 
-Test/test_luokv.o: Test/test_luokv.cpp.o
+Test/test_legokv.o: Test/test_legokv.cpp.o
 
-.PHONY : Test/test_luokv.o
+.PHONY : Test/test_legokv.o
 
 # target to build an object file
-Test/test_luokv.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Test/test_luokv.cpp.o
-.PHONY : Test/test_luokv.cpp.o
+Test/test_legokv.cpp.o:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Test/test_legokv.cpp.o
+.PHONY : Test/test_legokv.cpp.o
 
-Test/test_luokv.i: Test/test_luokv.cpp.i
+Test/test_legokv.i: Test/test_legokv.cpp.i
 
-.PHONY : Test/test_luokv.i
+.PHONY : Test/test_legokv.i
 
 # target to preprocess a source file
-Test/test_luokv.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Test/test_luokv.cpp.i
-.PHONY : Test/test_luokv.cpp.i
+Test/test_legokv.cpp.i:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Test/test_legokv.cpp.i
+.PHONY : Test/test_legokv.cpp.i
 
-Test/test_luokv.s: Test/test_luokv.cpp.s
+Test/test_legokv.s: Test/test_legokv.cpp.s
 
-.PHONY : Test/test_luokv.s
+.PHONY : Test/test_legokv.s
 
 # target to generate assembly for a file
-Test/test_luokv.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/Test/test_luokv.cpp.s
-.PHONY : Test/test_luokv.cpp.s
+Test/test_legokv.cpp.s:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Test/test_legokv.cpp.s
+.PHONY : Test/test_legokv.cpp.s
 
 lkv.o: lkv.cpp.o
 
@@ -291,7 +291,7 @@ lkv.o: lkv.cpp.o
 
 # target to build an object file
 lkv.cpp.o:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/lkv.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.o
 .PHONY : lkv.cpp.o
 
 lkv.i: lkv.cpp.i
@@ -300,7 +300,7 @@ lkv.i: lkv.cpp.i
 
 # target to preprocess a source file
 lkv.cpp.i:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/lkv.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.i
 .PHONY : lkv.cpp.i
 
 lkv.s: lkv.cpp.s
@@ -309,7 +309,7 @@ lkv.s: lkv.cpp.s
 
 # target to generate assembly for a file
 lkv.cpp.s:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/lkv.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.s
 .PHONY : lkv.cpp.s
 
 # Help Target
@@ -320,7 +320,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test_luolkv"
+	@echo "... test_legokv"
 	@echo "... Base/base.o"
 	@echo "... Base/base.i"
 	@echo "... Base/base.s"
@@ -336,9 +336,9 @@ help:
 	@echo "... Storage/leveldb_impl.o"
 	@echo "... Storage/leveldb_impl.i"
 	@echo "... Storage/leveldb_impl.s"
-	@echo "... Test/test_luokv.o"
-	@echo "... Test/test_luokv.i"
-	@echo "... Test/test_luokv.s"
+	@echo "... Test/test_legokv.o"
+	@echo "... Test/test_legokv.i"
+	@echo "... Test/test_legokv.s"
 	@echo "... lkv.o"
 	@echo "... lkv.i"
 	@echo "... lkv.s"

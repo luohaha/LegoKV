@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /Users/luoyixin/Github/LuoKV/Core
 CMAKE_BINARY_DIR = /Users/luoyixin/Github/LuoKV/Core
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_luolkv.dir
+# Target rules for target CMakeFiles/test_legokv.dir
 
 # All Build rule for target.
-CMakeFiles/test_luolkv.dir/all:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/depend
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target test_luolkv"
-.PHONY : CMakeFiles/test_luolkv.dir/all
+CMakeFiles/test_legokv.dir/all:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/depend
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/luoyixin/Github/LuoKV/Core/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target test_legokv"
+.PHONY : CMakeFiles/test_legokv.dir/all
 
 # Include target in all.
-all: CMakeFiles/test_luolkv.dir/all
+all: CMakeFiles/test_legokv.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_luolkv.dir/rule: cmake_check_build_system
+CMakeFiles/test_legokv.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/luoyixin/Github/LuoKV/Core/CMakeFiles 8
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_luolkv.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_legokv.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/luoyixin/Github/LuoKV/Core/CMakeFiles 0
-.PHONY : CMakeFiles/test_luolkv.dir/rule
+.PHONY : CMakeFiles/test_legokv.dir/rule
 
 # Convenience name for target.
-test_luolkv: CMakeFiles/test_luolkv.dir/rule
+test_legokv: CMakeFiles/test_legokv.dir/rule
 
-.PHONY : test_luolkv
-
-# clean rule for target.
-CMakeFiles/test_luolkv.dir/clean:
-	$(MAKE) -f CMakeFiles/test_luolkv.dir/build.make CMakeFiles/test_luolkv.dir/clean
-.PHONY : CMakeFiles/test_luolkv.dir/clean
+.PHONY : test_legokv
 
 # clean rule for target.
-clean: CMakeFiles/test_luolkv.dir/clean
+CMakeFiles/test_legokv.dir/clean:
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/clean
+.PHONY : CMakeFiles/test_legokv.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/test_legokv.dir/clean
 
 .PHONY : clean
 

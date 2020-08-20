@@ -46,5 +46,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/test_luolkv.dir/DependInfo.cmake"
+  "CMakeFiles/test_legokv.dir/DependInfo.cmake"
   )
