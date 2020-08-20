@@ -1,2 +1,2 @@
-# LuoKV
-Distributed KV store
+# LegoKV
+Distributed and pluginable KV store just like Lego toys :)
