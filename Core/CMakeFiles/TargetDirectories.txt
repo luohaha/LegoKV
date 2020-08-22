@@ -1,3 +1,4 @@
 /Users/luoyixin/Github/LuoKV/Core/CMakeFiles/rebuild_cache.dir
 /Users/luoyixin/Github/LuoKV/Core/CMakeFiles/edit_cache.dir
+/Users/luoyixin/Github/LuoKV/Core/CMakeFiles/test_legokv_client.dir
 /Users/luoyixin/Github/LuoKV/Core/CMakeFiles/test_legokv.dir

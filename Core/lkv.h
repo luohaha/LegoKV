@@ -19,7 +19,12 @@ public:
     LuoKV() {}
     ~LuoKV() {}
     LuoKV &SetConf(Conf::IConf *conf)
-    { conf_ = conf; conf->LoadConf(); return *this; }
+    { 
+      conf_ = conf; 
+      conf->LoadConf(); 
+      cur_loc_ = conf->GetConf().location; 
+      return *this; 
+    }
     LuoKV &SetStorageEngine(StorageEngine::IStorageEngine *se)
     { se_ = se; return *this; }
     LuoKV &SetConsensus(Consensus::IConsensus *cons)
@@ -31,11 +36,13 @@ public:
     int Put(const Base::BaseType &key, 
 		    const Base::BaseType &value);
     int Delete(const Base::BaseType &key);
+    const std::string &get_cur_location() const { return cur_loc_; }
 private:
     StorageEngine::IStorageEngine *se_;
     Consensus::IConsensus *cons_;
     Router::IRouter *router_;
     Conf::IConf *conf_;
+    std::string cur_loc_;
 };
 
 }

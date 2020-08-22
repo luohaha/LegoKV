@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_legokv_client
+
+# Build rule for target.
+test_legokv_client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_legokv_client
+.PHONY : test_legokv_client
+
+# fast build rule for target.
+test_legokv_client/fast:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/build
+.PHONY : test_legokv_client/fast
+
+#=============================================================================
 # Target rules for targets named test_legokv
 
 # Build rule for target.
@@ -204,6 +217,96 @@ Consensus/simple_consensus_impl.cpp.s:
 	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Consensus/simple_consensus_impl.cpp.s
 .PHONY : Consensus/simple_consensus_impl.cpp.s
 
+Proto/lkv.grpc.pb.o: Proto/lkv.grpc.pb.cc.o
+
+.PHONY : Proto/lkv.grpc.pb.o
+
+# target to build an object file
+Proto/lkv.grpc.pb.cc.o:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.grpc.pb.cc.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.grpc.pb.cc.o
+.PHONY : Proto/lkv.grpc.pb.cc.o
+
+Proto/lkv.grpc.pb.i: Proto/lkv.grpc.pb.cc.i
+
+.PHONY : Proto/lkv.grpc.pb.i
+
+# target to preprocess a source file
+Proto/lkv.grpc.pb.cc.i:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.grpc.pb.cc.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.grpc.pb.cc.i
+.PHONY : Proto/lkv.grpc.pb.cc.i
+
+Proto/lkv.grpc.pb.s: Proto/lkv.grpc.pb.cc.s
+
+.PHONY : Proto/lkv.grpc.pb.s
+
+# target to generate assembly for a file
+Proto/lkv.grpc.pb.cc.s:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.grpc.pb.cc.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.grpc.pb.cc.s
+.PHONY : Proto/lkv.grpc.pb.cc.s
+
+Proto/lkv.pb.o: Proto/lkv.pb.cc.o
+
+.PHONY : Proto/lkv.pb.o
+
+# target to build an object file
+Proto/lkv.pb.cc.o:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.pb.cc.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.pb.cc.o
+.PHONY : Proto/lkv.pb.cc.o
+
+Proto/lkv.pb.i: Proto/lkv.pb.cc.i
+
+.PHONY : Proto/lkv.pb.i
+
+# target to preprocess a source file
+Proto/lkv.pb.cc.i:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.pb.cc.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.pb.cc.i
+.PHONY : Proto/lkv.pb.cc.i
+
+Proto/lkv.pb.s: Proto/lkv.pb.cc.s
+
+.PHONY : Proto/lkv.pb.s
+
+# target to generate assembly for a file
+Proto/lkv.pb.cc.s:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv.pb.cc.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv.pb.cc.s
+.PHONY : Proto/lkv.pb.cc.s
+
+Proto/lkv_rpc.o: Proto/lkv_rpc.cpp.o
+
+.PHONY : Proto/lkv_rpc.o
+
+# target to build an object file
+Proto/lkv_rpc.cpp.o:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv_rpc.cpp.o
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv_rpc.cpp.o
+.PHONY : Proto/lkv_rpc.cpp.o
+
+Proto/lkv_rpc.i: Proto/lkv_rpc.cpp.i
+
+.PHONY : Proto/lkv_rpc.i
+
+# target to preprocess a source file
+Proto/lkv_rpc.cpp.i:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv_rpc.cpp.i
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv_rpc.cpp.i
+.PHONY : Proto/lkv_rpc.cpp.i
+
+Proto/lkv_rpc.s: Proto/lkv_rpc.cpp.s
+
+.PHONY : Proto/lkv_rpc.s
+
+# target to generate assembly for a file
+Proto/lkv_rpc.cpp.s:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Proto/lkv_rpc.cpp.s
+	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Proto/lkv_rpc.cpp.s
+.PHONY : Proto/lkv_rpc.cpp.s
+
 Router/simple_dhash_impl.o: Router/simple_dhash_impl.cpp.o
 
 .PHONY : Router/simple_dhash_impl.o
@@ -285,12 +388,40 @@ Test/test_legokv.cpp.s:
 	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/Test/test_legokv.cpp.s
 .PHONY : Test/test_legokv.cpp.s
 
+Test/test_legokv_client.o: Test/test_legokv_client.cpp.o
+
+.PHONY : Test/test_legokv_client.o
+
+# target to build an object file
+Test/test_legokv_client.cpp.o:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Test/test_legokv_client.cpp.o
+.PHONY : Test/test_legokv_client.cpp.o
+
+Test/test_legokv_client.i: Test/test_legokv_client.cpp.i
+
+.PHONY : Test/test_legokv_client.i
+
+# target to preprocess a source file
+Test/test_legokv_client.cpp.i:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Test/test_legokv_client.cpp.i
+.PHONY : Test/test_legokv_client.cpp.i
+
+Test/test_legokv_client.s: Test/test_legokv_client.cpp.s
+
+.PHONY : Test/test_legokv_client.s
+
+# target to generate assembly for a file
+Test/test_legokv_client.cpp.s:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/Test/test_legokv_client.cpp.s
+.PHONY : Test/test_legokv_client.cpp.s
+
 lkv.o: lkv.cpp.o
 
 .PHONY : lkv.o
 
 # target to build an object file
 lkv.cpp.o:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/lkv.cpp.o
 	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.o
 .PHONY : lkv.cpp.o
 
@@ -300,6 +431,7 @@ lkv.i: lkv.cpp.i
 
 # target to preprocess a source file
 lkv.cpp.i:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/lkv.cpp.i
 	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.i
 .PHONY : lkv.cpp.i
 
@@ -309,6 +441,7 @@ lkv.s: lkv.cpp.s
 
 # target to generate assembly for a file
 lkv.cpp.s:
+	$(MAKE) -f CMakeFiles/test_legokv_client.dir/build.make CMakeFiles/test_legokv_client.dir/lkv.cpp.s
 	$(MAKE) -f CMakeFiles/test_legokv.dir/build.make CMakeFiles/test_legokv.dir/lkv.cpp.s
 .PHONY : lkv.cpp.s
 
@@ -320,6 +453,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test_legokv_client"
 	@echo "... test_legokv"
 	@echo "... Base/base.o"
 	@echo "... Base/base.i"
@@ -330,6 +464,15 @@ help:
 	@echo "... Consensus/simple_consensus_impl.o"
 	@echo "... Consensus/simple_consensus_impl.i"
 	@echo "... Consensus/simple_consensus_impl.s"
+	@echo "... Proto/lkv.grpc.pb.o"
+	@echo "... Proto/lkv.grpc.pb.i"
+	@echo "... Proto/lkv.grpc.pb.s"
+	@echo "... Proto/lkv.pb.o"
+	@echo "... Proto/lkv.pb.i"
+	@echo "... Proto/lkv.pb.s"
+	@echo "... Proto/lkv_rpc.o"
+	@echo "... Proto/lkv_rpc.i"
+	@echo "... Proto/lkv_rpc.s"
 	@echo "... Router/simple_dhash_impl.o"
 	@echo "... Router/simple_dhash_impl.i"
 	@echo "... Router/simple_dhash_impl.s"
@@ -339,6 +482,9 @@ help:
 	@echo "... Test/test_legokv.o"
 	@echo "... Test/test_legokv.i"
 	@echo "... Test/test_legokv.s"
+	@echo "... Test/test_legokv_client.o"
+	@echo "... Test/test_legokv_client.i"
+	@echo "... Test/test_legokv_client.s"
 	@echo "... lkv.o"
 	@echo "... lkv.i"
 	@echo "... lkv.s"
