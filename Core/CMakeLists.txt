@@ -2,7 +2,11 @@
 cmake_minimum_required (VERSION 2.8)
 # 项目信息
 project (LegoKV)
-set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -framework CoreFoundation")
+if (${APPLE})
+  set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -framework CoreFoundation")
+else()
+  set(CMAKE_CXX_FLAGS "-std=c++11 -O2")
+endif()
 # 添加include目录
 include_directories(${PROJECT_SOURCE_DIR}/Base/ 
 		    ${PROJECT_SOURCE_DIR} 
