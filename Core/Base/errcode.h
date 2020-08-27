@@ -6,7 +6,7 @@
 #define ERR_SUCCESS 0
 #define ERR_UNEXPECTED 1
 #define ERR_NOT_FOUND 2
-#define ERR_JSON_ERR 3
+#define ERR_JSON_PARSER_ERR 3
 
 // err info map
  static const char *err_info_map[4]

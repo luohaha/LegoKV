@@ -16,7 +16,7 @@ void JsonConfImpl::GetJsonValue(std::string &jsonstr, Json::Value &root)
     const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
     if (!reader->parse(jsonstr.c_str(), jsonstr.c_str() + rawJsonLength, &root,
                        &err)) {
-      LOG.log_print(ERROR, ERR_JSON_ERR, "parse json error");
+      LOG.log_print(ERROR, ERR_JSON_PARSER_ERR, "parse json error");
     }
 }
 void JsonConfImpl::LoadConf()

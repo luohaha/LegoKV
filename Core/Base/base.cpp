@@ -10,7 +10,7 @@ namespace Base
 {
   // TODO support variant arg
   void LogPrint::log_print(LogLevel level,
-                           int errno,
+                           int errcode,
                            const char *msg, ...)
   {
     if (level >= level_)

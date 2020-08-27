@@ -55,7 +55,7 @@ namespace Base
   public:
     LogPrint() {}
     ~LogPrint() {}
-    void log_print(LogLevel level, int errno, const char *msg, ...);
+    void log_print(LogLevel level, int errcode, const char *msg, ...);
     static LogPrint &get_instance()
     {
       static LogPrint log_p;

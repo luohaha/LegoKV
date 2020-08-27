@@ -1,13 +1,13 @@
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 2.8)
-# 项目信息
+# project
 project (LegoKV)
 if (${APPLE})
   set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -framework CoreFoundation")
 else()
-  set(CMAKE_CXX_FLAGS "-std=c++11 -O2")
+  set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -pthread")
 endif()
-# 添加include目录
+# include dir
 include_directories(${PROJECT_SOURCE_DIR}/Base/ 
 		    ${PROJECT_SOURCE_DIR} 
 			${PROJECT_SOURCE_DIR}/Conf/
@@ -15,10 +15,15 @@ include_directories(${PROJECT_SOURCE_DIR}/Base/
 			${PROJECT_SOURCE_DIR}/Consensus/ 
 			${PROJECT_SOURCE_DIR}/Router/
 		    ${PROJECT_SOURCE_DIR}/LibsHeaders/
-                    ${PROJECT_SOURCE_DIR}/Proto/)
-link_directories(${PROJECT_SOURCE_DIR}/../Libs)
-FILE(GLOB LibFiles ${PROJECT_SOURCE_DIR}/../Libs/*.a)
-# 指定生成目标
+        ${PROJECT_SOURCE_DIR}/Proto/)
+if (${APPLE})
+  link_directories(${PROJECT_SOURCE_DIR}/../Libs)
+  FILE(GLOB LibFiles ${PROJECT_SOURCE_DIR}/../Libs/*.a)
+else()
+  link_directories(${PROJECT_SOURCE_DIR}/../Libs-Linux)
+  FILE(GLOB LibFiles ${PROJECT_SOURCE_DIR}/../Libs-Linux/*.a)
+endif()
+# target
 add_executable(test_legokv 
 Test/test_legokv.cpp 	
 lkv.cpp 
@@ -37,6 +42,10 @@ lkv.cpp
 Proto/lkv_rpc.cpp
 Proto/lkv.pb.cc
 Proto/lkv.grpc.pb.cc)
-TARGET_LINK_LIBRARIES(test_legokv_client ${LibFiles})
-TARGET_LINK_LIBRARIES(test_legokv ${LibFiles})
-
+if (${APPLE})
+  TARGET_LINK_LIBRARIES(test_legokv_client ${LibFiles})
+  TARGET_LINK_LIBRARIES(test_legokv ${LibFiles})
+else()
+  TARGET_LINK_LIBRARIES(test_legokv_client ${LibFiles} ${LibFiles} libabsl_int128.a libabsl_raw_logging_internal.a)
+  TARGET_LINK_LIBRARIES(test_legokv ${LibFiles} ${LibFiles} libabsl_int128.a libabsl_raw_logging_internal.a)
+endif()
