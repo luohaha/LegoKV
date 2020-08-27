@@ -16,7 +16,7 @@ namespace Base
     if (level >= level_)
     {
       printf("[%s][%s] %s \n",
-             log_level_map[level], err_info_map[errno], msg);
+             log_level_map[level], err_info_map[errcode], msg);
     }
   }
 } // namespace Base
