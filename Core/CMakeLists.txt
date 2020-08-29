@@ -5,7 +5,7 @@ project (LegoKV)
 if (${APPLE})
   set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -framework CoreFoundation")
 else()
-  set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -pthread")
+  set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -pthread -fPIC -no-pie -D_GLIBCXX_USE_CXX11_ABI=0")
 endif()
 # include dir
 include_directories(${PROJECT_SOURCE_DIR}/Base/ 
