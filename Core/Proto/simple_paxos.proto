@@ -1,0 +1,28 @@
+syntax = "proto3";
+package simplepaxos;
+
+message PrepareRet {
+  uint64 proposaln = 1;
+  uint64 acceptern = 2;
+  string accepterv = 3;
+  bool isok = 4;
+}
+
+message AcceptRet {
+  uint64 proposaln = 1;
+  bool isok = 2;
+}
+
+message Prepare {
+  uint64 proposaln = 1;
+}
+
+message Accept {
+  uint64 acceptern = 1;
+  string accepterv = 2;
+}
+
+service SimplePaxos {
+  rpc HandleAccept(Accept) returns (AcceptRet) {}
+  rpc HandlePrepare(Prepare) returns (PrepareRet) {}
+}
