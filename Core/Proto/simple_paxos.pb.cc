@@ -45,7 +45,8 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       "simple_paxos.proto");
   GOOGLE_CHECK(file != NULL);
   PrepareRet_descriptor_ = file->message_type(0);
-  static const int PrepareRet_offsets_[4] = {
+  static const int PrepareRet_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, proposaln_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, acceptern_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, accepterv_),
@@ -63,7 +64,8 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, _is_default_instance_));
   AcceptRet_descriptor_ = file->message_type(1);
-  static const int AcceptRet_offsets_[2] = {
+  static const int AcceptRet_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, proposaln_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, isok_),
   };
@@ -79,7 +81,8 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, _is_default_instance_));
   Prepare_descriptor_ = file->message_type(2);
-  static const int Prepare_offsets_[1] = {
+  static const int Prepare_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, proposaln_),
   };
   Prepare_reflection_ =
@@ -94,7 +97,8 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, _is_default_instance_));
   Accept_descriptor_ = file->message_type(3);
-  static const int Accept_offsets_[2] = {
+  static const int Accept_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, acceptern_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, accepterv_),
   };
@@ -153,16 +157,18 @@ void protobuf_AddDesc_simple_5fpaxos_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022simple_paxos.proto\022\013simplepaxos\"S\n\nPre"
-    "pareRet\022\021\n\tproposaln\030\001 \001(\004\022\021\n\tacceptern\030"
-    "\002 \001(\004\022\021\n\taccepterv\030\003 \001(\t\022\014\n\004isok\030\004 \001(\010\","
-    "\n\tAcceptRet\022\021\n\tproposaln\030\001 \001(\004\022\014\n\004isok\030\002"
-    " \001(\010\"\034\n\007Prepare\022\021\n\tproposaln\030\001 \001(\004\".\n\006Ac"
-    "cept\022\021\n\tacceptern\030\001 \001(\004\022\021\n\taccepterv\030\002 \001"
+    "\n\022simple_paxos.proto\022\013simplepaxos\"g\n\nPre"
+    "pareRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tproposaln"
+    "\030\002 \001(\004\022\021\n\tacceptern\030\003 \001(\004\022\021\n\taccepterv\030\004"
+    " \001(\t\022\014\n\004isok\030\005 \001(\010\"@\n\tAcceptRet\022\022\n\ninsta"
+    "nceid\030\001 \001(\004\022\021\n\tproposaln\030\002 \001(\004\022\014\n\004isok\030\003"
+    " \001(\010\"0\n\007Prepare\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tp"
+    "roposaln\030\002 \001(\004\"B\n\006Accept\022\022\n\ninstanceid\030\001"
+    " \001(\004\022\021\n\tacceptern\030\002 \001(\004\022\021\n\taccepterv\030\003 \001"
     "(\t2\216\001\n\013SimplePaxos\022=\n\014HandleAccept\022\023.sim"
     "plepaxos.Accept\032\026.simplepaxos.AcceptRet\""
     "\000\022@\n\rHandlePrepare\022\024.simplepaxos.Prepare"
-    "\032\027.simplepaxos.PrepareRet\"\000b\006proto3", 395);
+    "\032\027.simplepaxos.PrepareRet\"\000b\006proto3", 475);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "simple_paxos.proto", &protobuf_RegisterTypes);
   PrepareRet::default_instance_ = new PrepareRet();
@@ -186,6 +192,7 @@ struct StaticDescriptorInitializer_simple_5fpaxos_2eproto {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PrepareRet::kInstanceidFieldNumber;
 const int PrepareRet::kProposalnFieldNumber;
 const int PrepareRet::kAccepternFieldNumber;
 const int PrepareRet::kAcceptervFieldNumber;
@@ -214,6 +221,7 @@ void PrepareRet::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
   acceptern_ = GOOGLE_ULONGLONG(0);
   accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -274,7 +282,7 @@ void PrepareRet::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(proposaln_, acceptern_);
+  ZR_(instanceid_, acceptern_);
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isok_ = false;
 
@@ -293,9 +301,24 @@ bool PrepareRet::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint64 proposaln = 1;
+      // optional uint64 instanceid = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &instanceid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_proposaln;
+        break;
+      }
+
+      // optional uint64 proposaln = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_proposaln:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &proposaln_)));
@@ -303,13 +326,13 @@ bool PrepareRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_acceptern;
+        if (input->ExpectTag(24)) goto parse_acceptern;
         break;
       }
 
-      // optional uint64 acceptern = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional uint64 acceptern = 3;
+      case 3: {
+        if (tag == 24) {
          parse_acceptern:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
@@ -318,13 +341,13 @@ bool PrepareRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_accepterv;
+        if (input->ExpectTag(34)) goto parse_accepterv;
         break;
       }
 
-      // optional string accepterv = 3;
-      case 3: {
-        if (tag == 26) {
+      // optional string accepterv = 4;
+      case 4: {
+        if (tag == 34) {
          parse_accepterv:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_accepterv()));
@@ -335,13 +358,13 @@ bool PrepareRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_isok;
+        if (input->ExpectTag(40)) goto parse_isok;
         break;
       }
 
-      // optional bool isok = 4;
-      case 4: {
-        if (tag == 32) {
+      // optional bool isok = 5;
+      case 5: {
+        if (tag == 40) {
          parse_isok:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -378,29 +401,34 @@ failure:
 void PrepareRet::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:simplepaxos.PrepareRet)
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->proposaln(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
   }
 
-  // optional uint64 acceptern = 2;
+  // optional uint64 acceptern = 3;
   if (this->acceptern() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->acceptern(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->acceptern(), output);
   }
 
-  // optional string accepterv = 3;
+  // optional string accepterv = 4;
   if (this->accepterv().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->accepterv().data(), this->accepterv().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "simplepaxos.PrepareRet.accepterv");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->accepterv(), output);
+      4, this->accepterv(), output);
   }
 
-  // optional bool isok = 4;
+  // optional bool isok = 5;
   if (this->isok() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->isok(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->isok(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:simplepaxos.PrepareRet)
@@ -409,17 +437,22 @@ void PrepareRet::SerializeWithCachedSizes(
 ::google::protobuf::uint8* PrepareRet::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.PrepareRet)
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->proposaln(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
   }
 
-  // optional uint64 acceptern = 2;
+  // optional uint64 acceptern = 3;
   if (this->acceptern() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->acceptern(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->acceptern(), target);
   }
 
-  // optional string accepterv = 3;
+  // optional string accepterv = 4;
   if (this->accepterv().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->accepterv().data(), this->accepterv().length(),
@@ -427,12 +460,12 @@ void PrepareRet::SerializeWithCachedSizes(
       "simplepaxos.PrepareRet.accepterv");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->accepterv(), target);
+        4, this->accepterv(), target);
   }
 
-  // optional bool isok = 4;
+  // optional bool isok = 5;
   if (this->isok() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->isok(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->isok(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.PrepareRet)
@@ -443,28 +476,35 @@ int PrepareRet::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:simplepaxos.PrepareRet)
   int total_size = 0;
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->instanceid());
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->proposaln());
   }
 
-  // optional uint64 acceptern = 2;
+  // optional uint64 acceptern = 3;
   if (this->acceptern() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->acceptern());
   }
 
-  // optional string accepterv = 3;
+  // optional string accepterv = 4;
   if (this->accepterv().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->accepterv());
   }
 
-  // optional bool isok = 4;
+  // optional bool isok = 5;
   if (this->isok() != 0) {
     total_size += 1 + 1;
   }
@@ -496,6 +536,9 @@ void PrepareRet::MergeFrom(const PrepareRet& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:simplepaxos.PrepareRet)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.instanceid() != 0) {
+    set_instanceid(from.instanceid());
   }
   if (from.proposaln() != 0) {
     set_proposaln(from.proposaln());
@@ -536,6 +579,7 @@ void PrepareRet::Swap(PrepareRet* other) {
   InternalSwap(other);
 }
 void PrepareRet::InternalSwap(PrepareRet* other) {
+  std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   std::swap(acceptern_, other->acceptern_);
   accepterv_.Swap(&other->accepterv_);
@@ -555,7 +599,21 @@ void PrepareRet::InternalSwap(PrepareRet* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // PrepareRet
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+void PrepareRet::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 PrepareRet::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.instanceid)
+  return instanceid_;
+}
+ void PrepareRet::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 void PrepareRet::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -569,7 +627,7 @@ void PrepareRet::clear_proposaln() {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.proposaln)
 }
 
-// optional uint64 acceptern = 2;
+// optional uint64 acceptern = 3;
 void PrepareRet::clear_acceptern() {
   acceptern_ = GOOGLE_ULONGLONG(0);
 }
@@ -583,7 +641,7 @@ void PrepareRet::clear_acceptern() {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.acceptern)
 }
 
-// optional string accepterv = 3;
+// optional string accepterv = 4;
 void PrepareRet::clear_accepterv() {
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -627,7 +685,7 @@ void PrepareRet::clear_accepterv() {
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.accepterv)
 }
 
-// optional bool isok = 4;
+// optional bool isok = 5;
 void PrepareRet::clear_isok() {
   isok_ = false;
 }
@@ -646,6 +704,7 @@ void PrepareRet::clear_isok() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AcceptRet::kInstanceidFieldNumber;
 const int AcceptRet::kProposalnFieldNumber;
 const int AcceptRet::kIsokFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -671,6 +730,7 @@ AcceptRet::AcceptRet(const AcceptRet& from)
 void AcceptRet::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
+  instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
   isok_ = false;
 }
@@ -728,7 +788,7 @@ void AcceptRet::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(proposaln_, isok_);
+  ZR_(instanceid_, isok_);
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -745,9 +805,24 @@ bool AcceptRet::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint64 proposaln = 1;
+      // optional uint64 instanceid = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &instanceid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_proposaln;
+        break;
+      }
+
+      // optional uint64 proposaln = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_proposaln:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &proposaln_)));
@@ -755,13 +830,13 @@ bool AcceptRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_isok;
+        if (input->ExpectTag(24)) goto parse_isok;
         break;
       }
 
-      // optional bool isok = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional bool isok = 3;
+      case 3: {
+        if (tag == 24) {
          parse_isok:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -798,14 +873,19 @@ failure:
 void AcceptRet::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:simplepaxos.AcceptRet)
-  // optional uint64 proposaln = 1;
-  if (this->proposaln() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->proposaln(), output);
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
   }
 
-  // optional bool isok = 2;
+  // optional uint64 proposaln = 2;
+  if (this->proposaln() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
+  }
+
+  // optional bool isok = 3;
   if (this->isok() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->isok(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->isok(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:simplepaxos.AcceptRet)
@@ -814,14 +894,19 @@ void AcceptRet::SerializeWithCachedSizes(
 ::google::protobuf::uint8* AcceptRet::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.AcceptRet)
-  // optional uint64 proposaln = 1;
-  if (this->proposaln() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->proposaln(), target);
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
   }
 
-  // optional bool isok = 2;
+  // optional uint64 proposaln = 2;
+  if (this->proposaln() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
+  }
+
+  // optional bool isok = 3;
   if (this->isok() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->isok(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->isok(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.AcceptRet)
@@ -832,14 +917,21 @@ int AcceptRet::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:simplepaxos.AcceptRet)
   int total_size = 0;
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->instanceid());
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->proposaln());
   }
 
-  // optional bool isok = 2;
+  // optional bool isok = 3;
   if (this->isok() != 0) {
     total_size += 1 + 1;
   }
@@ -871,6 +963,9 @@ void AcceptRet::MergeFrom(const AcceptRet& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:simplepaxos.AcceptRet)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.instanceid() != 0) {
+    set_instanceid(from.instanceid());
   }
   if (from.proposaln() != 0) {
     set_proposaln(from.proposaln());
@@ -904,6 +999,7 @@ void AcceptRet::Swap(AcceptRet* other) {
   InternalSwap(other);
 }
 void AcceptRet::InternalSwap(AcceptRet* other) {
+  std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   std::swap(isok_, other->isok_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -921,7 +1017,21 @@ void AcceptRet::InternalSwap(AcceptRet* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // AcceptRet
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+void AcceptRet::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 AcceptRet::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.AcceptRet.instanceid)
+  return instanceid_;
+}
+ void AcceptRet::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 void AcceptRet::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -935,7 +1045,7 @@ void AcceptRet::clear_proposaln() {
   // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.proposaln)
 }
 
-// optional bool isok = 2;
+// optional bool isok = 3;
 void AcceptRet::clear_isok() {
   isok_ = false;
 }
@@ -954,6 +1064,7 @@ void AcceptRet::clear_isok() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Prepare::kInstanceidFieldNumber;
 const int Prepare::kProposalnFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -978,6 +1089,7 @@ Prepare::Prepare(const Prepare& from)
 void Prepare::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
+  instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
 
@@ -1018,7 +1130,27 @@ Prepare* Prepare::New(::google::protobuf::Arena* arena) const {
 
 void Prepare::Clear() {
 // @@protoc_insertion_point(message_clear_start:simplepaxos.Prepare)
-  proposaln_ = GOOGLE_ULONGLONG(0);
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Prepare, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<Prepare*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(instanceid_, proposaln_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool Prepare::MergePartialFromCodedStream(
@@ -1031,9 +1163,24 @@ bool Prepare::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint64 proposaln = 1;
+      // optional uint64 instanceid = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &instanceid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_proposaln;
+        break;
+      }
+
+      // optional uint64 proposaln = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_proposaln:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &proposaln_)));
@@ -1069,9 +1216,14 @@ failure:
 void Prepare::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:simplepaxos.Prepare)
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->proposaln(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:simplepaxos.Prepare)
@@ -1080,9 +1232,14 @@ void Prepare::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Prepare::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.Prepare)
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->proposaln(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.Prepare)
@@ -1093,7 +1250,14 @@ int Prepare::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:simplepaxos.Prepare)
   int total_size = 0;
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->instanceid());
+  }
+
+  // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
@@ -1128,6 +1292,9 @@ void Prepare::MergeFrom(const Prepare& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
+  if (from.instanceid() != 0) {
+    set_instanceid(from.instanceid());
+  }
   if (from.proposaln() != 0) {
     set_proposaln(from.proposaln());
   }
@@ -1157,6 +1324,7 @@ void Prepare::Swap(Prepare* other) {
   InternalSwap(other);
 }
 void Prepare::InternalSwap(Prepare* other) {
+  std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1173,7 +1341,21 @@ void Prepare::InternalSwap(Prepare* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // Prepare
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+void Prepare::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 Prepare::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Prepare.instanceid)
+  return instanceid_;
+}
+ void Prepare::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.Prepare.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 void Prepare::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -1192,6 +1374,7 @@ void Prepare::clear_proposaln() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Accept::kInstanceidFieldNumber;
 const int Accept::kAccepternFieldNumber;
 const int Accept::kAcceptervFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -1218,6 +1401,7 @@ void Accept::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  instanceid_ = GOOGLE_ULONGLONG(0);
   acceptern_ = GOOGLE_ULONGLONG(0);
   accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1260,8 +1444,28 @@ Accept* Accept::New(::google::protobuf::Arena* arena) const {
 
 void Accept::Clear() {
 // @@protoc_insertion_point(message_clear_start:simplepaxos.Accept)
-  acceptern_ = GOOGLE_ULONGLONG(0);
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Accept, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<Accept*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(instanceid_, acceptern_);
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool Accept::MergePartialFromCodedStream(
@@ -1274,9 +1478,24 @@ bool Accept::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint64 acceptern = 1;
+      // optional uint64 instanceid = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &instanceid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_acceptern;
+        break;
+      }
+
+      // optional uint64 acceptern = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_acceptern:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &acceptern_)));
@@ -1284,13 +1503,13 @@ bool Accept::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_accepterv;
+        if (input->ExpectTag(26)) goto parse_accepterv;
         break;
       }
 
-      // optional string accepterv = 2;
-      case 2: {
-        if (tag == 18) {
+      // optional string accepterv = 3;
+      case 3: {
+        if (tag == 26) {
          parse_accepterv:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_accepterv()));
@@ -1329,19 +1548,24 @@ failure:
 void Accept::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:simplepaxos.Accept)
-  // optional uint64 acceptern = 1;
-  if (this->acceptern() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->acceptern(), output);
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
   }
 
-  // optional string accepterv = 2;
+  // optional uint64 acceptern = 2;
+  if (this->acceptern() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->acceptern(), output);
+  }
+
+  // optional string accepterv = 3;
   if (this->accepterv().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->accepterv().data(), this->accepterv().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "simplepaxos.Accept.accepterv");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->accepterv(), output);
+      3, this->accepterv(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:simplepaxos.Accept)
@@ -1350,12 +1574,17 @@ void Accept::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Accept::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.Accept)
-  // optional uint64 acceptern = 1;
-  if (this->acceptern() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->acceptern(), target);
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
   }
 
-  // optional string accepterv = 2;
+  // optional uint64 acceptern = 2;
+  if (this->acceptern() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->acceptern(), target);
+  }
+
+  // optional string accepterv = 3;
   if (this->accepterv().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->accepterv().data(), this->accepterv().length(),
@@ -1363,7 +1592,7 @@ void Accept::SerializeWithCachedSizes(
       "simplepaxos.Accept.accepterv");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->accepterv(), target);
+        3, this->accepterv(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.Accept)
@@ -1374,14 +1603,21 @@ int Accept::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:simplepaxos.Accept)
   int total_size = 0;
 
-  // optional uint64 acceptern = 1;
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->instanceid());
+  }
+
+  // optional uint64 acceptern = 2;
   if (this->acceptern() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->acceptern());
   }
 
-  // optional string accepterv = 2;
+  // optional string accepterv = 3;
   if (this->accepterv().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1416,6 +1652,9 @@ void Accept::MergeFrom(const Accept& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
+  if (from.instanceid() != 0) {
+    set_instanceid(from.instanceid());
+  }
   if (from.acceptern() != 0) {
     set_acceptern(from.acceptern());
   }
@@ -1449,6 +1688,7 @@ void Accept::Swap(Accept* other) {
   InternalSwap(other);
 }
 void Accept::InternalSwap(Accept* other) {
+  std::swap(instanceid_, other->instanceid_);
   std::swap(acceptern_, other->acceptern_);
   accepterv_.Swap(&other->accepterv_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1466,7 +1706,21 @@ void Accept::InternalSwap(Accept* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // Accept
 
-// optional uint64 acceptern = 1;
+// optional uint64 instanceid = 1;
+void Accept::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 Accept::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Accept.instanceid)
+  return instanceid_;
+}
+ void Accept::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.Accept.instanceid)
+}
+
+// optional uint64 acceptern = 2;
 void Accept::clear_acceptern() {
   acceptern_ = GOOGLE_ULONGLONG(0);
 }
@@ -1480,7 +1734,7 @@ void Accept::clear_acceptern() {
   // @@protoc_insertion_point(field_set:simplepaxos.Accept.acceptern)
 }
 
-// optional string accepterv = 2;
+// optional string accepterv = 3;
 void Accept::clear_accepterv() {
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }

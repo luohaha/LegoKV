@@ -103,21 +103,27 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  void clear_instanceid();
+  static const int kInstanceidFieldNumber = 1;
+  ::google::protobuf::uint64 instanceid() const;
+  void set_instanceid(::google::protobuf::uint64 value);
+
+  // optional uint64 proposaln = 2;
   void clear_proposaln();
-  static const int kProposalnFieldNumber = 1;
+  static const int kProposalnFieldNumber = 2;
   ::google::protobuf::uint64 proposaln() const;
   void set_proposaln(::google::protobuf::uint64 value);
 
-  // optional uint64 acceptern = 2;
+  // optional uint64 acceptern = 3;
   void clear_acceptern();
-  static const int kAccepternFieldNumber = 2;
+  static const int kAccepternFieldNumber = 3;
   ::google::protobuf::uint64 acceptern() const;
   void set_acceptern(::google::protobuf::uint64 value);
 
-  // optional string accepterv = 3;
+  // optional string accepterv = 4;
   void clear_accepterv();
-  static const int kAcceptervFieldNumber = 3;
+  static const int kAcceptervFieldNumber = 4;
   const ::std::string& accepterv() const;
   void set_accepterv(const ::std::string& value);
   void set_accepterv(const char* value);
@@ -126,9 +132,9 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::std::string* release_accepterv();
   void set_allocated_accepterv(::std::string* accepterv);
 
-  // optional bool isok = 4;
+  // optional bool isok = 5;
   void clear_isok();
-  static const int kIsokFieldNumber = 4;
+  static const int kIsokFieldNumber = 5;
   bool isok() const;
   void set_isok(bool value);
 
@@ -137,6 +143,7 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
   ::google::protobuf::uint64 acceptern_;
   ::google::protobuf::internal::ArenaStringPtr accepterv_;
@@ -211,15 +218,21 @@ class AcceptRet : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   // accessors -------------------------------------------------------
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  void clear_instanceid();
+  static const int kInstanceidFieldNumber = 1;
+  ::google::protobuf::uint64 instanceid() const;
+  void set_instanceid(::google::protobuf::uint64 value);
+
+  // optional uint64 proposaln = 2;
   void clear_proposaln();
-  static const int kProposalnFieldNumber = 1;
+  static const int kProposalnFieldNumber = 2;
   ::google::protobuf::uint64 proposaln() const;
   void set_proposaln(::google::protobuf::uint64 value);
 
-  // optional bool isok = 2;
+  // optional bool isok = 3;
   void clear_isok();
-  static const int kIsokFieldNumber = 2;
+  static const int kIsokFieldNumber = 3;
   bool isok() const;
   void set_isok(bool value);
 
@@ -228,6 +241,7 @@ class AcceptRet : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
   bool isok_;
   mutable int _cached_size_;
@@ -300,9 +314,15 @@ class Prepare : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // optional uint64 proposaln = 1;
+  // optional uint64 instanceid = 1;
+  void clear_instanceid();
+  static const int kInstanceidFieldNumber = 1;
+  ::google::protobuf::uint64 instanceid() const;
+  void set_instanceid(::google::protobuf::uint64 value);
+
+  // optional uint64 proposaln = 2;
   void clear_proposaln();
-  static const int kProposalnFieldNumber = 1;
+  static const int kProposalnFieldNumber = 2;
   ::google::protobuf::uint64 proposaln() const;
   void set_proposaln(::google::protobuf::uint64 value);
 
@@ -311,6 +331,7 @@ class Prepare : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
@@ -382,15 +403,21 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // accessors -------------------------------------------------------
 
-  // optional uint64 acceptern = 1;
+  // optional uint64 instanceid = 1;
+  void clear_instanceid();
+  static const int kInstanceidFieldNumber = 1;
+  ::google::protobuf::uint64 instanceid() const;
+  void set_instanceid(::google::protobuf::uint64 value);
+
+  // optional uint64 acceptern = 2;
   void clear_acceptern();
-  static const int kAccepternFieldNumber = 1;
+  static const int kAccepternFieldNumber = 2;
   ::google::protobuf::uint64 acceptern() const;
   void set_acceptern(::google::protobuf::uint64 value);
 
-  // optional string accepterv = 2;
+  // optional string accepterv = 3;
   void clear_accepterv();
-  static const int kAcceptervFieldNumber = 2;
+  static const int kAcceptervFieldNumber = 3;
   const ::std::string& accepterv() const;
   void set_accepterv(const ::std::string& value);
   void set_accepterv(const char* value);
@@ -404,6 +431,7 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 acceptern_;
   ::google::protobuf::internal::ArenaStringPtr accepterv_;
   mutable int _cached_size_;
@@ -422,7 +450,21 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // PrepareRet
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+inline void PrepareRet::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 PrepareRet::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.instanceid)
+  return instanceid_;
+}
+inline void PrepareRet::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 inline void PrepareRet::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -436,7 +478,7 @@ inline void PrepareRet::set_proposaln(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.proposaln)
 }
 
-// optional uint64 acceptern = 2;
+// optional uint64 acceptern = 3;
 inline void PrepareRet::clear_acceptern() {
   acceptern_ = GOOGLE_ULONGLONG(0);
 }
@@ -450,7 +492,7 @@ inline void PrepareRet::set_acceptern(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.acceptern)
 }
 
-// optional string accepterv = 3;
+// optional string accepterv = 4;
 inline void PrepareRet::clear_accepterv() {
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -494,7 +536,7 @@ inline void PrepareRet::set_allocated_accepterv(::std::string* accepterv) {
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.accepterv)
 }
 
-// optional bool isok = 4;
+// optional bool isok = 5;
 inline void PrepareRet::clear_isok() {
   isok_ = false;
 }
@@ -512,7 +554,21 @@ inline void PrepareRet::set_isok(bool value) {
 
 // AcceptRet
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+inline void AcceptRet::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 AcceptRet::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.AcceptRet.instanceid)
+  return instanceid_;
+}
+inline void AcceptRet::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 inline void AcceptRet::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -526,7 +582,7 @@ inline void AcceptRet::set_proposaln(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.proposaln)
 }
 
-// optional bool isok = 2;
+// optional bool isok = 3;
 inline void AcceptRet::clear_isok() {
   isok_ = false;
 }
@@ -544,7 +600,21 @@ inline void AcceptRet::set_isok(bool value) {
 
 // Prepare
 
-// optional uint64 proposaln = 1;
+// optional uint64 instanceid = 1;
+inline void Prepare::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 Prepare::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Prepare.instanceid)
+  return instanceid_;
+}
+inline void Prepare::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.Prepare.instanceid)
+}
+
+// optional uint64 proposaln = 2;
 inline void Prepare::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -562,7 +632,21 @@ inline void Prepare::set_proposaln(::google::protobuf::uint64 value) {
 
 // Accept
 
-// optional uint64 acceptern = 1;
+// optional uint64 instanceid = 1;
+inline void Accept::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 Accept::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Accept.instanceid)
+  return instanceid_;
+}
+inline void Accept::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.Accept.instanceid)
+}
+
+// optional uint64 acceptern = 2;
 inline void Accept::clear_acceptern() {
   acceptern_ = GOOGLE_ULONGLONG(0);
 }
@@ -576,7 +660,7 @@ inline void Accept::set_acceptern(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.Accept.acceptern)
 }
 
-// optional string accepterv = 2;
+// optional string accepterv = 3;
 inline void Accept::clear_accepterv() {
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }

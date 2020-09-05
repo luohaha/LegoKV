@@ -2,24 +2,28 @@ syntax = "proto3";
 package simplepaxos;
 
 message PrepareRet {
-  uint64 proposaln = 1;
-  uint64 acceptern = 2;
-  string accepterv = 3;
-  bool isok = 4;
+  uint64 instanceid = 1;
+  uint64 proposaln = 2;
+  uint64 acceptern = 3;
+  string accepterv = 4;
+  bool isok = 5;
 }
 
 message AcceptRet {
-  uint64 proposaln = 1;
-  bool isok = 2;
+  uint64 instanceid = 1;
+  uint64 proposaln = 2;
+  bool isok = 3;
 }
 
 message Prepare {
-  uint64 proposaln = 1;
+  uint64 instanceid = 1;
+  uint64 proposaln = 2;
 }
 
 message Accept {
-  uint64 acceptern = 1;
-  string accepterv = 2;
+  uint64 instanceid = 1;
+  uint64 acceptern = 2;
+  string accepterv = 3;
 }
 
 service SimplePaxos {
