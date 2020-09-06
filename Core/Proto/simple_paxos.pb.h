@@ -550,36 +550,42 @@ class PaxosRecord : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // optional uint64 instanceid = 1;
+  // optional uint64 magic = 1;
+  void clear_magic();
+  static const int kMagicFieldNumber = 1;
+  ::google::protobuf::uint64 magic() const;
+  void set_magic(::google::protobuf::uint64 value);
+
+  // optional uint64 instanceid = 2;
   void clear_instanceid();
-  static const int kInstanceidFieldNumber = 1;
+  static const int kInstanceidFieldNumber = 2;
   ::google::protobuf::uint64 instanceid() const;
   void set_instanceid(::google::protobuf::uint64 value);
 
-  // optional uint64 proposaln = 2;
+  // optional uint64 proposaln = 3;
   void clear_proposaln();
-  static const int kProposalnFieldNumber = 2;
+  static const int kProposalnFieldNumber = 3;
   ::google::protobuf::uint64 proposaln() const;
   void set_proposaln(::google::protobuf::uint64 value);
 
-  // optional uint64 acceptn = 3;
+  // optional uint64 acceptn = 4;
   void clear_acceptn();
-  static const int kAcceptnFieldNumber = 3;
+  static const int kAcceptnFieldNumber = 4;
   ::google::protobuf::uint64 acceptn() const;
   void set_acceptn(::google::protobuf::uint64 value);
 
-  // optional .lkvrpc.ConsensusType accepterv = 4;
+  // optional .lkvrpc.ConsensusType accepterv = 5;
   bool has_accepterv() const;
   void clear_accepterv();
-  static const int kAcceptervFieldNumber = 4;
+  static const int kAcceptervFieldNumber = 5;
   const ::lkvrpc::ConsensusType& accepterv() const;
   ::lkvrpc::ConsensusType* mutable_accepterv();
   ::lkvrpc::ConsensusType* release_accepterv();
   void set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv);
 
-  // optional bool confirm = 5;
+  // optional bool confirm = 6;
   void clear_confirm();
-  static const int kConfirmFieldNumber = 5;
+  static const int kConfirmFieldNumber = 6;
   bool confirm() const;
   void set_confirm(bool value);
 
@@ -588,6 +594,7 @@ class PaxosRecord : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 magic_;
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
   ::google::protobuf::uint64 acceptn_;
@@ -1031,7 +1038,21 @@ inline void Accept::set_allocated_consenus_group(::std::string* consenus_group) 
 
 // PaxosRecord
 
-// optional uint64 instanceid = 1;
+// optional uint64 magic = 1;
+inline void PaxosRecord::clear_magic() {
+  magic_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 PaxosRecord::magic() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.magic)
+  return magic_;
+}
+inline void PaxosRecord::set_magic(::google::protobuf::uint64 value) {
+  
+  magic_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.magic)
+}
+
+// optional uint64 instanceid = 2;
 inline void PaxosRecord::clear_instanceid() {
   instanceid_ = GOOGLE_ULONGLONG(0);
 }
@@ -1045,7 +1066,7 @@ inline void PaxosRecord::set_instanceid(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.instanceid)
 }
 
-// optional uint64 proposaln = 2;
+// optional uint64 proposaln = 3;
 inline void PaxosRecord::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -1059,7 +1080,7 @@ inline void PaxosRecord::set_proposaln(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.proposaln)
 }
 
-// optional uint64 acceptn = 3;
+// optional uint64 acceptn = 4;
 inline void PaxosRecord::clear_acceptn() {
   acceptn_ = GOOGLE_ULONGLONG(0);
 }
@@ -1073,7 +1094,7 @@ inline void PaxosRecord::set_acceptn(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.acceptn)
 }
 
-// optional .lkvrpc.ConsensusType accepterv = 4;
+// optional .lkvrpc.ConsensusType accepterv = 5;
 inline bool PaxosRecord::has_accepterv() const {
   return !_is_default_instance_ && accepterv_ != NULL;
 }
@@ -1111,7 +1132,7 @@ inline void PaxosRecord::set_allocated_accepterv(::lkvrpc::ConsensusType* accept
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PaxosRecord.accepterv)
 }
 
-// optional bool confirm = 5;
+// optional bool confirm = 6;
 inline void PaxosRecord::clear_confirm() {
   confirm_ = false;
 }

@@ -121,7 +121,8 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, _is_default_instance_));
   PaxosRecord_descriptor_ = file->message_type(4);
-  static const int PaxosRecord_offsets_[5] = {
+  static const int PaxosRecord_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, magic_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, proposaln_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, acceptn_),
@@ -199,14 +200,15 @@ void protobuf_AddDesc_simple_5fpaxos_2eproto() {
     "\n\tproposaln\030\002 \001(\004\022\026\n\016consenus_group\030\003 \001("
     "\t\"q\n\006Accept\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\taccep"
     "tern\030\002 \001(\004\022(\n\taccepterv\030\003 \001(\0132\025.lkvrpc.C"
-    "onsensusType\022\026\n\016consenus_group\030\004 \001(\t\"\200\001\n"
-    "\013PaxosRecord\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tprop"
-    "osaln\030\002 \001(\004\022\017\n\007acceptn\030\003 \001(\004\022(\n\taccepter"
-    "v\030\004 \001(\0132\025.lkvrpc.ConsensusType\022\017\n\007confir"
-    "m\030\005 \001(\0102\216\001\n\013SimplePaxos\022=\n\014HandleAccept\022"
-    "\023.simplepaxos.Accept\032\026.simplepaxos.Accep"
-    "tRet\"\000\022@\n\rHandlePrepare\022\024.simplepaxos.Pr"
-    "epare\032\027.simplepaxos.PrepareRet\"\000b\006proto3", 760);
+    "onsensusType\022\026\n\016consenus_group\030\004 \001(\t\"\217\001\n"
+    "\013PaxosRecord\022\r\n\005magic\030\001 \001(\004\022\022\n\ninstancei"
+    "d\030\002 \001(\004\022\021\n\tproposaln\030\003 \001(\004\022\017\n\007acceptn\030\004 "
+    "\001(\004\022(\n\taccepterv\030\005 \001(\0132\025.lkvrpc.Consensu"
+    "sType\022\017\n\007confirm\030\006 \001(\0102\216\001\n\013SimplePaxos\022="
+    "\n\014HandleAccept\022\023.simplepaxos.Accept\032\026.si"
+    "mplepaxos.AcceptRet\"\000\022@\n\rHandlePrepare\022\024"
+    ".simplepaxos.Prepare\032\027.simplepaxos.Prepa"
+    "reRet\"\000b\006proto3", 775);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "simple_paxos.proto", &protobuf_RegisterTypes);
   PrepareRet::default_instance_ = new PrepareRet();
@@ -2184,6 +2186,7 @@ void Accept::clear_consenus_group() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PaxosRecord::kMagicFieldNumber;
 const int PaxosRecord::kInstanceidFieldNumber;
 const int PaxosRecord::kProposalnFieldNumber;
 const int PaxosRecord::kAcceptnFieldNumber;
@@ -2213,6 +2216,7 @@ PaxosRecord::PaxosRecord(const PaxosRecord& from)
 void PaxosRecord::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
+  magic_ = GOOGLE_ULONGLONG(0);
   instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
   acceptn_ = GOOGLE_ULONGLONG(0);
@@ -2274,7 +2278,7 @@ void PaxosRecord::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(instanceid_, acceptn_);
+  ZR_(magic_, acceptn_);
   if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
   accepterv_ = NULL;
   confirm_ = false;
@@ -2294,9 +2298,24 @@ bool PaxosRecord::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint64 instanceid = 1;
+      // optional uint64 magic = 1;
       case 1: {
         if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &magic_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_instanceid;
+        break;
+      }
+
+      // optional uint64 instanceid = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_instanceid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &instanceid_)));
@@ -2304,13 +2323,13 @@ bool PaxosRecord::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_proposaln;
+        if (input->ExpectTag(24)) goto parse_proposaln;
         break;
       }
 
-      // optional uint64 proposaln = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional uint64 proposaln = 3;
+      case 3: {
+        if (tag == 24) {
          parse_proposaln:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
@@ -2319,13 +2338,13 @@ bool PaxosRecord::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_acceptn;
+        if (input->ExpectTag(32)) goto parse_acceptn;
         break;
       }
 
-      // optional uint64 acceptn = 3;
-      case 3: {
-        if (tag == 24) {
+      // optional uint64 acceptn = 4;
+      case 4: {
+        if (tag == 32) {
          parse_acceptn:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
@@ -2334,26 +2353,26 @@ bool PaxosRecord::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_accepterv;
+        if (input->ExpectTag(42)) goto parse_accepterv;
         break;
       }
 
-      // optional .lkvrpc.ConsensusType accepterv = 4;
-      case 4: {
-        if (tag == 34) {
+      // optional .lkvrpc.ConsensusType accepterv = 5;
+      case 5: {
+        if (tag == 42) {
          parse_accepterv:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_accepterv()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(40)) goto parse_confirm;
+        if (input->ExpectTag(48)) goto parse_confirm;
         break;
       }
 
-      // optional bool confirm = 5;
-      case 5: {
-        if (tag == 40) {
+      // optional bool confirm = 6;
+      case 6: {
+        if (tag == 48) {
          parse_confirm:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2390,30 +2409,35 @@ failure:
 void PaxosRecord::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:simplepaxos.PaxosRecord)
-  // optional uint64 instanceid = 1;
+  // optional uint64 magic = 1;
+  if (this->magic() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->magic(), output);
+  }
+
+  // optional uint64 instanceid = 2;
   if (this->instanceid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->instanceid(), output);
   }
 
-  // optional uint64 proposaln = 2;
+  // optional uint64 proposaln = 3;
   if (this->proposaln() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->proposaln(), output);
   }
 
-  // optional uint64 acceptn = 3;
+  // optional uint64 acceptn = 4;
   if (this->acceptn() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->acceptn(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(4, this->acceptn(), output);
   }
 
-  // optional .lkvrpc.ConsensusType accepterv = 4;
+  // optional .lkvrpc.ConsensusType accepterv = 5;
   if (this->has_accepterv()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->accepterv_, output);
+      5, *this->accepterv_, output);
   }
 
-  // optional bool confirm = 5;
+  // optional bool confirm = 6;
   if (this->confirm() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->confirm(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->confirm(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:simplepaxos.PaxosRecord)
@@ -2422,31 +2446,36 @@ void PaxosRecord::SerializeWithCachedSizes(
 ::google::protobuf::uint8* PaxosRecord::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.PaxosRecord)
-  // optional uint64 instanceid = 1;
+  // optional uint64 magic = 1;
+  if (this->magic() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->magic(), target);
+  }
+
+  // optional uint64 instanceid = 2;
   if (this->instanceid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->instanceid(), target);
   }
 
-  // optional uint64 proposaln = 2;
+  // optional uint64 proposaln = 3;
   if (this->proposaln() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->proposaln(), target);
   }
 
-  // optional uint64 acceptn = 3;
+  // optional uint64 acceptn = 4;
   if (this->acceptn() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->acceptn(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(4, this->acceptn(), target);
   }
 
-  // optional .lkvrpc.ConsensusType accepterv = 4;
+  // optional .lkvrpc.ConsensusType accepterv = 5;
   if (this->has_accepterv()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        4, *this->accepterv_, false, target);
+        5, *this->accepterv_, false, target);
   }
 
-  // optional bool confirm = 5;
+  // optional bool confirm = 6;
   if (this->confirm() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->confirm(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->confirm(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.PaxosRecord)
@@ -2457,35 +2486,42 @@ int PaxosRecord::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:simplepaxos.PaxosRecord)
   int total_size = 0;
 
-  // optional uint64 instanceid = 1;
+  // optional uint64 magic = 1;
+  if (this->magic() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->magic());
+  }
+
+  // optional uint64 instanceid = 2;
   if (this->instanceid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->instanceid());
   }
 
-  // optional uint64 proposaln = 2;
+  // optional uint64 proposaln = 3;
   if (this->proposaln() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->proposaln());
   }
 
-  // optional uint64 acceptn = 3;
+  // optional uint64 acceptn = 4;
   if (this->acceptn() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->acceptn());
   }
 
-  // optional .lkvrpc.ConsensusType accepterv = 4;
+  // optional .lkvrpc.ConsensusType accepterv = 5;
   if (this->has_accepterv()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->accepterv_);
   }
 
-  // optional bool confirm = 5;
+  // optional bool confirm = 6;
   if (this->confirm() != 0) {
     total_size += 1 + 1;
   }
@@ -2517,6 +2553,9 @@ void PaxosRecord::MergeFrom(const PaxosRecord& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:simplepaxos.PaxosRecord)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.magic() != 0) {
+    set_magic(from.magic());
   }
   if (from.instanceid() != 0) {
     set_instanceid(from.instanceid());
@@ -2559,6 +2598,7 @@ void PaxosRecord::Swap(PaxosRecord* other) {
   InternalSwap(other);
 }
 void PaxosRecord::InternalSwap(PaxosRecord* other) {
+  std::swap(magic_, other->magic_);
   std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   std::swap(acceptn_, other->acceptn_);
@@ -2579,7 +2619,21 @@ void PaxosRecord::InternalSwap(PaxosRecord* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // PaxosRecord
 
-// optional uint64 instanceid = 1;
+// optional uint64 magic = 1;
+void PaxosRecord::clear_magic() {
+  magic_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 PaxosRecord::magic() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.magic)
+  return magic_;
+}
+ void PaxosRecord::set_magic(::google::protobuf::uint64 value) {
+  
+  magic_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.magic)
+}
+
+// optional uint64 instanceid = 2;
 void PaxosRecord::clear_instanceid() {
   instanceid_ = GOOGLE_ULONGLONG(0);
 }
@@ -2593,7 +2647,7 @@ void PaxosRecord::clear_instanceid() {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.instanceid)
 }
 
-// optional uint64 proposaln = 2;
+// optional uint64 proposaln = 3;
 void PaxosRecord::clear_proposaln() {
   proposaln_ = GOOGLE_ULONGLONG(0);
 }
@@ -2607,7 +2661,7 @@ void PaxosRecord::clear_proposaln() {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.proposaln)
 }
 
-// optional uint64 acceptn = 3;
+// optional uint64 acceptn = 4;
 void PaxosRecord::clear_acceptn() {
   acceptn_ = GOOGLE_ULONGLONG(0);
 }
@@ -2621,7 +2675,7 @@ void PaxosRecord::clear_acceptn() {
   // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.acceptn)
 }
 
-// optional .lkvrpc.ConsensusType accepterv = 4;
+// optional .lkvrpc.ConsensusType accepterv = 5;
 bool PaxosRecord::has_accepterv() const {
   return !_is_default_instance_ && accepterv_ != NULL;
 }
@@ -2659,7 +2713,7 @@ void PaxosRecord::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PaxosRecord.accepterv)
 }
 
-// optional bool confirm = 5;
+// optional bool confirm = 6;
 void PaxosRecord::clear_confirm() {
   confirm_ = false;
 }

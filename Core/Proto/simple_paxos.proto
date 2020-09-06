@@ -32,11 +32,12 @@ message Accept {
 }
 
 message PaxosRecord {
-  uint64 instanceid = 1;
-  uint64 proposaln = 2;
-  uint64 acceptn = 3;
-  lkvrpc.ConsensusType accepterv = 4;
-  bool confirm = 5;
+  uint64 magic = 1;
+  uint64 instanceid = 2;
+  uint64 proposaln = 3;
+  uint64 acceptn = 4;
+  lkvrpc.ConsensusType accepterv = 5;
+  bool confirm = 6;
 }
 
 service SimplePaxos {
