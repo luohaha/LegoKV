@@ -27,6 +27,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "lkv.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace simplepaxos {
@@ -121,16 +122,14 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint64 acceptern() const;
   void set_acceptern(::google::protobuf::uint64 value);
 
-  // optional string accepterv = 4;
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  bool has_accepterv() const;
   void clear_accepterv();
   static const int kAcceptervFieldNumber = 4;
-  const ::std::string& accepterv() const;
-  void set_accepterv(const ::std::string& value);
-  void set_accepterv(const char* value);
-  void set_accepterv(const char* value, size_t size);
-  ::std::string* mutable_accepterv();
-  ::std::string* release_accepterv();
-  void set_allocated_accepterv(::std::string* accepterv);
+  const ::lkvrpc::ConsensusType& accepterv() const;
+  ::lkvrpc::ConsensusType* mutable_accepterv();
+  ::lkvrpc::ConsensusType* release_accepterv();
+  void set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv);
 
   // optional bool isok = 5;
   void clear_isok();
@@ -157,7 +156,7 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
   ::google::protobuf::uint64 acceptern_;
-  ::google::protobuf::internal::ArenaStringPtr accepterv_;
+  ::lkvrpc::ConsensusType* accepterv_;
   ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   bool isok_;
   mutable int _cached_size_;
@@ -451,16 +450,14 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::uint64 acceptern() const;
   void set_acceptern(::google::protobuf::uint64 value);
 
-  // optional string accepterv = 3;
+  // optional .lkvrpc.ConsensusType accepterv = 3;
+  bool has_accepterv() const;
   void clear_accepterv();
   static const int kAcceptervFieldNumber = 3;
-  const ::std::string& accepterv() const;
-  void set_accepterv(const ::std::string& value);
-  void set_accepterv(const char* value);
-  void set_accepterv(const char* value, size_t size);
-  ::std::string* mutable_accepterv();
-  ::std::string* release_accepterv();
-  void set_allocated_accepterv(::std::string* accepterv);
+  const ::lkvrpc::ConsensusType& accepterv() const;
+  ::lkvrpc::ConsensusType* mutable_accepterv();
+  ::lkvrpc::ConsensusType* release_accepterv();
+  void set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv);
 
   // optional string consenus_group = 4;
   void clear_consenus_group();
@@ -480,7 +477,7 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   bool _is_default_instance_;
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 acceptern_;
-  ::google::protobuf::internal::ArenaStringPtr accepterv_;
+  ::lkvrpc::ConsensusType* accepterv_;
   ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
@@ -540,47 +537,41 @@ inline void PrepareRet::set_acceptern(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.acceptern)
 }
 
-// optional string accepterv = 4;
+// optional .lkvrpc.ConsensusType accepterv = 4;
+inline bool PrepareRet::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
 inline void PrepareRet::clear_accepterv() {
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
 }
-inline const ::std::string& PrepareRet::accepterv() const {
+inline const ::lkvrpc::ConsensusType& PrepareRet::accepterv() const {
   // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.accepterv)
-  return accepterv_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
 }
-inline void PrepareRet::set_accepterv(const ::std::string& value) {
+inline ::lkvrpc::ConsensusType* PrepareRet::mutable_accepterv() {
   
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.accepterv)
-}
-inline void PrepareRet::set_accepterv(const char* value) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:simplepaxos.PrepareRet.accepterv)
-}
-inline void PrepareRet::set_accepterv(const char* value, size_t size) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:simplepaxos.PrepareRet.accepterv)
-}
-inline ::std::string* PrepareRet::mutable_accepterv() {
-  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
   // @@protoc_insertion_point(field_mutable:simplepaxos.PrepareRet.accepterv)
-  return accepterv_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_;
 }
-inline ::std::string* PrepareRet::release_accepterv() {
+inline ::lkvrpc::ConsensusType* PrepareRet::release_accepterv() {
   // @@protoc_insertion_point(field_release:simplepaxos.PrepareRet.accepterv)
   
-  return accepterv_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
 }
-inline void PrepareRet::set_allocated_accepterv(::std::string* accepterv) {
-  if (accepterv != NULL) {
+inline void PrepareRet::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
     
   } else {
     
   }
-  accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.accepterv)
 }
 
@@ -840,47 +831,41 @@ inline void Accept::set_acceptern(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:simplepaxos.Accept.acceptern)
 }
 
-// optional string accepterv = 3;
+// optional .lkvrpc.ConsensusType accepterv = 3;
+inline bool Accept::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
 inline void Accept::clear_accepterv() {
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
 }
-inline const ::std::string& Accept::accepterv() const {
+inline const ::lkvrpc::ConsensusType& Accept::accepterv() const {
   // @@protoc_insertion_point(field_get:simplepaxos.Accept.accepterv)
-  return accepterv_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
 }
-inline void Accept::set_accepterv(const ::std::string& value) {
+inline ::lkvrpc::ConsensusType* Accept::mutable_accepterv() {
   
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:simplepaxos.Accept.accepterv)
-}
-inline void Accept::set_accepterv(const char* value) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:simplepaxos.Accept.accepterv)
-}
-inline void Accept::set_accepterv(const char* value, size_t size) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Accept.accepterv)
-}
-inline ::std::string* Accept::mutable_accepterv() {
-  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
   // @@protoc_insertion_point(field_mutable:simplepaxos.Accept.accepterv)
-  return accepterv_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_;
 }
-inline ::std::string* Accept::release_accepterv() {
+inline ::lkvrpc::ConsensusType* Accept::release_accepterv() {
   // @@protoc_insertion_point(field_release:simplepaxos.Accept.accepterv)
   
-  return accepterv_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
 }
-inline void Accept::set_allocated_accepterv(::std::string* accepterv) {
-  if (accepterv != NULL) {
+inline void Accept::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
     
   } else {
     
   }
-  accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.accepterv)
 }
 

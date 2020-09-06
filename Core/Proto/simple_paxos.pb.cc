@@ -160,22 +160,24 @@ void protobuf_AddDesc_simple_5fpaxos_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::lkvrpc::protobuf_AddDesc_lkv_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022simple_paxos.proto\022\013simplepaxos\"\177\n\nPre"
-    "pareRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tproposaln"
-    "\030\002 \001(\004\022\021\n\tacceptern\030\003 \001(\004\022\021\n\taccepterv\030\004"
-    " \001(\t\022\014\n\004isok\030\005 \001(\010\022\026\n\016consenus_group\030\006 \001"
-    "(\t\"X\n\tAcceptRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tp"
-    "roposaln\030\002 \001(\004\022\014\n\004isok\030\003 \001(\010\022\026\n\016consenus"
-    "_group\030\004 \001(\t\"H\n\007Prepare\022\022\n\ninstanceid\030\001 "
-    "\001(\004\022\021\n\tproposaln\030\002 \001(\004\022\026\n\016consenus_group"
-    "\030\003 \001(\t\"Z\n\006Accept\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\t"
-    "acceptern\030\002 \001(\004\022\021\n\taccepterv\030\003 \001(\t\022\026\n\016co"
-    "nsenus_group\030\004 \001(\t2\216\001\n\013SimplePaxos\022=\n\014Ha"
-    "ndleAccept\022\023.simplepaxos.Accept\032\026.simple"
-    "paxos.AcceptRet\"\000\022@\n\rHandlePrepare\022\024.sim"
-    "plepaxos.Prepare\032\027.simplepaxos.PrepareRe"
-    "t\"\000b\006proto3", 571);
+    "\n\022simple_paxos.proto\022\013simplepaxos\032\tlkv.p"
+    "roto\"\226\001\n\nPrepareRet\022\022\n\ninstanceid\030\001 \001(\004\022"
+    "\021\n\tproposaln\030\002 \001(\004\022\021\n\tacceptern\030\003 \001(\004\022(\n"
+    "\taccepterv\030\004 \001(\0132\025.lkvrpc.ConsensusType\022"
+    "\014\n\004isok\030\005 \001(\010\022\026\n\016consenus_group\030\006 \001(\t\"X\n"
+    "\tAcceptRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tpropos"
+    "aln\030\002 \001(\004\022\014\n\004isok\030\003 \001(\010\022\026\n\016consenus_grou"
+    "p\030\004 \001(\t\"H\n\007Prepare\022\022\n\ninstanceid\030\001 \001(\004\022\021"
+    "\n\tproposaln\030\002 \001(\004\022\026\n\016consenus_group\030\003 \001("
+    "\t\"q\n\006Accept\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\taccep"
+    "tern\030\002 \001(\004\022(\n\taccepterv\030\003 \001(\0132\025.lkvrpc.C"
+    "onsensusType\022\026\n\016consenus_group\030\004 \001(\t2\216\001\n"
+    "\013SimplePaxos\022=\n\014HandleAccept\022\023.simplepax"
+    "os.Accept\032\026.simplepaxos.AcceptRet\"\000\022@\n\rH"
+    "andlePrepare\022\024.simplepaxos.Prepare\032\027.sim"
+    "plepaxos.PrepareRet\"\000b\006proto3", 629);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "simple_paxos.proto", &protobuf_RegisterTypes);
   PrepareRet::default_instance_ = new PrepareRet();
@@ -215,6 +217,7 @@ PrepareRet::PrepareRet()
 
 void PrepareRet::InitAsDefaultInstance() {
   _is_default_instance_ = true;
+  accepterv_ = const_cast< ::lkvrpc::ConsensusType*>(&::lkvrpc::ConsensusType::default_instance());
 }
 
 PrepareRet::PrepareRet(const PrepareRet& from)
@@ -232,7 +235,7 @@ void PrepareRet::SharedCtor() {
   instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
   acceptern_ = GOOGLE_ULONGLONG(0);
-  accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  accepterv_ = NULL;
   isok_ = false;
   consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -243,9 +246,9 @@ PrepareRet::~PrepareRet() {
 }
 
 void PrepareRet::SharedDtor() {
-  accepterv_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
+    delete accepterv_;
   }
 }
 
@@ -293,7 +296,8 @@ void PrepareRet::Clear() {
 } while (0)
 
   ZR_(instanceid_, acceptern_);
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
   isok_ = false;
   consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
@@ -356,16 +360,12 @@ bool PrepareRet::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string accepterv = 4;
+      // optional .lkvrpc.ConsensusType accepterv = 4;
       case 4: {
         if (tag == 34) {
          parse_accepterv:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_accepterv()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->accepterv().data(), this->accepterv().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "simplepaxos.PrepareRet.accepterv"));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_accepterv()));
         } else {
           goto handle_unusual;
         }
@@ -444,14 +444,10 @@ void PrepareRet::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->acceptern(), output);
   }
 
-  // optional string accepterv = 4;
-  if (this->accepterv().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accepterv().data(), this->accepterv().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "simplepaxos.PrepareRet.accepterv");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->accepterv(), output);
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *this->accepterv_, output);
   }
 
   // optional bool isok = 5;
@@ -490,15 +486,11 @@ void PrepareRet::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->acceptern(), target);
   }
 
-  // optional string accepterv = 4;
-  if (this->accepterv().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accepterv().data(), this->accepterv().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "simplepaxos.PrepareRet.accepterv");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->accepterv(), target);
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        4, *this->accepterv_, false, target);
   }
 
   // optional bool isok = 5;
@@ -546,11 +538,11 @@ int PrepareRet::ByteSize() const {
         this->acceptern());
   }
 
-  // optional string accepterv = 4;
-  if (this->accepterv().size() > 0) {
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->accepterv());
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->accepterv_);
   }
 
   // optional bool isok = 5;
@@ -602,9 +594,8 @@ void PrepareRet::MergeFrom(const PrepareRet& from) {
   if (from.acceptern() != 0) {
     set_acceptern(from.acceptern());
   }
-  if (from.accepterv().size() > 0) {
-
-    accepterv_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accepterv_);
+  if (from.has_accepterv()) {
+    mutable_accepterv()->::lkvrpc::ConsensusType::MergeFrom(from.accepterv());
   }
   if (from.isok() != 0) {
     set_isok(from.isok());
@@ -642,7 +633,7 @@ void PrepareRet::InternalSwap(PrepareRet* other) {
   std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   std::swap(acceptern_, other->acceptern_);
-  accepterv_.Swap(&other->accepterv_);
+  std::swap(accepterv_, other->accepterv_);
   std::swap(isok_, other->isok_);
   consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -702,47 +693,41 @@ void PrepareRet::clear_acceptern() {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.acceptern)
 }
 
-// optional string accepterv = 4;
+// optional .lkvrpc.ConsensusType accepterv = 4;
+bool PrepareRet::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
 void PrepareRet::clear_accepterv() {
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
 }
- const ::std::string& PrepareRet::accepterv() const {
+const ::lkvrpc::ConsensusType& PrepareRet::accepterv() const {
   // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.accepterv)
-  return accepterv_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
 }
- void PrepareRet::set_accepterv(const ::std::string& value) {
+::lkvrpc::ConsensusType* PrepareRet::mutable_accepterv() {
   
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.accepterv)
-}
- void PrepareRet::set_accepterv(const char* value) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:simplepaxos.PrepareRet.accepterv)
-}
- void PrepareRet::set_accepterv(const char* value, size_t size) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:simplepaxos.PrepareRet.accepterv)
-}
- ::std::string* PrepareRet::mutable_accepterv() {
-  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
   // @@protoc_insertion_point(field_mutable:simplepaxos.PrepareRet.accepterv)
-  return accepterv_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_;
 }
- ::std::string* PrepareRet::release_accepterv() {
+::lkvrpc::ConsensusType* PrepareRet::release_accepterv() {
   // @@protoc_insertion_point(field_release:simplepaxos.PrepareRet.accepterv)
   
-  return accepterv_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
 }
- void PrepareRet::set_allocated_accepterv(::std::string* accepterv) {
-  if (accepterv != NULL) {
+void PrepareRet::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
     
   } else {
     
   }
-  accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.accepterv)
 }
 
@@ -1692,6 +1677,7 @@ Accept::Accept()
 
 void Accept::InitAsDefaultInstance() {
   _is_default_instance_ = true;
+  accepterv_ = const_cast< ::lkvrpc::ConsensusType*>(&::lkvrpc::ConsensusType::default_instance());
 }
 
 Accept::Accept(const Accept& from)
@@ -1708,7 +1694,7 @@ void Accept::SharedCtor() {
   _cached_size_ = 0;
   instanceid_ = GOOGLE_ULONGLONG(0);
   acceptern_ = GOOGLE_ULONGLONG(0);
-  accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  accepterv_ = NULL;
   consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -1718,9 +1704,9 @@ Accept::~Accept() {
 }
 
 void Accept::SharedDtor() {
-  accepterv_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
+    delete accepterv_;
   }
 }
 
@@ -1768,7 +1754,8 @@ void Accept::Clear() {
 } while (0)
 
   ZR_(instanceid_, acceptern_);
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
   consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
@@ -1815,16 +1802,12 @@ bool Accept::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string accepterv = 3;
+      // optional .lkvrpc.ConsensusType accepterv = 3;
       case 3: {
         if (tag == 26) {
          parse_accepterv:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_accepterv()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->accepterv().data(), this->accepterv().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "simplepaxos.Accept.accepterv"));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_accepterv()));
         } else {
           goto handle_unusual;
         }
@@ -1883,14 +1866,10 @@ void Accept::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->acceptern(), output);
   }
 
-  // optional string accepterv = 3;
-  if (this->accepterv().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accepterv().data(), this->accepterv().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "simplepaxos.Accept.accepterv");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->accepterv(), output);
+  // optional .lkvrpc.ConsensusType accepterv = 3;
+  if (this->has_accepterv()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *this->accepterv_, output);
   }
 
   // optional string consenus_group = 4;
@@ -1919,15 +1898,11 @@ void Accept::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->acceptern(), target);
   }
 
-  // optional string accepterv = 3;
-  if (this->accepterv().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accepterv().data(), this->accepterv().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "simplepaxos.Accept.accepterv");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->accepterv(), target);
+  // optional .lkvrpc.ConsensusType accepterv = 3;
+  if (this->has_accepterv()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3, *this->accepterv_, false, target);
   }
 
   // optional string consenus_group = 4;
@@ -1963,11 +1938,11 @@ int Accept::ByteSize() const {
         this->acceptern());
   }
 
-  // optional string accepterv = 3;
-  if (this->accepterv().size() > 0) {
+  // optional .lkvrpc.ConsensusType accepterv = 3;
+  if (this->has_accepterv()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->accepterv());
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->accepterv_);
   }
 
   // optional string consenus_group = 4;
@@ -2011,9 +1986,8 @@ void Accept::MergeFrom(const Accept& from) {
   if (from.acceptern() != 0) {
     set_acceptern(from.acceptern());
   }
-  if (from.accepterv().size() > 0) {
-
-    accepterv_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accepterv_);
+  if (from.has_accepterv()) {
+    mutable_accepterv()->::lkvrpc::ConsensusType::MergeFrom(from.accepterv());
   }
   if (from.consenus_group().size() > 0) {
 
@@ -2047,7 +2021,7 @@ void Accept::Swap(Accept* other) {
 void Accept::InternalSwap(Accept* other) {
   std::swap(instanceid_, other->instanceid_);
   std::swap(acceptern_, other->acceptern_);
-  accepterv_.Swap(&other->accepterv_);
+  std::swap(accepterv_, other->accepterv_);
   consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -2092,47 +2066,41 @@ void Accept::clear_acceptern() {
   // @@protoc_insertion_point(field_set:simplepaxos.Accept.acceptern)
 }
 
-// optional string accepterv = 3;
+// optional .lkvrpc.ConsensusType accepterv = 3;
+bool Accept::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
 void Accept::clear_accepterv() {
-  accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
 }
- const ::std::string& Accept::accepterv() const {
+const ::lkvrpc::ConsensusType& Accept::accepterv() const {
   // @@protoc_insertion_point(field_get:simplepaxos.Accept.accepterv)
-  return accepterv_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
 }
- void Accept::set_accepterv(const ::std::string& value) {
+::lkvrpc::ConsensusType* Accept::mutable_accepterv() {
   
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:simplepaxos.Accept.accepterv)
-}
- void Accept::set_accepterv(const char* value) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:simplepaxos.Accept.accepterv)
-}
- void Accept::set_accepterv(const char* value, size_t size) {
-  
-  accepterv_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Accept.accepterv)
-}
- ::std::string* Accept::mutable_accepterv() {
-  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
   // @@protoc_insertion_point(field_mutable:simplepaxos.Accept.accepterv)
-  return accepterv_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return accepterv_;
 }
- ::std::string* Accept::release_accepterv() {
+::lkvrpc::ConsensusType* Accept::release_accepterv() {
   // @@protoc_insertion_point(field_release:simplepaxos.Accept.accepterv)
   
-  return accepterv_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
 }
- void Accept::set_allocated_accepterv(::std::string* accepterv) {
-  if (accepterv != NULL) {
+void Accept::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
     
   } else {
     
   }
-  accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.accepterv)
 }
 

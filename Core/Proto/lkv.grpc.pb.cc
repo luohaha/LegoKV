@@ -5,20 +5,14 @@
 #include "lkv.pb.h"
 #include "lkv.grpc.pb.h"
 
-#include <functional>
-#include <grpcpp/impl/codegen/async_stream.h>
-#include <grpcpp/impl/codegen/async_unary_call.h>
-#include <grpcpp/impl/codegen/channel_interface.h>
-#include <grpcpp/impl/codegen/client_unary_call.h>
-#include <grpcpp/impl/codegen/client_callback.h>
-#include <grpcpp/impl/codegen/message_allocator.h>
-#include <grpcpp/impl/codegen/method_handler.h>
-#include <grpcpp/impl/codegen/rpc_service_method.h>
-#include <grpcpp/impl/codegen/server_callback.h>
-#include <grpcpp/impl/codegen/server_callback_handlers.h>
-#include <grpcpp/impl/codegen/server_context.h>
-#include <grpcpp/impl/codegen/service_type.h>
-#include <grpcpp/impl/codegen/sync_stream.h>
+#include <grpc++/impl/codegen/async_stream.h>
+#include <grpc++/impl/codegen/async_unary_call.h>
+#include <grpc++/impl/codegen/channel_interface.h>
+#include <grpc++/impl/codegen/client_unary_call.h>
+#include <grpc++/impl/codegen/method_handler_impl.h>
+#include <grpc++/impl/codegen/rpc_service_method.h>
+#include <grpc++/impl/codegen/service_type.h>
+#include <grpc++/impl/codegen/sync_stream.h>
 namespace lkvrpc {
 
 static const char* LKV_method_names[] = {
@@ -28,132 +22,56 @@ static const char* LKV_method_names[] = {
 };
 
 std::unique_ptr< LKV::Stub> LKV::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
-  (void)options;
   std::unique_ptr< LKV::Stub> stub(new LKV::Stub(channel));
   return stub;
 }
 
 LKV::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_Get_(LKV_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Put_(LKV_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Delete_(LKV_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_Get_(LKV_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Put_(LKV_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Delete_(LKV_method_names[2], ::grpc::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status LKV::Stub::Get(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::lkvrpc::Value* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Get_, context, request, response);
-}
-
-void LKV::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, reactor);
-}
-
-void LKV::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, reactor);
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Get_, context, request, response);
 }
 
 ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>* LKV::Stub::AsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::Value>::Create(channel_.get(), cq, rpcmethod_Get_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>* LKV::Stub::PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::Value>::Create(channel_.get(), cq, rpcmethod_Get_, context, request, false);
+  return new ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>(channel_.get(), cq, rpcmethod_Get_, context, request);
 }
 
 ::grpc::Status LKV::Stub::Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::lkvrpc::ReturnInt* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Put_, context, request, response);
-}
-
-void LKV::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, reactor);
-}
-
-void LKV::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, reactor);
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Put_, context, request, response);
 }
 
 ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* LKV::Stub::AsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::ReturnInt>::Create(channel_.get(), cq, rpcmethod_Put_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* LKV::Stub::PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::ReturnInt>::Create(channel_.get(), cq, rpcmethod_Put_, context, request, false);
+  return new ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>(channel_.get(), cq, rpcmethod_Put_, context, request);
 }
 
 ::grpc::Status LKV::Stub::Delete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::lkvrpc::ReturnInt* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Delete_, context, request, response);
-}
-
-void LKV::Stub::experimental_async::Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Delete_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)> f) {
-  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Delete_, context, request, response, std::move(f));
-}
-
-void LKV::Stub::experimental_async::Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Delete_, context, request, response, reactor);
-}
-
-void LKV::Stub::experimental_async::Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Delete_, context, request, response, reactor);
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Delete_, context, request, response);
 }
 
 ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* LKV::Stub::AsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::ReturnInt>::Create(channel_.get(), cq, rpcmethod_Delete_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* LKV::Stub::PrepareAsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::lkvrpc::ReturnInt>::Create(channel_.get(), cq, rpcmethod_Delete_, context, request, false);
+  return new ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>(channel_.get(), cq, rpcmethod_Delete_, context, request);
 }
 
 LKV::Service::Service() {
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
+  AddMethod(new ::grpc::RpcServiceMethod(
       LKV_method_names[0],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< LKV::Service, ::lkvrpc::Key, ::lkvrpc::Value>(
-          [](LKV::Service* service,
-             ::grpc_impl::ServerContext* ctx,
-             const ::lkvrpc::Key* req,
-             ::lkvrpc::Value* resp) {
-               return service->Get(ctx, req, resp);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< LKV::Service, ::lkvrpc::Key, ::lkvrpc::Value>(
+          std::mem_fn(&LKV::Service::Get), this)));
+  AddMethod(new ::grpc::RpcServiceMethod(
       LKV_method_names[1],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< LKV::Service, ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>(
-          [](LKV::Service* service,
-             ::grpc_impl::ServerContext* ctx,
-             const ::lkvrpc::KeyValuePair* req,
-             ::lkvrpc::ReturnInt* resp) {
-               return service->Put(ctx, req, resp);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< LKV::Service, ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>(
+          std::mem_fn(&LKV::Service::Put), this)));
+  AddMethod(new ::grpc::RpcServiceMethod(
       LKV_method_names[2],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< LKV::Service, ::lkvrpc::Key, ::lkvrpc::ReturnInt>(
-          [](LKV::Service* service,
-             ::grpc_impl::ServerContext* ctx,
-             const ::lkvrpc::Key* req,
-             ::lkvrpc::ReturnInt* resp) {
-               return service->Delete(ctx, req, resp);
-             }, this)));
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< LKV::Service, ::lkvrpc::Key, ::lkvrpc::ReturnInt>(
+          std::mem_fn(&LKV::Service::Delete), this)));
 }
 
 LKV::Service::~Service() {

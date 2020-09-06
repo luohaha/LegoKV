@@ -6,33 +6,28 @@
 
 #include "lkv.pb.h"
 
-#include <functional>
-#include <grpc/impl/codegen/port_platform.h>
-#include <grpcpp/impl/codegen/async_generic_service.h>
-#include <grpcpp/impl/codegen/async_stream.h>
-#include <grpcpp/impl/codegen/async_unary_call.h>
-#include <grpcpp/impl/codegen/client_callback.h>
-#include <grpcpp/impl/codegen/client_context.h>
-#include <grpcpp/impl/codegen/completion_queue.h>
-#include <grpcpp/impl/codegen/message_allocator.h>
-#include <grpcpp/impl/codegen/method_handler.h>
-#include <grpcpp/impl/codegen/proto_utils.h>
-#include <grpcpp/impl/codegen/rpc_method.h>
-#include <grpcpp/impl/codegen/server_callback.h>
-#include <grpcpp/impl/codegen/server_callback_handlers.h>
-#include <grpcpp/impl/codegen/server_context.h>
-#include <grpcpp/impl/codegen/service_type.h>
-#include <grpcpp/impl/codegen/status.h>
-#include <grpcpp/impl/codegen/stub_options.h>
-#include <grpcpp/impl/codegen/sync_stream.h>
+#include <grpc++/impl/codegen/async_stream.h>
+#include <grpc++/impl/codegen/async_unary_call.h>
+#include <grpc++/impl/codegen/method_handler_impl.h>
+#include <grpc++/impl/codegen/proto_utils.h>
+#include <grpc++/impl/codegen/rpc_method.h>
+#include <grpc++/impl/codegen/service_type.h>
+#include <grpc++/impl/codegen/status.h>
+#include <grpc++/impl/codegen/stub_options.h>
+#include <grpc++/impl/codegen/sync_stream.h>
+
+namespace grpc {
+class CompletionQueue;
+class Channel;
+class RpcService;
+class ServerCompletionQueue;
+class ServerContext;
+}  // namespace grpc
 
 namespace lkvrpc {
 
 class LKV final {
  public:
-  static constexpr char const* service_full_name() {
-    return "lkvrpc.LKV";
-  }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
@@ -40,77 +35,18 @@ class LKV final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>> AsyncGet(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>>(AsyncGetRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>> PrepareAsyncGet(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>>(PrepareAsyncGetRaw(context, request, cq));
-    }
     virtual ::grpc::Status Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::lkvrpc::ReturnInt* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>> AsyncPut(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>>(AsyncPutRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>> PrepareAsyncPut(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>>(PrepareAsyncPutRaw(context, request, cq));
     }
     virtual ::grpc::Status Delete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::lkvrpc::ReturnInt* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>> AsyncDelete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>>(AsyncDeleteRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>> PrepareAsyncDelete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>>(PrepareAsyncDeleteRaw(context, request, cq));
-    }
-    class experimental_async_interface {
-     public:
-      virtual ~experimental_async_interface() {}
-      virtual void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)>) = 0;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-      virtual void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) = 0;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-      virtual void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) = 0;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      #else
-      virtual void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      #endif
-    };
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    typedef class experimental_async_interface async_interface;
-    #endif
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    async_interface* async() { return experimental_async(); }
-    #endif
-    virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>* AsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::Value>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>* AsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>* AsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::lkvrpc::ReturnInt>* PrepareAsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -119,82 +55,23 @@ class LKV final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>> AsyncGet(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>>(AsyncGetRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>> PrepareAsyncGet(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>>(PrepareAsyncGetRaw(context, request, cq));
-    }
     ::grpc::Status Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::lkvrpc::ReturnInt* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>> AsyncPut(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>>(AsyncPutRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>> PrepareAsyncPut(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>>(PrepareAsyncPutRaw(context, request, cq));
     }
     ::grpc::Status Delete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::lkvrpc::ReturnInt* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>> AsyncDelete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>>(AsyncDeleteRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>> PrepareAsyncDelete(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>>(PrepareAsyncDeleteRaw(context, request, cq));
-    }
-    class experimental_async final :
-      public StubInterface::experimental_async_interface {
-     public:
-      void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)>) override;
-      void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, std::function<void(::grpc::Status)>) override;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Get(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::Value* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-      void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) override;
-      void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) override;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Put(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-      void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) override;
-      void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, std::function<void(::grpc::Status)>) override;
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Delete(::grpc::ClientContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::ClientUnaryReactor* reactor) override;
-      #else
-      void Delete(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::lkvrpc::ReturnInt* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      #endif
-     private:
-      friend class Stub;
-      explicit experimental_async(Stub* stub): stub_(stub) { }
-      Stub* stub() { return stub_; }
-      Stub* stub_;
-    };
-    class experimental_async_interface* experimental_async() override { return &async_stub_; }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>* AsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::lkvrpc::Value>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* AsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::lkvrpc::KeyValuePair& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* AsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::lkvrpc::ReturnInt>* PrepareAsyncDeleteRaw(::grpc::ClientContext* context, const ::lkvrpc::Key& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_Get_;
-    const ::grpc::internal::RpcMethod rpcmethod_Put_;
-    const ::grpc::internal::RpcMethod rpcmethod_Delete_;
+    const ::grpc::RpcMethod rpcmethod_Get_;
+    const ::grpc::RpcMethod rpcmethod_Put_;
+    const ::grpc::RpcMethod rpcmethod_Delete_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -209,7 +86,7 @@ class LKV final {
   template <class BaseClass>
   class WithAsyncMethod_Get : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Get() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -218,7 +95,7 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -229,7 +106,7 @@ class LKV final {
   template <class BaseClass>
   class WithAsyncMethod_Put : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Put() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -238,7 +115,7 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -249,7 +126,7 @@ class LKV final {
   template <class BaseClass>
   class WithAsyncMethod_Delete : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Delete() {
       ::grpc::Service::MarkMethodAsync(2);
@@ -258,7 +135,7 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Delete(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -268,155 +145,9 @@ class LKV final {
   };
   typedef WithAsyncMethod_Get<WithAsyncMethod_Put<WithAsyncMethod_Delete<Service > > > AsyncService;
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_Get : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithCallbackMethod_Get() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodCallback(0,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::Key, ::lkvrpc::Value>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response) { return this->Get(context, request, response); }));}
-    void SetMessageAllocatorFor_Get(
-        ::grpc::experimental::MessageAllocator< ::lkvrpc::Key, ::lkvrpc::Value>* allocator) {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-    #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
-    #endif
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::Key, ::lkvrpc::Value>*>(handler)
-              ->SetMessageAllocator(allocator);
-    }
-    ~ExperimentalWithCallbackMethod_Get() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Get(
-      ::grpc::CallbackServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Get(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
-  class ExperimentalWithCallbackMethod_Put : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithCallbackMethod_Put() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodCallback(1,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response) { return this->Put(context, request, response); }));}
-    void SetMessageAllocatorFor_Put(
-        ::grpc::experimental::MessageAllocator< ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>* allocator) {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-    #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
-    #endif
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>*>(handler)
-              ->SetMessageAllocator(allocator);
-    }
-    ~ExperimentalWithCallbackMethod_Put() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Put(
-      ::grpc::CallbackServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Put(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
-  class ExperimentalWithCallbackMethod_Delete : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithCallbackMethod_Delete() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodCallback(2,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::Key, ::lkvrpc::ReturnInt>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response) { return this->Delete(context, request, response); }));}
-    void SetMessageAllocatorFor_Delete(
-        ::grpc::experimental::MessageAllocator< ::lkvrpc::Key, ::lkvrpc::ReturnInt>* allocator) {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-    #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
-    #endif
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::lkvrpc::Key, ::lkvrpc::ReturnInt>*>(handler)
-              ->SetMessageAllocator(allocator);
-    }
-    ~ExperimentalWithCallbackMethod_Delete() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Delete(
-      ::grpc::CallbackServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Delete(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/)
-    #endif
-      { return nullptr; }
-  };
-  #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_Get<ExperimentalWithCallbackMethod_Put<ExperimentalWithCallbackMethod_Delete<Service > > > CallbackService;
-  #endif
-
-  typedef ExperimentalWithCallbackMethod_Get<ExperimentalWithCallbackMethod_Put<ExperimentalWithCallbackMethod_Delete<Service > > > ExperimentalCallbackService;
-  template <class BaseClass>
   class WithGenericMethod_Get : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Get() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -425,7 +156,7 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -433,7 +164,7 @@ class LKV final {
   template <class BaseClass>
   class WithGenericMethod_Put : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Put() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -442,7 +173,7 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -450,7 +181,7 @@ class LKV final {
   template <class BaseClass>
   class WithGenericMethod_Delete : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Delete() {
       ::grpc::Service::MarkMethodGeneric(2);
@@ -459,206 +190,25 @@ class LKV final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Delete(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-  };
-  template <class BaseClass>
-  class WithRawMethod_Get : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_Get() {
-      ::grpc::Service::MarkMethodRaw(0);
-    }
-    ~WithRawMethod_Get() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestGet(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithRawMethod_Put : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_Put() {
-      ::grpc::Service::MarkMethodRaw(1);
-    }
-    ~WithRawMethod_Put() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestPut(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithRawMethod_Delete : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_Delete() {
-      ::grpc::Service::MarkMethodRaw(2);
-    }
-    ~WithRawMethod_Delete() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestDelete(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_Get : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithRawCallbackMethod_Get() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodRawCallback(0,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Get(context, request, response); }));
-    }
-    ~ExperimentalWithRawCallbackMethod_Get() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Get(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Get(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_Put : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithRawCallbackMethod_Put() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodRawCallback(1,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Put(context, request, response); }));
-    }
-    ~ExperimentalWithRawCallbackMethod_Put() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Put(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Put(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_Delete : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithRawCallbackMethod_Delete() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodRawCallback(2,
-          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Delete(context, request, response); }));
-    }
-    ~ExperimentalWithRawCallbackMethod_Delete() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* Delete(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #else
-    virtual ::grpc::experimental::ServerUnaryReactor* Delete(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
-    #endif
-      { return nullptr; }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Get : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_Get() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::lkvrpc::Key, ::lkvrpc::Value>(
-            [this](::grpc_impl::ServerContext* context,
-                   ::grpc_impl::ServerUnaryStreamer<
-                     ::lkvrpc::Key, ::lkvrpc::Value>* streamer) {
-                       return this->StreamedGet(context,
-                         streamer);
-                  }));
+        new ::grpc::StreamedUnaryHandler< ::lkvrpc::Key, ::lkvrpc::Value>(std::bind(&WithStreamedUnaryMethod_Get<BaseClass>::StreamedGet, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Get() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::Value* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::Value* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -668,24 +218,17 @@ class LKV final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_Put : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_Put() {
       ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>(
-            [this](::grpc_impl::ServerContext* context,
-                   ::grpc_impl::ServerUnaryStreamer<
-                     ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>* streamer) {
-                       return this->StreamedPut(context,
-                         streamer);
-                  }));
+        new ::grpc::StreamedUnaryHandler< ::lkvrpc::KeyValuePair, ::lkvrpc::ReturnInt>(std::bind(&WithStreamedUnaryMethod_Put<BaseClass>::StreamedPut, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Put() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::lkvrpc::KeyValuePair* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* context, const ::lkvrpc::KeyValuePair* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -695,24 +238,17 @@ class LKV final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_Delete : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_Delete() {
       ::grpc::Service::MarkMethodStreamed(2,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::lkvrpc::Key, ::lkvrpc::ReturnInt>(
-            [this](::grpc_impl::ServerContext* context,
-                   ::grpc_impl::ServerUnaryStreamer<
-                     ::lkvrpc::Key, ::lkvrpc::ReturnInt>* streamer) {
-                       return this->StreamedDelete(context,
-                         streamer);
-                  }));
+        new ::grpc::StreamedUnaryHandler< ::lkvrpc::Key, ::lkvrpc::ReturnInt>(std::bind(&WithStreamedUnaryMethod_Delete<BaseClass>::StreamedDelete, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Delete() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Delete(::grpc::ServerContext* /*context*/, const ::lkvrpc::Key* /*request*/, ::lkvrpc::ReturnInt* /*response*/) override {
+    ::grpc::Status Delete(::grpc::ServerContext* context, const ::lkvrpc::Key* request, ::lkvrpc::ReturnInt* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

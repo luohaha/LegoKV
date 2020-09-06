@@ -19,6 +19,18 @@ message ReturnInt
   int32 ret = 1;
 }
 
+message ConsensusType
+{
+  enum OpType {
+    OP_GET = 0;
+    OP_PUT = 1;
+    OP_DEL = 2;
+  }
+  OpType op = 1;
+  string key = 2;
+  string value = 3;
+}
+
 service LKV {
   rpc Get(Key) returns (Value) {}
   rpc Put(KeyValuePair) returns (ReturnInt) {}

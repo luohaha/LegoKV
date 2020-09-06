@@ -1,11 +1,12 @@
 syntax = "proto3";
+import "lkv.proto";
 package simplepaxos;
 
 message PrepareRet {
   uint64 instanceid = 1;
   uint64 proposaln = 2;
   uint64 acceptern = 3;
-  string accepterv = 4;
+  lkvrpc.ConsensusType accepterv = 4;
   bool isok = 5;
   string consenus_group = 6;
 }
@@ -26,7 +27,7 @@ message Prepare {
 message Accept {
   uint64 instanceid = 1;
   uint64 acceptern = 2;
-  string accepterv = 3;
+  lkvrpc.ConsensusType accepterv = 3;
   string consenus_group = 4;
 }
 
