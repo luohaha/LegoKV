@@ -39,6 +39,7 @@ void protobuf_ShutdownFile_simple_5fpaxos_2eproto();
 
 class Accept;
 class AcceptRet;
+class PaxosRecord;
 class Prepare;
 class PrepareRet;
 
@@ -487,6 +488,119 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   void InitAsDefaultInstance();
   static Accept* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class PaxosRecord : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:simplepaxos.PaxosRecord) */ {
+ public:
+  PaxosRecord();
+  virtual ~PaxosRecord();
+
+  PaxosRecord(const PaxosRecord& from);
+
+  inline PaxosRecord& operator=(const PaxosRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PaxosRecord& default_instance();
+
+  void Swap(PaxosRecord* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PaxosRecord* New() const { return New(NULL); }
+
+  PaxosRecord* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PaxosRecord& from);
+  void MergeFrom(const PaxosRecord& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PaxosRecord* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint64 instanceid = 1;
+  void clear_instanceid();
+  static const int kInstanceidFieldNumber = 1;
+  ::google::protobuf::uint64 instanceid() const;
+  void set_instanceid(::google::protobuf::uint64 value);
+
+  // optional uint64 proposaln = 2;
+  void clear_proposaln();
+  static const int kProposalnFieldNumber = 2;
+  ::google::protobuf::uint64 proposaln() const;
+  void set_proposaln(::google::protobuf::uint64 value);
+
+  // optional uint64 acceptn = 3;
+  void clear_acceptn();
+  static const int kAcceptnFieldNumber = 3;
+  ::google::protobuf::uint64 acceptn() const;
+  void set_acceptn(::google::protobuf::uint64 value);
+
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  bool has_accepterv() const;
+  void clear_accepterv();
+  static const int kAcceptervFieldNumber = 4;
+  const ::lkvrpc::ConsensusType& accepterv() const;
+  ::lkvrpc::ConsensusType* mutable_accepterv();
+  ::lkvrpc::ConsensusType* release_accepterv();
+  void set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv);
+
+  // optional bool confirm = 5;
+  void clear_confirm();
+  static const int kConfirmFieldNumber = 5;
+  bool confirm() const;
+  void set_confirm(bool value);
+
+  // @@protoc_insertion_point(class_scope:simplepaxos.PaxosRecord)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::uint64 instanceid_;
+  ::google::protobuf::uint64 proposaln_;
+  ::google::protobuf::uint64 acceptn_;
+  ::lkvrpc::ConsensusType* accepterv_;
+  bool confirm_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
+  friend void protobuf_AssignDesc_simple_5fpaxos_2eproto();
+  friend void protobuf_ShutdownFile_simple_5fpaxos_2eproto();
+
+  void InitAsDefaultInstance();
+  static PaxosRecord* default_instance_;
+};
 // ===================================================================
 
 
@@ -913,7 +1027,107 @@ inline void Accept::set_allocated_consenus_group(::std::string* consenus_group) 
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.consenus_group)
 }
 
+// -------------------------------------------------------------------
+
+// PaxosRecord
+
+// optional uint64 instanceid = 1;
+inline void PaxosRecord::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 PaxosRecord::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.instanceid)
+  return instanceid_;
+}
+inline void PaxosRecord::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.instanceid)
+}
+
+// optional uint64 proposaln = 2;
+inline void PaxosRecord::clear_proposaln() {
+  proposaln_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 PaxosRecord::proposaln() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.proposaln)
+  return proposaln_;
+}
+inline void PaxosRecord::set_proposaln(::google::protobuf::uint64 value) {
+  
+  proposaln_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.proposaln)
+}
+
+// optional uint64 acceptn = 3;
+inline void PaxosRecord::clear_acceptn() {
+  acceptn_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 PaxosRecord::acceptn() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.acceptn)
+  return acceptn_;
+}
+inline void PaxosRecord::set_acceptn(::google::protobuf::uint64 value) {
+  
+  acceptn_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.acceptn)
+}
+
+// optional .lkvrpc.ConsensusType accepterv = 4;
+inline bool PaxosRecord::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
+inline void PaxosRecord::clear_accepterv() {
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
+}
+inline const ::lkvrpc::ConsensusType& PaxosRecord::accepterv() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.accepterv)
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
+}
+inline ::lkvrpc::ConsensusType* PaxosRecord::mutable_accepterv() {
+  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
+  // @@protoc_insertion_point(field_mutable:simplepaxos.PaxosRecord.accepterv)
+  return accepterv_;
+}
+inline ::lkvrpc::ConsensusType* PaxosRecord::release_accepterv() {
+  // @@protoc_insertion_point(field_release:simplepaxos.PaxosRecord.accepterv)
+  
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
+}
+inline void PaxosRecord::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.PaxosRecord.accepterv)
+}
+
+// optional bool confirm = 5;
+inline void PaxosRecord::clear_confirm() {
+  confirm_ = false;
+}
+inline bool PaxosRecord::confirm() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.confirm)
+  return confirm_;
+}
+inline void PaxosRecord::set_confirm(bool value) {
+  
+  confirm_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.confirm)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

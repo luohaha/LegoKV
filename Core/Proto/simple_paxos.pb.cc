@@ -33,6 +33,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Accept_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Accept_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PaxosRecord_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PaxosRecord_reflection_ = NULL;
 
 }  // namespace
 
@@ -117,6 +120,25 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       sizeof(Accept),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, _is_default_instance_));
+  PaxosRecord_descriptor_ = file->message_type(4);
+  static const int PaxosRecord_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, instanceid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, proposaln_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, acceptn_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, accepterv_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, confirm_),
+  };
+  PaxosRecord_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      PaxosRecord_descriptor_,
+      PaxosRecord::default_instance_,
+      PaxosRecord_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(PaxosRecord),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PaxosRecord, _is_default_instance_));
 }
 
 namespace {
@@ -138,6 +160,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
       Prepare_descriptor_, &Prepare::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Accept_descriptor_, &Accept::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      PaxosRecord_descriptor_, &PaxosRecord::default_instance());
 }
 
 }  // namespace
@@ -151,6 +175,8 @@ void protobuf_ShutdownFile_simple_5fpaxos_2eproto() {
   delete Prepare_reflection_;
   delete Accept::default_instance_;
   delete Accept_reflection_;
+  delete PaxosRecord::default_instance_;
+  delete PaxosRecord_reflection_;
 }
 
 void protobuf_AddDesc_simple_5fpaxos_2eproto() GOOGLE_ATTRIBUTE_COLD;
@@ -173,21 +199,26 @@ void protobuf_AddDesc_simple_5fpaxos_2eproto() {
     "\n\tproposaln\030\002 \001(\004\022\026\n\016consenus_group\030\003 \001("
     "\t\"q\n\006Accept\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\taccep"
     "tern\030\002 \001(\004\022(\n\taccepterv\030\003 \001(\0132\025.lkvrpc.C"
-    "onsensusType\022\026\n\016consenus_group\030\004 \001(\t2\216\001\n"
-    "\013SimplePaxos\022=\n\014HandleAccept\022\023.simplepax"
-    "os.Accept\032\026.simplepaxos.AcceptRet\"\000\022@\n\rH"
-    "andlePrepare\022\024.simplepaxos.Prepare\032\027.sim"
-    "plepaxos.PrepareRet\"\000b\006proto3", 629);
+    "onsensusType\022\026\n\016consenus_group\030\004 \001(\t\"\200\001\n"
+    "\013PaxosRecord\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tprop"
+    "osaln\030\002 \001(\004\022\017\n\007acceptn\030\003 \001(\004\022(\n\taccepter"
+    "v\030\004 \001(\0132\025.lkvrpc.ConsensusType\022\017\n\007confir"
+    "m\030\005 \001(\0102\216\001\n\013SimplePaxos\022=\n\014HandleAccept\022"
+    "\023.simplepaxos.Accept\032\026.simplepaxos.Accep"
+    "tRet\"\000\022@\n\rHandlePrepare\022\024.simplepaxos.Pr"
+    "epare\032\027.simplepaxos.PrepareRet\"\000b\006proto3", 760);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "simple_paxos.proto", &protobuf_RegisterTypes);
   PrepareRet::default_instance_ = new PrepareRet();
   AcceptRet::default_instance_ = new AcceptRet();
   Prepare::default_instance_ = new Prepare();
   Accept::default_instance_ = new Accept();
+  PaxosRecord::default_instance_ = new PaxosRecord();
   PrepareRet::default_instance_->InitAsDefaultInstance();
   AcceptRet::default_instance_->InitAsDefaultInstance();
   Prepare::default_instance_->InitAsDefaultInstance();
   Accept::default_instance_->InitAsDefaultInstance();
+  PaxosRecord::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_simple_5fpaxos_2eproto);
 }
 
@@ -2146,6 +2177,500 @@ void Accept::clear_consenus_group() {
   }
   consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.consenus_group)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PaxosRecord::kInstanceidFieldNumber;
+const int PaxosRecord::kProposalnFieldNumber;
+const int PaxosRecord::kAcceptnFieldNumber;
+const int PaxosRecord::kAcceptervFieldNumber;
+const int PaxosRecord::kConfirmFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+PaxosRecord::PaxosRecord()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:simplepaxos.PaxosRecord)
+}
+
+void PaxosRecord::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  accepterv_ = const_cast< ::lkvrpc::ConsensusType*>(&::lkvrpc::ConsensusType::default_instance());
+}
+
+PaxosRecord::PaxosRecord(const PaxosRecord& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:simplepaxos.PaxosRecord)
+}
+
+void PaxosRecord::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  instanceid_ = GOOGLE_ULONGLONG(0);
+  proposaln_ = GOOGLE_ULONGLONG(0);
+  acceptn_ = GOOGLE_ULONGLONG(0);
+  accepterv_ = NULL;
+  confirm_ = false;
+}
+
+PaxosRecord::~PaxosRecord() {
+  // @@protoc_insertion_point(destructor:simplepaxos.PaxosRecord)
+  SharedDtor();
+}
+
+void PaxosRecord::SharedDtor() {
+  if (this != default_instance_) {
+    delete accepterv_;
+  }
+}
+
+void PaxosRecord::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PaxosRecord::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PaxosRecord_descriptor_;
+}
+
+const PaxosRecord& PaxosRecord::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_simple_5fpaxos_2eproto();
+  return *default_instance_;
+}
+
+PaxosRecord* PaxosRecord::default_instance_ = NULL;
+
+PaxosRecord* PaxosRecord::New(::google::protobuf::Arena* arena) const {
+  PaxosRecord* n = new PaxosRecord;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void PaxosRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:simplepaxos.PaxosRecord)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(PaxosRecord, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<PaxosRecord*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(instanceid_, acceptn_);
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
+  confirm_ = false;
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool PaxosRecord::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:simplepaxos.PaxosRecord)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint64 instanceid = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &instanceid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_proposaln;
+        break;
+      }
+
+      // optional uint64 proposaln = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_proposaln:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &proposaln_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_acceptn;
+        break;
+      }
+
+      // optional uint64 acceptn = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_acceptn:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &acceptn_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_accepterv;
+        break;
+      }
+
+      // optional .lkvrpc.ConsensusType accepterv = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_accepterv:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_accepterv()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_confirm;
+        break;
+      }
+
+      // optional bool confirm = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_confirm:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &confirm_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:simplepaxos.PaxosRecord)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:simplepaxos.PaxosRecord)
+  return false;
+#undef DO_
+}
+
+void PaxosRecord::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:simplepaxos.PaxosRecord)
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->instanceid(), output);
+  }
+
+  // optional uint64 proposaln = 2;
+  if (this->proposaln() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
+  }
+
+  // optional uint64 acceptn = 3;
+  if (this->acceptn() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->acceptn(), output);
+  }
+
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *this->accepterv_, output);
+  }
+
+  // optional bool confirm = 5;
+  if (this->confirm() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->confirm(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:simplepaxos.PaxosRecord)
+}
+
+::google::protobuf::uint8* PaxosRecord::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:simplepaxos.PaxosRecord)
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->instanceid(), target);
+  }
+
+  // optional uint64 proposaln = 2;
+  if (this->proposaln() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
+  }
+
+  // optional uint64 acceptn = 3;
+  if (this->acceptn() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->acceptn(), target);
+  }
+
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        4, *this->accepterv_, false, target);
+  }
+
+  // optional bool confirm = 5;
+  if (this->confirm() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->confirm(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.PaxosRecord)
+  return target;
+}
+
+int PaxosRecord::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:simplepaxos.PaxosRecord)
+  int total_size = 0;
+
+  // optional uint64 instanceid = 1;
+  if (this->instanceid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->instanceid());
+  }
+
+  // optional uint64 proposaln = 2;
+  if (this->proposaln() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->proposaln());
+  }
+
+  // optional uint64 acceptn = 3;
+  if (this->acceptn() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->acceptn());
+  }
+
+  // optional .lkvrpc.ConsensusType accepterv = 4;
+  if (this->has_accepterv()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->accepterv_);
+  }
+
+  // optional bool confirm = 5;
+  if (this->confirm() != 0) {
+    total_size += 1 + 1;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PaxosRecord::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:simplepaxos.PaxosRecord)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const PaxosRecord* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const PaxosRecord>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:simplepaxos.PaxosRecord)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:simplepaxos.PaxosRecord)
+    MergeFrom(*source);
+  }
+}
+
+void PaxosRecord::MergeFrom(const PaxosRecord& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:simplepaxos.PaxosRecord)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.instanceid() != 0) {
+    set_instanceid(from.instanceid());
+  }
+  if (from.proposaln() != 0) {
+    set_proposaln(from.proposaln());
+  }
+  if (from.acceptn() != 0) {
+    set_acceptn(from.acceptn());
+  }
+  if (from.has_accepterv()) {
+    mutable_accepterv()->::lkvrpc::ConsensusType::MergeFrom(from.accepterv());
+  }
+  if (from.confirm() != 0) {
+    set_confirm(from.confirm());
+  }
+}
+
+void PaxosRecord::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:simplepaxos.PaxosRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PaxosRecord::CopyFrom(const PaxosRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:simplepaxos.PaxosRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PaxosRecord::IsInitialized() const {
+
+  return true;
+}
+
+void PaxosRecord::Swap(PaxosRecord* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void PaxosRecord::InternalSwap(PaxosRecord* other) {
+  std::swap(instanceid_, other->instanceid_);
+  std::swap(proposaln_, other->proposaln_);
+  std::swap(acceptn_, other->acceptn_);
+  std::swap(accepterv_, other->accepterv_);
+  std::swap(confirm_, other->confirm_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata PaxosRecord::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PaxosRecord_descriptor_;
+  metadata.reflection = PaxosRecord_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// PaxosRecord
+
+// optional uint64 instanceid = 1;
+void PaxosRecord::clear_instanceid() {
+  instanceid_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 PaxosRecord::instanceid() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.instanceid)
+  return instanceid_;
+}
+ void PaxosRecord::set_instanceid(::google::protobuf::uint64 value) {
+  
+  instanceid_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.instanceid)
+}
+
+// optional uint64 proposaln = 2;
+void PaxosRecord::clear_proposaln() {
+  proposaln_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 PaxosRecord::proposaln() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.proposaln)
+  return proposaln_;
+}
+ void PaxosRecord::set_proposaln(::google::protobuf::uint64 value) {
+  
+  proposaln_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.proposaln)
+}
+
+// optional uint64 acceptn = 3;
+void PaxosRecord::clear_acceptn() {
+  acceptn_ = GOOGLE_ULONGLONG(0);
+}
+ ::google::protobuf::uint64 PaxosRecord::acceptn() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.acceptn)
+  return acceptn_;
+}
+ void PaxosRecord::set_acceptn(::google::protobuf::uint64 value) {
+  
+  acceptn_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.acceptn)
+}
+
+// optional .lkvrpc.ConsensusType accepterv = 4;
+bool PaxosRecord::has_accepterv() const {
+  return !_is_default_instance_ && accepterv_ != NULL;
+}
+void PaxosRecord::clear_accepterv() {
+  if (GetArenaNoVirtual() == NULL && accepterv_ != NULL) delete accepterv_;
+  accepterv_ = NULL;
+}
+const ::lkvrpc::ConsensusType& PaxosRecord::accepterv() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.accepterv)
+  return accepterv_ != NULL ? *accepterv_ : *default_instance_->accepterv_;
+}
+::lkvrpc::ConsensusType* PaxosRecord::mutable_accepterv() {
+  
+  if (accepterv_ == NULL) {
+    accepterv_ = new ::lkvrpc::ConsensusType;
+  }
+  // @@protoc_insertion_point(field_mutable:simplepaxos.PaxosRecord.accepterv)
+  return accepterv_;
+}
+::lkvrpc::ConsensusType* PaxosRecord::release_accepterv() {
+  // @@protoc_insertion_point(field_release:simplepaxos.PaxosRecord.accepterv)
+  
+  ::lkvrpc::ConsensusType* temp = accepterv_;
+  accepterv_ = NULL;
+  return temp;
+}
+void PaxosRecord::set_allocated_accepterv(::lkvrpc::ConsensusType* accepterv) {
+  delete accepterv_;
+  accepterv_ = accepterv;
+  if (accepterv) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.PaxosRecord.accepterv)
+}
+
+// optional bool confirm = 5;
+void PaxosRecord::clear_confirm() {
+  confirm_ = false;
+}
+ bool PaxosRecord::confirm() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PaxosRecord.confirm)
+  return confirm_;
+}
+ void PaxosRecord::set_confirm(bool value) {
+  
+  confirm_ = value;
+  // @@protoc_insertion_point(field_set:simplepaxos.PaxosRecord.confirm)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

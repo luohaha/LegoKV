@@ -31,6 +31,14 @@ message Accept {
   string consenus_group = 4;
 }
 
+message PaxosRecord {
+  uint64 instanceid = 1;
+  uint64 proposaln = 2;
+  uint64 acceptn = 3;
+  lkvrpc.ConsensusType accepterv = 4;
+  bool confirm = 5;
+}
+
 service SimplePaxos {
   rpc HandleAccept(Accept) returns (AcceptRet) {}
   rpc HandlePrepare(Prepare) returns (PrepareRet) {}
