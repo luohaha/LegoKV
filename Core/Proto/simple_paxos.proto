@@ -7,23 +7,27 @@ message PrepareRet {
   uint64 acceptern = 3;
   string accepterv = 4;
   bool isok = 5;
+  string consenus_group = 6;
 }
 
 message AcceptRet {
   uint64 instanceid = 1;
   uint64 proposaln = 2;
   bool isok = 3;
+  string consenus_group = 4;
 }
 
 message Prepare {
   uint64 instanceid = 1;
   uint64 proposaln = 2;
+  string consenus_group = 3;
 }
 
 message Accept {
   uint64 instanceid = 1;
   uint64 acceptern = 2;
   string accepterv = 3;
+  string consenus_group = 4;
 }
 
 service SimplePaxos {

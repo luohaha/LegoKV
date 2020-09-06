@@ -138,6 +138,17 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool isok() const;
   void set_isok(bool value);
 
+  // optional string consenus_group = 6;
+  void clear_consenus_group();
+  static const int kConsenusGroupFieldNumber = 6;
+  const ::std::string& consenus_group() const;
+  void set_consenus_group(const ::std::string& value);
+  void set_consenus_group(const char* value);
+  void set_consenus_group(const char* value, size_t size);
+  ::std::string* mutable_consenus_group();
+  ::std::string* release_consenus_group();
+  void set_allocated_consenus_group(::std::string* consenus_group);
+
   // @@protoc_insertion_point(class_scope:simplepaxos.PrepareRet)
  private:
 
@@ -147,6 +158,7 @@ class PrepareRet : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint64 proposaln_;
   ::google::protobuf::uint64 acceptern_;
   ::google::protobuf::internal::ArenaStringPtr accepterv_;
+  ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   bool isok_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
@@ -236,6 +248,17 @@ class AcceptRet : public ::google::protobuf::Message /* @@protoc_insertion_point
   bool isok() const;
   void set_isok(bool value);
 
+  // optional string consenus_group = 4;
+  void clear_consenus_group();
+  static const int kConsenusGroupFieldNumber = 4;
+  const ::std::string& consenus_group() const;
+  void set_consenus_group(const ::std::string& value);
+  void set_consenus_group(const char* value);
+  void set_consenus_group(const char* value, size_t size);
+  ::std::string* mutable_consenus_group();
+  ::std::string* release_consenus_group();
+  void set_allocated_consenus_group(::std::string* consenus_group);
+
   // @@protoc_insertion_point(class_scope:simplepaxos.AcceptRet)
  private:
 
@@ -243,6 +266,7 @@ class AcceptRet : public ::google::protobuf::Message /* @@protoc_insertion_point
   bool _is_default_instance_;
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
+  ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   bool isok_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
@@ -326,6 +350,17 @@ class Prepare : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::uint64 proposaln() const;
   void set_proposaln(::google::protobuf::uint64 value);
 
+  // optional string consenus_group = 3;
+  void clear_consenus_group();
+  static const int kConsenusGroupFieldNumber = 3;
+  const ::std::string& consenus_group() const;
+  void set_consenus_group(const ::std::string& value);
+  void set_consenus_group(const char* value);
+  void set_consenus_group(const char* value, size_t size);
+  ::std::string* mutable_consenus_group();
+  ::std::string* release_consenus_group();
+  void set_allocated_consenus_group(::std::string* consenus_group);
+
   // @@protoc_insertion_point(class_scope:simplepaxos.Prepare)
  private:
 
@@ -333,6 +368,7 @@ class Prepare : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   bool _is_default_instance_;
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 proposaln_;
+  ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
   friend void protobuf_AssignDesc_simple_5fpaxos_2eproto();
@@ -426,6 +462,17 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::std::string* release_accepterv();
   void set_allocated_accepterv(::std::string* accepterv);
 
+  // optional string consenus_group = 4;
+  void clear_consenus_group();
+  static const int kConsenusGroupFieldNumber = 4;
+  const ::std::string& consenus_group() const;
+  void set_consenus_group(const ::std::string& value);
+  void set_consenus_group(const char* value);
+  void set_consenus_group(const char* value, size_t size);
+  ::std::string* mutable_consenus_group();
+  ::std::string* release_consenus_group();
+  void set_allocated_consenus_group(::std::string* consenus_group);
+
   // @@protoc_insertion_point(class_scope:simplepaxos.Accept)
  private:
 
@@ -434,6 +481,7 @@ class Accept : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::uint64 instanceid_;
   ::google::protobuf::uint64 acceptern_;
   ::google::protobuf::internal::ArenaStringPtr accepterv_;
+  ::google::protobuf::internal::ArenaStringPtr consenus_group_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_simple_5fpaxos_2eproto();
   friend void protobuf_AssignDesc_simple_5fpaxos_2eproto();
@@ -550,6 +598,50 @@ inline void PrepareRet::set_isok(bool value) {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.isok)
 }
 
+// optional string consenus_group = 6;
+inline void PrepareRet::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PrepareRet::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PrepareRet::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.consenus_group)
+}
+inline void PrepareRet::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.PrepareRet.consenus_group)
+}
+inline void PrepareRet::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.PrepareRet.consenus_group)
+}
+inline ::std::string* PrepareRet::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.PrepareRet.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PrepareRet::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.PrepareRet.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PrepareRet::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.consenus_group)
+}
+
 // -------------------------------------------------------------------
 
 // AcceptRet
@@ -596,6 +688,50 @@ inline void AcceptRet::set_isok(bool value) {
   // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.isok)
 }
 
+// optional string consenus_group = 4;
+inline void AcceptRet::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AcceptRet::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.AcceptRet.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AcceptRet::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.consenus_group)
+}
+inline void AcceptRet::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.AcceptRet.consenus_group)
+}
+inline void AcceptRet::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.AcceptRet.consenus_group)
+}
+inline ::std::string* AcceptRet::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.AcceptRet.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AcceptRet::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.AcceptRet.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AcceptRet::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.AcceptRet.consenus_group)
+}
+
 // -------------------------------------------------------------------
 
 // Prepare
@@ -626,6 +762,50 @@ inline void Prepare::set_proposaln(::google::protobuf::uint64 value) {
   
   proposaln_ = value;
   // @@protoc_insertion_point(field_set:simplepaxos.Prepare.proposaln)
+}
+
+// optional string consenus_group = 3;
+inline void Prepare::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Prepare::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Prepare.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Prepare::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.Prepare.consenus_group)
+}
+inline void Prepare::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.Prepare.consenus_group)
+}
+inline void Prepare::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Prepare.consenus_group)
+}
+inline ::std::string* Prepare::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.Prepare.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Prepare::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.Prepare.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Prepare::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.Prepare.consenus_group)
 }
 
 // -------------------------------------------------------------------
@@ -702,6 +882,50 @@ inline void Accept::set_allocated_accepterv(::std::string* accepterv) {
   }
   accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.accepterv)
+}
+
+// optional string consenus_group = 4;
+inline void Accept::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Accept::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Accept.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Accept::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.Accept.consenus_group)
+}
+inline void Accept::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.Accept.consenus_group)
+}
+inline void Accept::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Accept.consenus_group)
+}
+inline ::std::string* Accept::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.Accept.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Accept::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.Accept.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Accept::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.consenus_group)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

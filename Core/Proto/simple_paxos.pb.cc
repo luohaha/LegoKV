@@ -45,12 +45,13 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       "simple_paxos.proto");
   GOOGLE_CHECK(file != NULL);
   PrepareRet_descriptor_ = file->message_type(0);
-  static const int PrepareRet_offsets_[5] = {
+  static const int PrepareRet_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, proposaln_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, acceptern_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, accepterv_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, consenus_group_),
   };
   PrepareRet_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -64,10 +65,11 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PrepareRet, _is_default_instance_));
   AcceptRet_descriptor_ = file->message_type(1);
-  static const int AcceptRet_offsets_[3] = {
+  static const int AcceptRet_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, proposaln_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, consenus_group_),
   };
   AcceptRet_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -81,9 +83,10 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcceptRet, _is_default_instance_));
   Prepare_descriptor_ = file->message_type(2);
-  static const int Prepare_offsets_[2] = {
+  static const int Prepare_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, proposaln_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, consenus_group_),
   };
   Prepare_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -97,10 +100,11 @@ void protobuf_AssignDesc_simple_5fpaxos_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Prepare, _is_default_instance_));
   Accept_descriptor_ = file->message_type(3);
-  static const int Accept_offsets_[3] = {
+  static const int Accept_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, instanceid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, acceptern_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, accepterv_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Accept, consenus_group_),
   };
   Accept_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -157,18 +161,21 @@ void protobuf_AddDesc_simple_5fpaxos_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022simple_paxos.proto\022\013simplepaxos\"g\n\nPre"
+    "\n\022simple_paxos.proto\022\013simplepaxos\"\177\n\nPre"
     "pareRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tproposaln"
     "\030\002 \001(\004\022\021\n\tacceptern\030\003 \001(\004\022\021\n\taccepterv\030\004"
-    " \001(\t\022\014\n\004isok\030\005 \001(\010\"@\n\tAcceptRet\022\022\n\ninsta"
-    "nceid\030\001 \001(\004\022\021\n\tproposaln\030\002 \001(\004\022\014\n\004isok\030\003"
-    " \001(\010\"0\n\007Prepare\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tp"
-    "roposaln\030\002 \001(\004\"B\n\006Accept\022\022\n\ninstanceid\030\001"
-    " \001(\004\022\021\n\tacceptern\030\002 \001(\004\022\021\n\taccepterv\030\003 \001"
-    "(\t2\216\001\n\013SimplePaxos\022=\n\014HandleAccept\022\023.sim"
-    "plepaxos.Accept\032\026.simplepaxos.AcceptRet\""
-    "\000\022@\n\rHandlePrepare\022\024.simplepaxos.Prepare"
-    "\032\027.simplepaxos.PrepareRet\"\000b\006proto3", 475);
+    " \001(\t\022\014\n\004isok\030\005 \001(\010\022\026\n\016consenus_group\030\006 \001"
+    "(\t\"X\n\tAcceptRet\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\tp"
+    "roposaln\030\002 \001(\004\022\014\n\004isok\030\003 \001(\010\022\026\n\016consenus"
+    "_group\030\004 \001(\t\"H\n\007Prepare\022\022\n\ninstanceid\030\001 "
+    "\001(\004\022\021\n\tproposaln\030\002 \001(\004\022\026\n\016consenus_group"
+    "\030\003 \001(\t\"Z\n\006Accept\022\022\n\ninstanceid\030\001 \001(\004\022\021\n\t"
+    "acceptern\030\002 \001(\004\022\021\n\taccepterv\030\003 \001(\t\022\026\n\016co"
+    "nsenus_group\030\004 \001(\t2\216\001\n\013SimplePaxos\022=\n\014Ha"
+    "ndleAccept\022\023.simplepaxos.Accept\032\026.simple"
+    "paxos.AcceptRet\"\000\022@\n\rHandlePrepare\022\024.sim"
+    "plepaxos.Prepare\032\027.simplepaxos.PrepareRe"
+    "t\"\000b\006proto3", 571);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "simple_paxos.proto", &protobuf_RegisterTypes);
   PrepareRet::default_instance_ = new PrepareRet();
@@ -197,6 +204,7 @@ const int PrepareRet::kProposalnFieldNumber;
 const int PrepareRet::kAccepternFieldNumber;
 const int PrepareRet::kAcceptervFieldNumber;
 const int PrepareRet::kIsokFieldNumber;
+const int PrepareRet::kConsenusGroupFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PrepareRet::PrepareRet()
@@ -226,6 +234,7 @@ void PrepareRet::SharedCtor() {
   acceptern_ = GOOGLE_ULONGLONG(0);
   accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isok_ = false;
+  consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 PrepareRet::~PrepareRet() {
@@ -235,6 +244,7 @@ PrepareRet::~PrepareRet() {
 
 void PrepareRet::SharedDtor() {
   accepterv_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -285,6 +295,7 @@ void PrepareRet::Clear() {
   ZR_(instanceid_, acceptern_);
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isok_ = false;
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -373,6 +384,23 @@ bool PrepareRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(50)) goto parse_consenus_group;
+        break;
+      }
+
+      // optional string consenus_group = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_consenus_group:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_consenus_group()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->consenus_group().data(), this->consenus_group().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "simplepaxos.PrepareRet.consenus_group"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -431,6 +459,16 @@ void PrepareRet::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->isok(), output);
   }
 
+  // optional string consenus_group = 6;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.PrepareRet.consenus_group");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->consenus_group(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:simplepaxos.PrepareRet)
 }
 
@@ -466,6 +504,17 @@ void PrepareRet::SerializeWithCachedSizes(
   // optional bool isok = 5;
   if (this->isok() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->isok(), target);
+  }
+
+  // optional string consenus_group = 6;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.PrepareRet.consenus_group");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->consenus_group(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.PrepareRet)
@@ -507,6 +556,13 @@ int PrepareRet::ByteSize() const {
   // optional bool isok = 5;
   if (this->isok() != 0) {
     total_size += 1 + 1;
+  }
+
+  // optional string consenus_group = 6;
+  if (this->consenus_group().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->consenus_group());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -553,6 +609,10 @@ void PrepareRet::MergeFrom(const PrepareRet& from) {
   if (from.isok() != 0) {
     set_isok(from.isok());
   }
+  if (from.consenus_group().size() > 0) {
+
+    consenus_group_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.consenus_group_);
+  }
 }
 
 void PrepareRet::CopyFrom(const ::google::protobuf::Message& from) {
@@ -584,6 +644,7 @@ void PrepareRet::InternalSwap(PrepareRet* other) {
   std::swap(acceptern_, other->acceptern_);
   accepterv_.Swap(&other->accepterv_);
   std::swap(isok_, other->isok_);
+  consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -699,6 +760,50 @@ void PrepareRet::clear_isok() {
   // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.isok)
 }
 
+// optional string consenus_group = 6;
+void PrepareRet::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& PrepareRet::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.PrepareRet.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void PrepareRet::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.PrepareRet.consenus_group)
+}
+ void PrepareRet::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.PrepareRet.consenus_group)
+}
+ void PrepareRet::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.PrepareRet.consenus_group)
+}
+ ::std::string* PrepareRet::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.PrepareRet.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* PrepareRet::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.PrepareRet.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void PrepareRet::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.PrepareRet.consenus_group)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -707,6 +812,7 @@ void PrepareRet::clear_isok() {
 const int AcceptRet::kInstanceidFieldNumber;
 const int AcceptRet::kProposalnFieldNumber;
 const int AcceptRet::kIsokFieldNumber;
+const int AcceptRet::kConsenusGroupFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AcceptRet::AcceptRet()
@@ -729,10 +835,12 @@ AcceptRet::AcceptRet(const AcceptRet& from)
 
 void AcceptRet::SharedCtor() {
     _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
   isok_ = false;
+  consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 AcceptRet::~AcceptRet() {
@@ -741,6 +849,7 @@ AcceptRet::~AcceptRet() {
 }
 
 void AcceptRet::SharedDtor() {
+  consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -788,7 +897,9 @@ void AcceptRet::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(instanceid_, isok_);
+  ZR_(instanceid_, proposaln_);
+  isok_ = false;
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -845,6 +956,23 @@ bool AcceptRet::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(34)) goto parse_consenus_group;
+        break;
+      }
+
+      // optional string consenus_group = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_consenus_group:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_consenus_group()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->consenus_group().data(), this->consenus_group().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "simplepaxos.AcceptRet.consenus_group"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -888,6 +1016,16 @@ void AcceptRet::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->isok(), output);
   }
 
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.AcceptRet.consenus_group");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->consenus_group(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:simplepaxos.AcceptRet)
 }
 
@@ -907,6 +1045,17 @@ void AcceptRet::SerializeWithCachedSizes(
   // optional bool isok = 3;
   if (this->isok() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->isok(), target);
+  }
+
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.AcceptRet.consenus_group");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->consenus_group(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.AcceptRet)
@@ -934,6 +1083,13 @@ int AcceptRet::ByteSize() const {
   // optional bool isok = 3;
   if (this->isok() != 0) {
     total_size += 1 + 1;
+  }
+
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->consenus_group());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -973,6 +1129,10 @@ void AcceptRet::MergeFrom(const AcceptRet& from) {
   if (from.isok() != 0) {
     set_isok(from.isok());
   }
+  if (from.consenus_group().size() > 0) {
+
+    consenus_group_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.consenus_group_);
+  }
 }
 
 void AcceptRet::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1002,6 +1162,7 @@ void AcceptRet::InternalSwap(AcceptRet* other) {
   std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
   std::swap(isok_, other->isok_);
+  consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1059,6 +1220,50 @@ void AcceptRet::clear_isok() {
   // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.isok)
 }
 
+// optional string consenus_group = 4;
+void AcceptRet::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& AcceptRet::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.AcceptRet.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void AcceptRet::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.AcceptRet.consenus_group)
+}
+ void AcceptRet::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.AcceptRet.consenus_group)
+}
+ void AcceptRet::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.AcceptRet.consenus_group)
+}
+ ::std::string* AcceptRet::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.AcceptRet.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* AcceptRet::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.AcceptRet.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void AcceptRet::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.AcceptRet.consenus_group)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -1066,6 +1271,7 @@ void AcceptRet::clear_isok() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Prepare::kInstanceidFieldNumber;
 const int Prepare::kProposalnFieldNumber;
+const int Prepare::kConsenusGroupFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Prepare::Prepare()
@@ -1088,9 +1294,11 @@ Prepare::Prepare(const Prepare& from)
 
 void Prepare::SharedCtor() {
     _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   instanceid_ = GOOGLE_ULONGLONG(0);
   proposaln_ = GOOGLE_ULONGLONG(0);
+  consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Prepare::~Prepare() {
@@ -1099,6 +1307,7 @@ Prepare::~Prepare() {
 }
 
 void Prepare::SharedDtor() {
+  consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -1147,6 +1356,7 @@ void Prepare::Clear() {
 } while (0)
 
   ZR_(instanceid_, proposaln_);
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -1188,6 +1398,23 @@ bool Prepare::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(26)) goto parse_consenus_group;
+        break;
+      }
+
+      // optional string consenus_group = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_consenus_group:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_consenus_group()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->consenus_group().data(), this->consenus_group().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "simplepaxos.Prepare.consenus_group"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1226,6 +1453,16 @@ void Prepare::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->proposaln(), output);
   }
 
+  // optional string consenus_group = 3;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.Prepare.consenus_group");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->consenus_group(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:simplepaxos.Prepare)
 }
 
@@ -1240,6 +1477,17 @@ void Prepare::SerializeWithCachedSizes(
   // optional uint64 proposaln = 2;
   if (this->proposaln() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->proposaln(), target);
+  }
+
+  // optional string consenus_group = 3;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.Prepare.consenus_group");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->consenus_group(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.Prepare)
@@ -1262,6 +1510,13 @@ int Prepare::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->proposaln());
+  }
+
+  // optional string consenus_group = 3;
+  if (this->consenus_group().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->consenus_group());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -1298,6 +1553,10 @@ void Prepare::MergeFrom(const Prepare& from) {
   if (from.proposaln() != 0) {
     set_proposaln(from.proposaln());
   }
+  if (from.consenus_group().size() > 0) {
+
+    consenus_group_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.consenus_group_);
+  }
 }
 
 void Prepare::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1326,6 +1585,7 @@ void Prepare::Swap(Prepare* other) {
 void Prepare::InternalSwap(Prepare* other) {
   std::swap(instanceid_, other->instanceid_);
   std::swap(proposaln_, other->proposaln_);
+  consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1369,6 +1629,50 @@ void Prepare::clear_proposaln() {
   // @@protoc_insertion_point(field_set:simplepaxos.Prepare.proposaln)
 }
 
+// optional string consenus_group = 3;
+void Prepare::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& Prepare::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Prepare.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Prepare::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.Prepare.consenus_group)
+}
+ void Prepare::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.Prepare.consenus_group)
+}
+ void Prepare::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Prepare.consenus_group)
+}
+ ::std::string* Prepare::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.Prepare.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Prepare::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.Prepare.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Prepare::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.Prepare.consenus_group)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -1377,6 +1681,7 @@ void Prepare::clear_proposaln() {
 const int Accept::kInstanceidFieldNumber;
 const int Accept::kAccepternFieldNumber;
 const int Accept::kAcceptervFieldNumber;
+const int Accept::kConsenusGroupFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Accept::Accept()
@@ -1404,6 +1709,7 @@ void Accept::SharedCtor() {
   instanceid_ = GOOGLE_ULONGLONG(0);
   acceptern_ = GOOGLE_ULONGLONG(0);
   accepterv_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  consenus_group_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Accept::~Accept() {
@@ -1413,6 +1719,7 @@ Accept::~Accept() {
 
 void Accept::SharedDtor() {
   accepterv_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  consenus_group_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -1462,6 +1769,7 @@ void Accept::Clear() {
 
   ZR_(instanceid_, acceptern_);
   accepterv_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -1520,6 +1828,23 @@ bool Accept::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(34)) goto parse_consenus_group;
+        break;
+      }
+
+      // optional string consenus_group = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_consenus_group:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_consenus_group()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->consenus_group().data(), this->consenus_group().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "simplepaxos.Accept.consenus_group"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1568,6 +1893,16 @@ void Accept::SerializeWithCachedSizes(
       3, this->accepterv(), output);
   }
 
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.Accept.consenus_group");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->consenus_group(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:simplepaxos.Accept)
 }
 
@@ -1593,6 +1928,17 @@ void Accept::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->accepterv(), target);
+  }
+
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->consenus_group().data(), this->consenus_group().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "simplepaxos.Accept.consenus_group");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->consenus_group(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:simplepaxos.Accept)
@@ -1622,6 +1968,13 @@ int Accept::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->accepterv());
+  }
+
+  // optional string consenus_group = 4;
+  if (this->consenus_group().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->consenus_group());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -1662,6 +2015,10 @@ void Accept::MergeFrom(const Accept& from) {
 
     accepterv_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accepterv_);
   }
+  if (from.consenus_group().size() > 0) {
+
+    consenus_group_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.consenus_group_);
+  }
 }
 
 void Accept::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1691,6 +2048,7 @@ void Accept::InternalSwap(Accept* other) {
   std::swap(instanceid_, other->instanceid_);
   std::swap(acceptern_, other->acceptern_);
   accepterv_.Swap(&other->accepterv_);
+  consenus_group_.Swap(&other->consenus_group_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1776,6 +2134,50 @@ void Accept::clear_accepterv() {
   }
   accepterv_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accepterv);
   // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.accepterv)
+}
+
+// optional string consenus_group = 4;
+void Accept::clear_consenus_group() {
+  consenus_group_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& Accept::consenus_group() const {
+  // @@protoc_insertion_point(field_get:simplepaxos.Accept.consenus_group)
+  return consenus_group_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Accept::set_consenus_group(const ::std::string& value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:simplepaxos.Accept.consenus_group)
+}
+ void Accept::set_consenus_group(const char* value) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:simplepaxos.Accept.consenus_group)
+}
+ void Accept::set_consenus_group(const char* value, size_t size) {
+  
+  consenus_group_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:simplepaxos.Accept.consenus_group)
+}
+ ::std::string* Accept::mutable_consenus_group() {
+  
+  // @@protoc_insertion_point(field_mutable:simplepaxos.Accept.consenus_group)
+  return consenus_group_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Accept::release_consenus_group() {
+  // @@protoc_insertion_point(field_release:simplepaxos.Accept.consenus_group)
+  
+  return consenus_group_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Accept::set_allocated_consenus_group(::std::string* consenus_group) {
+  if (consenus_group != NULL) {
+    
+  } else {
+    
+  }
+  consenus_group_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), consenus_group);
+  // @@protoc_insertion_point(field_set_allocated:simplepaxos.Accept.consenus_group)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
