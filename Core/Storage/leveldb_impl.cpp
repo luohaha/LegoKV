@@ -50,13 +50,13 @@ namespace StorageEngine
   }
 
   int LevelDBImpl::Apply(const std::string &consensus_group,
-                         const Consensus::ConsensusType &value)
+                         const lkvrpc::ConsensusType &value)
   {
-    if (value.op == Consensus::OP_PUT) {
-      return Put(consensus_group, value.key, value.value);
-    } else if (value.op == Consensus::OP_DEL) {
-      return Delete(consensus_group, value.key);
-    } else if (value.op == Consensus::OP_GET) {
+    if (value.op() == lkvrpc::ConsensusType::OP_PUT) {
+      return Put(consensus_group, value.key(), value.value());
+    } else if (value.op() == lkvrpc::ConsensusType::OP_DEL) {
+      return Delete(consensus_group, value.key());
+    } else if (value.op() == lkvrpc::ConsensusType::OP_GET) {
       //do nothing
     }
     return ERR_UNEXPECTED;

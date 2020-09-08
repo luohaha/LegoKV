@@ -16,7 +16,7 @@ struct GlobalConf
 struct ConfType
 {
     std::string location;
-    std::string curConsensusGroup;
+    std::string workdir;
     struct GlobalConf gconf;
 };
 

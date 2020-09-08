@@ -22,9 +22,11 @@ int LuoKV::Get(const Base::BaseType &key,
   std::string &cg = router_->RouterHash(key);
   std::string &loc = cons_->ChooseReadProvider(cg);
   if (loc == cur_loc_) {
-    ConsensusType v(OP_GET, key.buf);
+    lkvrpc::ConsensusType v;
+    v.set_op(lkvrpc::ConsensusType_OpType::ConsensusType_OpType_OP_GET);
+    v.set_key(key.buf);
     return cons_->Propose(cg, v,
-    [&](bool a, const std::string &cg, const ConsensusType &b) 
+    [&](bool a, const std::string &cg, const lkvrpc::ConsensusType &b) 
     -> int { return se_->Get(cg, key, value); });
   } else {
     LKVClientImpl impl(loc);
@@ -38,9 +40,12 @@ int LuoKV::Put(const Base::BaseType &key,
   std::string &cg = router_->RouterHash(key);
   std::string &loc = cons_->ChooseModifyProvider(cg);
   if (loc == cur_loc_) {
-    ConsensusType v(OP_PUT, key.buf, value.buf);
+    lkvrpc::ConsensusType v;
+    v.set_op(lkvrpc::ConsensusType_OpType::ConsensusType_OpType_OP_PUT);
+    v.set_key(key.buf);
+    v.set_value(value.buf);
     return cons_->Propose(router_->RouterHash(key), v,
-    [&](bool a, const std::string &cg, const ConsensusType &b) 
+    [&](bool a, const std::string &cg, const lkvrpc::ConsensusType &b) 
     -> int { return se_->Apply(cg, b); });
   } else {
     LKVClientImpl impl(loc);
@@ -53,9 +58,11 @@ int LuoKV::Delete(const Base::BaseType &key)
   std::string &cg = router_->RouterHash(key);
   std::string &loc = cons_->ChooseModifyProvider(cg);
   if (loc == cur_loc_) {
-    ConsensusType v(OP_DEL, key.buf);
+    lkvrpc::ConsensusType v;
+    v.set_op(lkvrpc::ConsensusType_OpType::ConsensusType_OpType_OP_DEL);
+    v.set_key(key.buf);
     return cons_->Propose(router_->RouterHash(key), v,
-    [&](bool a, const std::string &cg, const ConsensusType &b) 
+    [&](bool a, const std::string &cg, const lkvrpc::ConsensusType &b) 
     -> int { return se_->Apply(cg, b); });
   } else {
     LKVClientImpl impl(loc);

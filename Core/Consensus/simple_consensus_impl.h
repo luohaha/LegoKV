@@ -12,8 +12,8 @@ namespace Consensus
         SimpleConsensusImpl(Conf::IConf *conf) : conf_(conf) 
         { conf->LoadConf(); }
         virtual int Propose(const std::string &consensus_group,
-                            const ConsensusType &value,
-                            std::function<int (bool, const std::string&, const ConsensusType &)> cb) override;
+                            const lkvrpc::ConsensusType &value,
+                            std::function<int (bool, const std::string&, const lkvrpc::ConsensusType &)> cb) override;
         virtual std::string &ChooseReadProvider(const std::string &consensus_group) override;
         virtual std::string &ChooseModifyProvider(const std::string &consensus_group) override;
     private:

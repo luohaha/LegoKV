@@ -27,7 +27,7 @@ namespace StorageEngine
     virtual int Delete(const std::string &consensus_group,
         const Base::BaseType &key) override;
     virtual int Apply(const std::string &consensus_group,
-                      const Consensus::ConsensusType &value) override;
+                      const lkvrpc::ConsensusType &value) override;
   private:
     leveldb::DB* db_;
   };

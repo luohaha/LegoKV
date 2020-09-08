@@ -28,7 +28,7 @@ void JsonConfImpl::LoadConf()
     Json::Value root;
     GetJsonValue(contents, root);
     cur_conf_.location = root.get("location", "NULL").asString();
-    cur_conf_.curConsensusGroup = root.get("curConsensusGroup", "NULL").asString();
+    cur_conf_.workdir = root.get("workdir", "NULL").asString();
     Json::Value &gconf = root["gconf"];
     const std::vector<std::string> &keys = gconf.getMemberNames();
     for (auto &each : keys) {
@@ -49,8 +49,8 @@ struct ConfType &JsonConfImpl::GetConf()
 
 void JsonConfImpl::PrintConf()
 {
-    printf("location : %s\ncurConsensusGroup : %s\n", 
-    cur_conf_.location.c_str(), cur_conf_.curConsensusGroup.c_str());
+    printf("location : %s\n workdir : %s\n", 
+    cur_conf_.location.c_str(), cur_conf_.workdir.c_str());
     for (auto &each : cur_conf_.gconf.globalConsensusGroup) {
         printf("consensus group : %s : ", each.first.c_str());
         printf("[");

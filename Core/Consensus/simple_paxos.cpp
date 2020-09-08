@@ -1,123 +1,237 @@
 #include "simple_paxos.h"
 #include <algorithm>
 
-namespace lkv 
+namespace lkv
 {
-namespace Consensus
-{
+    namespace Consensus
+    {
 
-int SimplePaxos::Propose(const std::string &consensus_group,
-                      const ConsensusType &value,
-                      std::function<int (bool, const std::string &, const ConsensusType &)> cb)
-{
-    
-    return cb(true, consensus_group, value);
-}
-
-std::string &SimplePaxos::ChooseReadProvider(const std::string &consensus_group)
-{
-    return conf_->GetConf().gconf.globalConsensusGroup[consensus_group].at(0);
-}
-
-std::string &SimplePaxos::ChooseModifyProvider(const std::string &consensus_group)
-{
-    return conf_->GetConf().gconf.globalConsensusGroup[consensus_group].at(0);
-}
-
-Status SimplePaxos::HandleAccept(ServerContext* context, 
-                                const simplepaxos::Accept* request, 
-                                simplepaxos::AcceptRet* response)
-{
-    if (request->acceptern() >= acceptor_.proposaln) {
-        acceptor_.proposaln = request->acceptern();
-        acceptor_.acceptvalue = request->acceptern();
-        acceptor_.acceptvalue = request->accepterv();
-        response->set_proposaln(request->acceptern());
-        response->set_isok(true);
-        return Status::OK;
-    } else {
-        response->set_isok(false);
-        return Status::OK;
-    }
-}
-Status SimplePaxos::HandlePrepare(ServerContext* context, 
-                                  const simplepaxos::Prepare* request, 
-                                  simplepaxos::PrepareRet* response)
-{
-    if (request->proposaln() > acceptor_.proposaln) {
-        acceptor_.proposaln = request->proposaln();
-        response->set_proposaln(acceptor_.proposaln);
-        response->set_acceptern(acceptor_.acceptn);
-        response->set_accepterv(acceptor_.acceptvalue);
-        response->set_isok(true);
-        return Status::OK;
-    } else {
-        response->set_isok(false);
-        return Status::OK;
-    }
-}
-
-Status SimplePaxos::SendPrepare_(std::string peer, int64_t proposaln)
-{
-    if (stub_pool_.find(peer) == stub_pool_.end()) {
-        stub_pool_[peer](simplepaxos::SimplePaxos::NewStub(grpc::CreateChannel(peer, 
-          grpc::InsecureChannelCredentials())));
-    }
-    ClientContext context;
-    simplepaxos::Prepare p;
-    p.set_proposaln(proposaln);
-    simplepaxos::PrepareRet ret;
-    Status s = stub_pool_[peer]->HandlePrepare(&context, p, &ret);
-    if (s.ok() && ret.isok()) {
-        proposer_.pset.insert(peer);
-        proposer_.proposaln = std::max(ret.proposaln(), proposer_.proposaln);
-        if (ret.acceptern() > proposer_.maxacceptn) {
-            proposer_.maxacceptv = ret.accepterv();
+        int SimplePaxos::Propose(const std::string &consensus_group,
+                                 const lkvrpc::ConsensusType &value,
+                                 std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)> cb)
+        {
+            if (psm_map_.find(consensus_group) == psm_map_.end())
+                return ERR_CONSENSUS_NO_EXIST;
+            psm_map_[consensus_group].propose_q_.Push(std::make_unique<std::pair<const lkvrpc::ConsensusType,
+                                                                                 std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)>>>(value, cb));
+            return cb(true, consensus_group, value);
         }
-        if (proposer_.pset.size() > peerset_.size() / 2) {
-            proposer_.state = ProposerState::ACCEPT;
-        }
-    }
-    return s;
-}
-    
-Status SimplePaxos::SendAccept_(std::string peer, int64_t acceptn, std::string acceptv)
-{
-    if (stub_pool_.find(peer) == stub_pool_.end()) {
-        stub_pool_[peer](simplepaxos::SimplePaxos::NewStub(grpc::CreateChannel(peer, 
-          grpc::InsecureChannelCredentials())));
-    }
-    ClientContext context;
-    simplepaxos::Accept a;
-    a.set_acceptern(acceptn);
-    a.set_accepterv(acceptv);
-    simplepaxos::AcceptRet ret;
-    Status s = stub_pool_[peer]->HandleAccept(&context, a, &ret);
-    if (s.ok() && ret.isok()) {
-        proposer_.aset.insert(peer);
-        if (proposer_.aset.size() > peerset_.size() / 2) {
-            proposer_.state = ProposerState::CONFIRM;
-        }
-    }
-    return s;
-}
 
-void SimplePaxos::Drive_()
-{
-    do {
-        if (proposer_.state == ProposerState::PREPARE) {
-            for (auto &peer : peerset_) {
-                SendPrepare_(peer, 0);
+        std::string &SimplePaxos::ChooseReadProvider(const std::string &consensus_group)
+        {
+            return conf_->GetConf().gconf.globalConsensusGroup[consensus_group].at(0);
+        }
+
+        std::string &SimplePaxos::ChooseModifyProvider(const std::string &consensus_group)
+        {
+            return conf_->GetConf().gconf.globalConsensusGroup[consensus_group].at(0);
+        }
+
+        Status SimplePaxos::HandleAccept(ServerContext *context,
+                                         const simplepaxos::Accept *request,
+                                         simplepaxos::AcceptRet *response)
+        {
+            if (psm_map_.find(request->consenus_group()) == psm_map_.end())
+            {
+                psm_map_.emplace(request->consenus_group(),
+                                 PaxosStateMachine(GetPeerSet_(request->consenus_group())));
             }
-        } else if (proposer_.state == ProposerState::ACCEPT) {
-            for (auto &peer : peerset_) {
-                SendAccept_(peer, proposer_.maxacceptn, proposer_.maxacceptv);
+            PaxosStateMachine &psm = psm_map_[request->consenus_group()];
+            Acceptor &acceptor = psm.instances_[request->instanceid()].acceptor_;
+            ReadRecord_(request->consenus_group(), request->instanceid(), acceptor);
+            if (request->acceptern() >= acceptor.proposaln)
+            {
+                acceptor.proposaln = request->acceptern();
+                acceptor.acceptn = request->acceptern();
+                acceptor.acceptvalue = request->accepterv();
+                WriteRecord_(request->consenus_group(), request->instanceid(), acceptor);
+                response->set_proposaln(request->acceptern());
+                response->set_consenus_group(request->consenus_group());
+                response->set_instanceid(request->instanceid());
+                response->set_isok(true);
+                return Status::OK;
             }
-        } else if (proposer_.state == ProposerState::CONFIRM) {
+            else
+            {
+                response->set_isok(false);
+                return Status::OK;
+            }
+        }
+        Status SimplePaxos::HandlePrepare(ServerContext *context,
+                                          const simplepaxos::Prepare *request,
+                                          simplepaxos::PrepareRet *response)
+        {
+            if (psm_map_.find(request->consenus_group()) == psm_map_.end())
+            {
+                psm_map_.emplace(request->consenus_group(),
+                                 PaxosStateMachine(GetPeerSet_(request->consenus_group())));
+            }
+            PaxosStateMachine &psm = psm_map_[request->consenus_group()];
+            Acceptor &acceptor = psm.instances_[request->instanceid()].acceptor_;
+            ReadRecord_(request->consenus_group(), request->instanceid(), acceptor);
+            if (request->proposaln() > acceptor.proposaln)
+            {
+                acceptor.proposaln = request->proposaln();
+                WriteRecord_(request->consenus_group(), request->instanceid(), acceptor);
+                response->set_proposaln(acceptor.proposaln);
+                response->set_acceptern(acceptor.acceptn);
+                response->set_allocated_accepterv(&acceptor.acceptvalue);
+                response->set_consenus_group(request->consenus_group());
+                response->set_instanceid(request->instanceid());
+                response->set_isok(true);
+                return Status::OK;
+            }
+            else
+            {
+                response->set_proposaln(acceptor.proposaln);
+                response->set_isok(false);
+                return Status::OK;
+            }
+        }
 
-        } else {}
-    } while (true);
-}
+        Status SimplePaxos::SendPrepare_(const std::string &peer,
+                                         const std::string &cg,
+                                         uint64_t instanceid,
+                                         uint64_t proposaln)
+        {
+            if (stub_pool_.find(peer) == stub_pool_.end())
+            {
+                stub_pool_[peer] = simplepaxos::SimplePaxos::NewStub(grpc::CreateChannel(peer,
+                                                                                         grpc::InsecureChannelCredentials()));
+            }
+            if (psm_map_.find(cg) == psm_map_.end())
+            {
+                psm_map_.emplace(cg, PaxosStateMachine(GetPeerSet_(cg)));
+            }
+            PaxosStateMachine &psm = psm_map_[cg];
+            ClientContext context;
+            simplepaxos::Prepare p;
+            p.set_consenus_group(cg);
+            p.set_proposaln(proposaln);
+            p.set_instanceid(instanceid);
+            simplepaxos::PrepareRet ret;
+            Proposer &proposer = psm.instances_[instanceid].proposer_;
+            Status s = stub_pool_[peer]->HandlePrepare(&context, p, &ret);
+            if (s.ok() && ret.isok())
+            {
+                if (ret.isok())
+                {
+                    proposer.pset.insert(peer);
+                    if (ret.acceptern() > proposer.maxacceptn)
+                    {
+                        proposer.maxacceptv = ret.accepterv();
+                        proposer.maxacceptn = ret.acceptern();
+                    }
+                    if (proposer.pset.size() > psm.peerset_.size() / 2)
+                    {
+                        proposer.state = ProposerState::ACCEPT;
+                    }
+                }
+                else
+                {
+                    proposer.next_proposn = std::max(proposer.next_proposn + 1, ret.proposaln());
+                }
+            }
+            return s;
+        }
 
-}
-}
+        Status SimplePaxos::SendAccept_(const std::string &peer,
+                                        const std::string &cg,
+                                        uint64_t instanceid,
+                                        uint64_t acceptn,
+                                        lkvrpc::ConsensusType &acceptv)
+        {
+            if (stub_pool_.find(peer) == stub_pool_.end())
+            {
+                stub_pool_[peer] = simplepaxos::SimplePaxos::NewStub(grpc::CreateChannel(peer,
+                                                                                         grpc::InsecureChannelCredentials()));
+            }
+            if (psm_map_.find(cg) == psm_map_.end())
+            {
+                psm_map_.emplace(cg, PaxosStateMachine(GetPeerSet_(cg)));
+            }
+
+            ClientContext context;
+            simplepaxos::Accept a;
+            a.set_consenus_group(cg);
+            a.set_instanceid(instanceid);
+            a.set_acceptern(acceptn);
+            a.set_allocated_accepterv(&acceptv);
+            PaxosStateMachine &psm = psm_map_[cg];
+            Proposer &proposer = psm.instances_[instanceid].proposer_;
+            Acceptor &acceptor = psm.instances_[instanceid].acceptor_;
+            simplepaxos::AcceptRet ret;
+            Status s = stub_pool_[peer]->HandleAccept(&context, a, &ret);
+            if (s.ok() && ret.isok())
+            {
+                proposer.aset.insert(peer);
+                if (proposer.aset.size() > psm.peerset_.size() / 2 
+                && proposer.aset.find(conf_->GetConf().location) != proposer.aset.end())
+                {
+                    proposer.state = ProposerState::CONFIRM;
+                    acceptor.confirm = true;
+                    WriteRecord_(cg, instanceid, acceptor);
+                }
+            }
+            return s;
+        }
+
+        void SimplePaxos::Drive_()
+        {
+            do
+            {
+                for (auto &cg : psm_map_)
+                {
+                    // for each paxos state machine
+                    PaxosStateMachine &psm = cg.second;
+                    for (auto &instance : psm.instances_)
+                    {
+                        // for each instance
+                        Proposer &proposer = instance.second.proposer_;
+                        if (proposer.state == ProposerState::PREPARE)
+                        {
+                            for (auto &peer : psm.peerset_)
+                            {
+                                SendPrepare_(peer, cg.first, instance.first, proposer.next_proposn);
+                            }
+                        }
+                        else if (proposer.state == ProposerState::ACCEPT)
+                        {
+                            for (auto &peer : psm.peerset_)
+                            {
+                                if (proposer.maxacceptv.key().empty())
+                                {
+                                    proposer.maxacceptv = proposer.want_to_pval.get()->first;
+                                    proposer.propos_want_to = true;
+                                } else {
+                                    proposer.propos_want_to = false;
+                                }
+                                SendAccept_(peer, cg.first, instance.first,
+                                            proposer.maxacceptn, proposer.maxacceptv);
+                            }
+                        }
+                        else if (proposer.state == ProposerState::CONFIRM)
+                        {
+                            // cb
+                            if (proposer.propos_want_to) {
+                                proposer.want_to_pval.get()->second(true, cg.first, proposer.maxacceptv);
+                            } else {
+                                storage_->Apply(cg.first, proposer.maxacceptv);
+                            }
+                            proposer.state = ProposerState::FINISH;
+                        }
+                        else
+                        {
+                        }
+                    }
+                    auto next = psm.propose_q_.TryPop();
+                    if (next.get() != NULL) {
+                        psm.instances_.emplace(psm.next_instance_id_.fetch_add(1, std::memory_order_release), PaxosStateInstance());
+                        psm.instances_[0].proposer_.want_to_pval = std::move(next);
+                    }
+                }
+            } while (true);
+        }
+
+    } // namespace Consensus
+} // namespace lkv

@@ -5,8 +5,8 @@ namespace lkv
 namespace Consensus 
 {
 int SimpleConsensusImpl::Propose(const std::string &consensus_group,
-                      const ConsensusType &value,
-                      std::function<int (bool, const std::string &, const ConsensusType &)> cb)
+                      const lkvrpc::ConsensusType &value,
+                      std::function<int (bool, const std::string &, const lkvrpc::ConsensusType &)> cb)
 {
     return cb(true, consensus_group, value);
 }

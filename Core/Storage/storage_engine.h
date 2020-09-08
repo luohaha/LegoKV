@@ -25,7 +25,7 @@ class IStorageEngine
   virtual int Delete(const std::string &consensus_group,
                      const Base::BaseType &key) = 0;
   virtual int Apply(const std::string &consensus_group,
-                    const Consensus::ConsensusType &value) = 0;
+                    const lkvrpc::ConsensusType &value) = 0;
 };
 
 }
