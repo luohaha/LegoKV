@@ -152,7 +152,7 @@ namespace lkv
         std::unique_lock<std::mutex> guard(mutex_);
         if (q_.size() >= count_)
         {
-          push_cond_.wait(mutex_);
+          push_cond_.wait(guard);
         }
         q_.push(item);
         pop_cond_.notify_all();
@@ -163,7 +163,7 @@ namespace lkv
         std::unique_lock<std::mutex> guard(mutex_);
         if (q_.empty())
         {
-          pop_cond_.wait(mutex_);
+          pop_cond_.wait(guard);
         }
         std::unique_ptr<T> ret = std::move(q_.front());
         q_.pop();
