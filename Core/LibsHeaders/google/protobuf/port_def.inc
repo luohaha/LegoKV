@@ -300,14 +300,14 @@
 
 // Shared google3/opensource definitions. //////////////////////////////////////
 
-#define PROTOBUF_VERSION 3012002
-#define PROTOBUF_MIN_HEADER_VERSION_FOR_PROTOC 3012000
-#define PROTOBUF_MIN_PROTOC_VERSION 3012000
+#define PROTOBUF_VERSION 3013000
+#define PROTOBUF_MIN_HEADER_VERSION_FOR_PROTOC 3013000
+#define PROTOBUF_MIN_PROTOC_VERSION 3013000
 #define PROTOBUF_VERSION_SUFFIX ""
 
 // The minimum library version which works with the current version of the
 // headers.
-#define GOOGLE_PROTOBUF_MIN_LIBRARY_VERSION 3012000
+#define GOOGLE_PROTOBUF_MIN_LIBRARY_VERSION 3013000
 
 #if defined(GOOGLE_PROTOBUF_NO_RTTI) && GOOGLE_PROTOBUF_NO_RTTI
 #define PROTOBUF_RTTI 0
@@ -356,55 +356,67 @@
 #endif
 
 #if defined(PROTOBUF_USE_DLLS)
-  #if defined(_MSC_VER)
-    #ifdef LIBPROTOBUF_EXPORTS
-      #define PROTOBUF_EXPORT __declspec(dllexport)
-      #define PROTOBUF_EXPORT_TEMPLATE_DECLARE
-      #define PROTOBUF_EXPORT_TEMPLATE_DEFINE __declspec(dllexport)
-    #else
-      #define PROTOBUF_EXPORT __declspec(dllimport)
-      #define PROTOBUF_EXPORT_TEMPLATE_DECLARE
-      #define PROTOBUF_EXPORT_TEMPLATE_DEFINE __declspec(dllimport)
-    #endif
-    #ifdef LIBPROTOC_EXPORTS
-      #define PROTOC_EXPORT __declspec(dllexport)
-    #else
-      #define PROTOC_EXPORT __declspec(dllimport)
-    #endif
-  #else  // defined(_MSC_VER)
-    #ifdef LIBPROTOBUF_EXPORTS
-      #define PROTOBUF_EXPORT __attribute__((visibility("default")))
-      #define PROTOBUF_EXPORT_TEMPLATE_DECLARE __attribute__((visibility("default")))
-      #define PROTOBUF_EXPORT_TEMPLATE_DEFINE
-    #else
-      #define PROTOBUF_EXPORT
-      #define PROTOBUF_EXPORT_TEMPLATE_DECLARE
-      #define PROTOBUF_EXPORT_TEMPLATE_DEFINE
-    #endif
-    #ifdef LIBPROTOC_EXPORTS
-      #define PROTOC_EXPORT   __attribute__((visibility("default")))
-    #else
-      #define PROTOC_EXPORT
-    #endif
-  #endif
+#if defined(_MSC_VER)
+#ifdef LIBPROTOBUF_EXPORTS
+#define PROTOBUF_EXPORT __declspec(dllexport)
+#define PROTOBUF_EXPORT_TEMPLATE_DECLARE
+#define PROTOBUF_EXPORT_TEMPLATE_DEFINE __declspec(dllexport)
+#else
+#define PROTOBUF_EXPORT __declspec(dllimport)
+#define PROTOBUF_EXPORT_TEMPLATE_DECLARE
+#define PROTOBUF_EXPORT_TEMPLATE_DEFINE __declspec(dllimport)
+#endif
+#ifdef LIBPROTOC_EXPORTS
+#define PROTOC_EXPORT __declspec(dllexport)
+#else
+#define PROTOC_EXPORT __declspec(dllimport)
+#endif
+#else  // defined(_MSC_VER)
+#ifdef LIBPROTOBUF_EXPORTS
+#define PROTOBUF_EXPORT __attribute__((visibility("default")))
+#define PROTOBUF_EXPORT_TEMPLATE_DECLARE __attribute__((visibility("default")))
+#define PROTOBUF_EXPORT_TEMPLATE_DEFINE
+#else
+#define PROTOBUF_EXPORT
+#define PROTOBUF_EXPORT_TEMPLATE_DECLARE
+#define PROTOBUF_EXPORT_TEMPLATE_DEFINE
+#endif
+#ifdef LIBPROTOC_EXPORTS
+#define PROTOC_EXPORT __attribute__((visibility("default")))
+#else
+#define PROTOC_EXPORT
+#endif
+#endif
 #else  // defined(PROTOBUF_USE_DLLS)
-  #define PROTOBUF_EXPORT
-  #define PROTOC_EXPORT
-  #define PROTOBUF_EXPORT_TEMPLATE_DECLARE
-  #define PROTOBUF_EXPORT_TEMPLATE_DEFINE
+#define PROTOBUF_EXPORT
+#define PROTOC_EXPORT
+#define PROTOBUF_EXPORT_TEMPLATE_DECLARE
+#define PROTOBUF_EXPORT_TEMPLATE_DEFINE
 #endif
 
 // Windows declares several inconvenient macro names.  We #undef them and then
 // restore them in port_undef.inc.
 #ifdef _MSC_VER
+#pragma push_macro("CREATE_NEW")
+#undef CREATE_NEW
+#pragma push_macro("DOUBLE_CLICK")
+#undef DOUBLE_CLICK
 #pragma push_macro("ERROR")
 #undef ERROR
+#pragma push_macro("ERROR_BUSY")
+#undef ERROR_BUSY
+#pragma push_macro("ERROR_NOT_FOUND")
+#undef ERROR_NOT_FOUND
 #pragma push_macro("GetMessage")
 #undef GetMessage
 #pragma push_macro("IGNORE")
 #undef IGNORE
 #pragma push_macro("IN")
 #undef IN
+#pragma push_macro("INPUT_KEYBOARD")
+#undef INPUT_KEYBOARD
+#pragma push_macro("NO_ERROR")
+#undef NO_ERROR
 #pragma push_macro("OUT")
 #undef OUT
 #pragma push_macro("OPTIONAL")
@@ -413,15 +425,29 @@
 #undef min
 #pragma push_macro("max")
 #undef max
+#pragma push_macro("REASON_UNKNOWN")
+#undef REASON_UNKNOWN
+#pragma push_macro("SERVICE_DISABLED")
+#undef SERVICE_DISABLED
+#pragma push_macro("SEVERITY_ERROR")
+#undef SEVERITY_ERROR
+#pragma push_macro("STRICT")
+#undef STRICT
 #endif  // _MSC_VER
 
 #if defined(__clang__) || defined(__GNUC__) || defined(_MSC_VER)
-// Don't let the YES/NO Objective-C Macros interfere with proto identifiers with
-// the same name.
+// Don't let Objective-C Macros interfere with proto identifiers with the same 
+// name.
 #pragma push_macro("YES")
 #undef YES
 #pragma push_macro("NO")
 #undef NO
+#pragma push_macro("DEBUG")
+#undef DEBUG
+#pragma push_macro("TRUE")
+#undef TRUE
+#pragma push_macro("FALSE")
+#undef FALSE
 #endif // defined(__clang__) || defined(__GNUC__) || defined(_MSC_VER)
 
 #if defined(__clang__)
@@ -484,3 +510,21 @@
 #endif
 
 #define PROTOBUF_FINAL final
+
+#if defined(_MSC_VER)
+#define PROTOBUF_THREAD_LOCAL __declspec(thread)
+#else
+#define PROTOBUF_THREAD_LOCAL __thread
+#endif
+
+// For enabling message owned arena, one major blocker is semantic change from
+// moving to copying when there is ownership transfer (e.g., move ctor, swap,
+// set allocated, release). This change not only causes performance regression
+// but also breaks users code (e.g., dangling reference). For top-level
+// messages, since it owns the arena, we can mitigate the issue by transferring
+// ownership of arena. However, we cannot do that for nested messages. In order
+// to tell how many usages of nested messages affected by message owned arena,
+// we need to simulate the arena ownership.
+// This experiment is purely for the purpose of gathering data. All code guarded
+// by this flag is supposed to be removed after this experiment.
+// #define PROTOBUF_MESSAGE_OWNED_ARENA_EXPERIMENT

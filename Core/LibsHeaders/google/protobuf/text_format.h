@@ -369,6 +369,8 @@ class PROTOBUF_EXPORT TextFormat {
     // output to the OutputStream (see text_format.cc for implementation).
     class TextGenerator;
 
+    static const char* const kDoNotParse;
+
     // Internal Print method, used for writing to the OutputStream via
     // the TextGenerator class.
     void Print(const Message& message, TextGenerator* generator) const;
@@ -452,7 +454,7 @@ class PROTOBUF_EXPORT TextFormat {
   // google::protobuf::MessageLite::ParseFromString().
   static bool Parse(io::ZeroCopyInputStream* input, Message* output);
   // Like Parse(), but reads directly from a string.
-  static bool ParseFromString(const std::string& input, Message* output);
+  static bool ParseFromString(ConstStringParam input, Message* output);
 
   // Like Parse(), but the data is merged into the given message, as if
   // using Message::MergeFrom().
@@ -529,7 +531,7 @@ class PROTOBUF_EXPORT TextFormat {
     // Like TextFormat::Parse().
     bool Parse(io::ZeroCopyInputStream* input, Message* output);
     // Like TextFormat::ParseFromString().
-    bool ParseFromString(const std::string& input, Message* output);
+    bool ParseFromString(ConstStringParam input, Message* output);
     // Like TextFormat::Merge().
     bool Merge(io::ZeroCopyInputStream* input, Message* output);
     // Like TextFormat::MergeFromString().

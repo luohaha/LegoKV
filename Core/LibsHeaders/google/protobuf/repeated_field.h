@@ -334,13 +334,12 @@ class RepeatedField final {
   int total_size_;
   struct Rep {
     Arena* arena;
-    Element elements[1];
+    // Here we declare a huge array as a way of approximating C's "flexible
+    // array member" feature without relying on undefined behavior.
+    Element elements[(std::numeric_limits<int>::max() - 2 * sizeof(Arena*)) /
+                     sizeof(Element)];
   };
-  // We can not use sizeof(Rep) - sizeof(Element) due to the trailing padding on
-  // the struct. We can not use sizeof(Arena*) as well because there might be
-  // a "gap" after the field arena and before the field elements (e.g., when
-  // Element is double and pointer is 32bit).
-  static const size_t kRepHeaderSize;
+  static constexpr size_t kRepHeaderSize = offsetof(Rep, elements);
 
   // If total_size_ == 0 this points to an Arena otherwise it points to the
   // elements member of a Rep struct. Using this invariant allows the storage of
@@ -381,14 +380,14 @@ class RepeatedField final {
   void CopyArray(Element* to, const Element* from, int size);
 
   // Internal helper to delete all elements and deallocate the storage.
-  // If Element has a trivial destructor (for example, if it's a fundamental
-  // type, like int32), the loop will be removed by the optimizer.
   void InternalDeallocate(Rep* rep, int size) {
     if (rep != NULL) {
       Element* e = &rep->elements[0];
-      Element* limit = &rep->elements[size];
-      for (; e < limit; e++) {
-        e->~Element();
+      if (!std::is_trivial<Element>::value) {
+        Element* limit = &rep->elements[size];
+        for (; e < limit; e++) {
+          e->~Element();
+        }
       }
       if (rep->arena == NULL) {
 #if defined(__GXX_DELETE_WITH_SIZE__) || defined(__cpp_sized_deallocation)
@@ -439,50 +438,53 @@ class RepeatedField final {
   //
   // The first version executes at 7 cycles per iteration while the second
   // version near 1 or 2 cycles.
-  class FastAdder {
+  template <int = 0, bool = std::is_pod<Element>::value>
+  class FastAdderImpl {
    public:
-    explicit FastAdder(RepeatedField* rf) : repeated_field_(rf) {
-      if (kIsPod) {
-        index_ = repeated_field_->current_size_;
+    explicit FastAdderImpl(RepeatedField* rf) : repeated_field_(rf) {
+      index_ = repeated_field_->current_size_;
+      capacity_ = repeated_field_->total_size_;
+      buffer_ = repeated_field_->unsafe_elements();
+    }
+    ~FastAdderImpl() { repeated_field_->current_size_ = index_; }
+
+    void Add(Element val) {
+      if (index_ == capacity_) {
+        repeated_field_->current_size_ = index_;
+        repeated_field_->Reserve(index_ + 1);
         capacity_ = repeated_field_->total_size_;
         buffer_ = repeated_field_->unsafe_elements();
       }
-    }
-    ~FastAdder() {
-      if (kIsPod) repeated_field_->current_size_ = index_;
-    }
-
-    void Add(const Element& val) {
-      if (kIsPod) {
-        if (index_ == capacity_) {
-          repeated_field_->current_size_ = index_;
-          repeated_field_->Reserve(index_ + 1);
-          capacity_ = repeated_field_->total_size_;
-          buffer_ = repeated_field_->unsafe_elements();
-        }
-        buffer_[index_++] = val;
-      } else {
-        repeated_field_->Add(val);
-      }
+      buffer_[index_++] = val;
     }
 
    private:
-    constexpr static bool kIsPod = std::is_pod<Element>::value;
     RepeatedField* repeated_field_;
     int index_;
     int capacity_;
     Element* buffer_;
 
-    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastAdder);
+    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
   };
+
+  // FastAdder is a wrapper for adding fields. The specialization above handles
+  // POD types more efficiently than RepeatedField.
+  template <int I>
+  class FastAdderImpl<I, false> {
+   public:
+    explicit FastAdderImpl(RepeatedField* rf) : repeated_field_(rf) {}
+    void Add(const Element& val) { repeated_field_->Add(val); }
+
+   private:
+    RepeatedField* repeated_field_;
+    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
+  };
+
+  using FastAdder = FastAdderImpl<>;
 
   friend class TestRepeatedFieldHelper;
   friend class ::google::protobuf::internal::ParseContext;
 };
-
-template <typename Element>
-const size_t RepeatedField<Element>::kRepHeaderSize =
-    reinterpret_cast<size_t>(&reinterpret_cast<Rep*>(16)->elements[0]) - 16;
 
 namespace internal {
 template <typename It>
@@ -734,9 +736,12 @@ class PROTOBUF_EXPORT RepeatedPtrFieldBase {
   int total_size_;
   struct Rep {
     int allocated_size;
-    void* elements[1];
+    // Here we declare a huge array as a way of approximating C's "flexible
+    // array member" feature without relying on undefined behavior.
+    void* elements[(std::numeric_limits<int>::max() - 2 * sizeof(int)) /
+                   sizeof(void*)];
   };
-  static constexpr size_t kRepHeaderSize = sizeof(Rep) - sizeof(void*);
+  static constexpr size_t kRepHeaderSize = offsetof(Rep, elements);
   Rep* rep_;
 
   template <typename TypeHandler>
@@ -1329,8 +1334,15 @@ inline void RepeatedField<Element>::Set(int index, const Element& value) {
 template <typename Element>
 inline void RepeatedField<Element>::Add(const Element& value) {
   uint32 size = current_size_;
-  if (static_cast<int>(size) == total_size_) Reserve(total_size_ + 1);
-  elements()[size] = value;
+  if (static_cast<int>(size) == total_size_) {
+    // value could reference an element of the array. Reserving new space will
+    // invalidate the reference. So we must make a copy first.
+    auto tmp = value;
+    Reserve(total_size_ + 1);
+    elements()[size] = std::move(tmp);
+  } else {
+    elements()[size] = value;
+  }
   current_size_ = size + 1;
 }
 
