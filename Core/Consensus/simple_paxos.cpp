@@ -12,9 +12,10 @@ namespace lkv
         {
             if (psm_map_.find(consensus_group) == psm_map_.end())
                 return ERR_CONSENSUS_NO_EXIST;
-            psm_map_[consensus_group].propose_q_.Push(std::make_unique<std::pair<const lkvrpc::ConsensusType,
-                                                                                 std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)>>>(value, cb));
-            return cb(true, consensus_group, value);
+            Base::Cond condition;
+            psm_map_[consensus_group].propose_q_.Push(std::unique_ptr<ProposVal>(new ProposVal(value, cb, condition)));
+            condition.Wait();
+            return ERR_SUCCESS;
         }
 
         std::string &SimplePaxos::ChooseReadProvider(const std::string &consensus_group)
@@ -33,8 +34,7 @@ namespace lkv
         {
             if (psm_map_.find(request->consenus_group()) == psm_map_.end())
             {
-                psm_map_.emplace(request->consenus_group(),
-                                 PaxosStateMachine(GetPeerSet_(request->consenus_group())));
+                psm_map_[request->consenus_group()].SetPeerSet(GetPeerSet_(request->consenus_group()));
             }
             PaxosStateMachine &psm = psm_map_[request->consenus_group()];
             Acceptor &acceptor = psm.instances_[request->instanceid()].acceptor_;
@@ -63,8 +63,7 @@ namespace lkv
         {
             if (psm_map_.find(request->consenus_group()) == psm_map_.end())
             {
-                psm_map_.emplace(request->consenus_group(),
-                                 PaxosStateMachine(GetPeerSet_(request->consenus_group())));
+                psm_map_[request->consenus_group()].SetPeerSet(GetPeerSet_(request->consenus_group()));
             }
             PaxosStateMachine &psm = psm_map_[request->consenus_group()];
             Acceptor &acceptor = psm.instances_[request->instanceid()].acceptor_;
@@ -101,7 +100,7 @@ namespace lkv
             }
             if (psm_map_.find(cg) == psm_map_.end())
             {
-                psm_map_.emplace(cg, PaxosStateMachine(GetPeerSet_(cg)));
+                psm_map_[cg].SetPeerSet(GetPeerSet_(cg));
             }
             PaxosStateMachine &psm = psm_map_[cg];
             ClientContext context;
@@ -148,7 +147,7 @@ namespace lkv
             }
             if (psm_map_.find(cg) == psm_map_.end())
             {
-                psm_map_.emplace(cg, PaxosStateMachine(GetPeerSet_(cg)));
+                psm_map_[cg].SetPeerSet(GetPeerSet_(cg));
             }
 
             ClientContext context;
@@ -201,7 +200,7 @@ namespace lkv
                             {
                                 if (proposer.maxacceptv.key().empty())
                                 {
-                                    proposer.maxacceptv = proposer.want_to_pval.get()->first;
+                                    proposer.maxacceptv = proposer.want_to_pval.get()->value;
                                     proposer.propos_want_to = true;
                                 } else {
                                     proposer.propos_want_to = false;
@@ -214,10 +213,11 @@ namespace lkv
                         {
                             // cb
                             if (proposer.propos_want_to) {
-                                proposer.want_to_pval.get()->second(true, cg.first, proposer.maxacceptv);
+                                proposer.want_to_pval.get()->cb(true, cg.first, proposer.maxacceptv);
                             } else {
                                 storage_->Apply(cg.first, proposer.maxacceptv);
                             }
+                            proposer.want_to_pval.get()->condition.Notify();
                             proposer.state = ProposerState::FINISH;
                         }
                         else
@@ -226,8 +226,9 @@ namespace lkv
                     }
                     auto next = psm.propose_q_.TryPop();
                     if (next.get() != NULL) {
-                        psm.instances_.emplace(psm.next_instance_id_.fetch_add(1, std::memory_order_release), PaxosStateInstance());
-                        psm.instances_[0].proposer_.want_to_pval = std::move(next);
+                        uint64_t iid = psm.next_instance_id_.fetch_add(1, std::memory_order_release);
+                        psm.instances_.emplace(iid, PaxosStateInstance());
+                        psm.instances_[iid].proposer_.want_to_pval = std::move(next);
                     }
                 }
             } while (true);

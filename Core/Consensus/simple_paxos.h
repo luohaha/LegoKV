@@ -40,9 +40,16 @@ namespace lkv
             FINISH,
         };
 
-        typedef std::pair<const lkvrpc::ConsensusType,
-                          std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)>>
-            ProposVal;
+        struct ProposVal
+        {
+            ProposVal(const lkvrpc::ConsensusType &v,
+                      const std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)> &c,
+                      Base::Cond &co) : value(v), cb(c), condition(co) {}
+            ~ProposVal() {}
+            const lkvrpc::ConsensusType &value;
+            const std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)> &cb;
+            Base::Cond &condition;
+        };
 
         struct Proposer
         {
@@ -64,7 +71,12 @@ namespace lkv
 
         struct PaxosStateMachine
         {
+            PaxosStateMachine() : propose_q_(100) {}
             PaxosStateMachine(const std::vector<std::string> &peerset) : propose_q_(100), next_instance_id_(1)
+            {
+                peerset_.assign(peerset.begin(), peerset.end());
+            }
+            void SetPeerSet(const std::vector<std::string> &peerset)
             {
                 peerset_.assign(peerset.begin(), peerset.end());
             }
@@ -78,11 +90,17 @@ namespace lkv
         {
         public:
             SimplePaxos(Conf::IConf *conf, StorageEngine::IStorageEngine *storage)
-                : conf_(conf), storage_(storage_)
+                : conf_(conf), storage_(storage)
             {
                 conf->LoadConf();
+                th_.emplace_back(&SimplePaxos::Drive_, this);
             }
-            ~SimplePaxos() {}
+            ~SimplePaxos() 
+            {
+                for (auto &each : th_) {
+                    each.join();
+                }
+            }
             virtual int Propose(const std::string &consensus_group,
                                 const lkvrpc::ConsensusType &value,
                                 std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)> cb) override;
@@ -91,9 +109,9 @@ namespace lkv
 
             // rpc impl
             virtual Status HandleAccept(ServerContext *context,
-                                        const simplepaxos::Accept *request, simplepaxos::AcceptRet *response);
+                                        const simplepaxos::Accept *request, simplepaxos::AcceptRet *response) override;
             virtual Status HandlePrepare(ServerContext *context,
-                                         const simplepaxos::Prepare *request, simplepaxos::PrepareRet *response);
+                                         const simplepaxos::Prepare *request, simplepaxos::PrepareRet *response) override;
 
         private:
             static const uint64_t MAGIC = 0xDEDEABAB;
@@ -117,7 +135,7 @@ namespace lkv
             {
                 if (pagecontainer_map_.find(cg) == pagecontainer_map_.end())
                 {
-                    pagecontainer_map_[cg] = std::make_unique<Base::PageContainer>(conf_->GetConf().workdir + "/" + cg + "/");
+                    pagecontainer_map_[cg] = Base::make_unique<Base::PageContainer>(conf_->GetConf().workdir + "/" + cg + "/");
                 }
                 simplepaxos::PaxosRecord record;
                 record.set_magic(MAGIC);
@@ -135,7 +153,7 @@ namespace lkv
             {
                 if (pagecontainer_map_.find(cg) == pagecontainer_map_.end())
                 {
-                    pagecontainer_map_[cg] = std::make_unique<Base::PageContainer>(conf_->GetConf().workdir + "/" + cg + "/");
+                    pagecontainer_map_[cg] = Base::make_unique<Base::PageContainer>(conf_->GetConf().workdir + "/" + cg + "/");
                 }
                 simplepaxos::PaxosRecord record;
                 std::string tmp(4096, '0');
@@ -157,6 +175,8 @@ namespace lkv
             std::map<std::string, PaxosStateMachine> psm_map_;
             StorageEngine::IStorageEngine *storage_;
             std::map<std::string, std::unique_ptr<Base::PageContainer>> pagecontainer_map_;
+            std::vector<std::thread> th_;
+            Base::Cond cond_;
         };
 
     } // namespace Consensus

@@ -154,7 +154,7 @@ namespace lkv
         {
           push_cond_.wait(guard);
         }
-        q_.push(item);
+        q_.push(std::move(item));
         pop_cond_.notify_all();
         return;
       }
@@ -175,7 +175,7 @@ namespace lkv
         std::unique_lock<std::mutex> guard(mutex_);
         if (q_.empty())
         {
-          return make_unique<T>(NULL);
+          return std::unique_ptr<T>();
         }
         std::unique_ptr<T> ret = std::move(q_.front());
         q_.pop();
@@ -246,6 +246,24 @@ namespace lkv
       std::string dir_;
       std::map<uint64_t, File *> file_index_;
       bool ok_;
+    };
+
+    class Cond
+    {
+    public:
+      void Wait()
+      {
+        std::unique_lock<std::mutex> guard(mutex_);
+        cond_.wait(guard);
+      }
+      void Notify()
+      {
+        std::unique_lock<std::mutex> guard(mutex_);
+        cond_.notify_all();
+      }
+    private:
+      std::mutex mutex_;
+      std::condition_variable cond_;
     };
   } // namespace Base
 } // namespace lkv

@@ -1,3 +1,5 @@
+#ifndef LKV_RPC_H
+#define LKV_RPC_H
 #include "lkv.pb.h"
 #include "lkv.grpc.pb.h"
 #include "lkv.h"
@@ -53,3 +55,5 @@ private:
 };
 }
 }
+
+#endif
