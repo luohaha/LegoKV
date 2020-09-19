@@ -10,8 +10,12 @@ using namespace Consensus;
 using namespace Router;
 using namespace Rpc;
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc != 2) {
+        printf("usage ./test_legokv_client server_ip_port\n");
+        return 0;
+    }
     LKVClientImpl impl("0.0.0.0:8888");
     for (int i = 0; i < 1000; i++) {
         impl.Put(std::to_string(i), std::to_string(i));
