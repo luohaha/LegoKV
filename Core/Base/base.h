@@ -88,7 +88,7 @@ namespace lkv
       {
         ok_ = true;
         size_ = size;
-        fd_ = open(file_name.c_str(), O_CREAT | O_RDWR);
+        fd_ = open(file_name.c_str(), O_CREAT | O_RDWR, 0664);
         if (fd_ < 0)
         {
           ok_ = false;
