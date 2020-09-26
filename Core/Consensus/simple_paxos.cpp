@@ -10,11 +10,14 @@ namespace lkv
                                  const lkvrpc::ConsensusType &value,
                                  std::function<int(bool, const std::string &, const lkvrpc::ConsensusType &)> cb)
         {
-            if (psm_map_.find(consensus_group) == psm_map_.end())
-                return ERR_CONSENSUS_NO_EXIST;
+	  //if (psm_map_.find(consensus_group) == psm_map_.end())
+	  //    return ERR_CONSENSUS_NO_EXIST;
             Base::Cond condition;
+	    LOG_INFO("Propose cg %s Push To Queue", consensus_group.c_str());
             psm_map_[consensus_group].propose_q_.Push(std::unique_ptr<ProposVal>(new ProposVal(value, cb, condition)));
-            condition.Wait();
+            LOG_INFO("Propose cg %s Push To Queue Success", consensus_group.c_str());
+	    condition.Wait();
+	    LOG_INFO("Propose cg %s End", consensus_group.c_str());
             return ERR_SUCCESS;
         }
 

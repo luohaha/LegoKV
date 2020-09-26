@@ -23,6 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdarg.h>
 
 namespace lkv
 {
@@ -70,7 +71,27 @@ namespace lkv
     public:
       LogPrint() {}
       ~LogPrint() {}
-      void log_print(LogLevel level, int errcode, const char *msg, ...);
+      inline void log_print(LogLevel level, int errcode, const char *msg, ...)
+      {
+	log_print_impl(level, errcode, __FILE__, __func__, __LINE__, msg);
+      }
+      inline void log_print_impl(LogLevel level, int errcode, const char* file, const char* func, int line, const char *msg, ...)
+      {
+    	if (level >= level_)
+    	{
+      	printf("[%s][%s][%s][%s][%d]",
+               log_level_map[level],
+	       err_info_map[errcode],
+	       file,
+	       func,
+	       line);
+	va_list args;
+	va_start(args, msg);
+	vprintf(msg, args);
+	va_end(args);
+	printf("\n");
+    	}
+      }
       static LogPrint &get_instance()
       {
         static LogPrint log_p;
@@ -270,6 +291,7 @@ namespace lkv
 
 #define LOG lkv::Base::LogPrint::get_instance()
 
-#define LOG_OUT(type, msg...)
+#define LOG_INFO(msg, ...) \
+  LOG.log_print_impl(lkv::Base::LogLevel::INFO, ERR_SUCCESS, __FILE__, __func__, __LINE__, msg)
 
 #endif //LUOKV_BASE_H

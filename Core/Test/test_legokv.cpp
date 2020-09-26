@@ -13,14 +13,15 @@ using namespace Rpc;
 
 int main(int argc, char** argv)
 {
-  if (argc < 3) {
-    printf("usage : ./test_legokv conf_file leveldb_dir\n");
+  if (argc < 2) {
+    printf("usage : ./test_legokv conf_file\n");
     return 0;
   }
   std::string conf_file(argv[1]);
-  LOG.log_print(INFO, ERR_SUCCESS, "hello lkv");
-  IStorageEngine *se = new LevelDBImpl(argv[2]);
   IConf *conf = new JsonConfImpl(conf_file);
+  conf->LoadConf();
+  static_cast<JsonConfImpl*>(conf)->PrintConf();
+  IStorageEngine *se = new LevelDBImpl(conf->GetConf().workdir);
   IConsensus *cons = new SimplePaxos(conf, se);
   IRouter *router = new SimpleDHashImpl(conf);
   LuoKV lkv;

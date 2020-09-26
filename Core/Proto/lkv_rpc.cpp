@@ -9,6 +9,7 @@ Status LKVServiceImpl::Get(ServerContext *context, const lkvrpc::Key *request,
              lkvrpc::Value *reply)
 {
     BaseType resp;
+    LOG_INFO("Server : Get key %s", request->buf().c_str());
     lkv_->Get(BaseType(request->buf()), &resp);
     reply->set_buf(resp.buf);
     return Status::OK;
@@ -16,12 +17,14 @@ Status LKVServiceImpl::Get(ServerContext *context, const lkvrpc::Key *request,
 Status LKVServiceImpl::Put(ServerContext *context, const lkvrpc::KeyValuePair *request,
              lkvrpc::ReturnInt *reply)
 {
+    LOG_INFO("Server : Put key %s", request->buf().c_str());
     reply->set_ret(lkv_->Put(BaseType(request->key().buf()), BaseType(request->value().buf())));
     return Status::OK;
 }
 Status LKVServiceImpl::Delete(ServerContext *context, const lkvrpc::Key *request,
                 lkvrpc::ReturnInt *reply)
 {
+    LOG_INFO("Server : Del key %s", request->buf().c_str());
     reply->set_ret(lkv_->Delete(BaseType(request->buf())));
     return Status::OK;
 }
@@ -71,7 +74,8 @@ int LKVClientImpl::Put(const Base::BaseType &key,
     lkvrpc::ReturnInt ret;
     ClientContext context;
     Status status = stub_->Put(&context, pair, &ret);
-    return 0;
+    if (!status.ok()) return 1;
+    return ret.ret();
 }
   
 int LKVClientImpl::Delete(const Base::BaseType &key)
@@ -81,6 +85,7 @@ int LKVClientImpl::Delete(const Base::BaseType &key)
     lkvrpc::ReturnInt ret;
     ClientContext context;
     Status status = stub_->Delete(&context, ikey, &ret);
+    if (!status.ok()) return 1;
     return ret.ret();
 }
 

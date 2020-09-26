@@ -16,13 +16,14 @@ int main(int argc, char** argv)
         printf("usage ./test_legokv_client server_ip_port\n");
         return 0;
     }
-    LKVClientImpl impl("0.0.0.0:8888");
+    LKVClientImpl impl(argv[1]);
     for (int i = 0; i < 1000; i++) {
-        impl.Put(std::to_string(i), std::to_string(i));
+       assert(impl.Put(std::to_string(i), std::to_string(i)) == 0);
     }
+    printf("Put Success %s\n", argv[1]);
     BaseType ret;
     for (int i = 0; i < 1000; i++) {
-        impl.Get(std::to_string(i), &ret);
+        assert(impl.Get(std::to_string(i), &ret) == 0);
         assert(std::to_string(i) == ret.buf);
     }
     return 0;
