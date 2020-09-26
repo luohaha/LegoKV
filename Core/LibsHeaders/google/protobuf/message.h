@@ -145,7 +145,6 @@ class MessageFactory;
 class AssignDescriptorsHelper;
 class DynamicMessageFactory;
 class MapKey;
-class MapValueConstRef;
 class MapValueRef;
 class MapIterator;
 class MapReflectionTester;
@@ -170,9 +169,6 @@ class CelMapReflectionFriend;  // field_backed_map_impl.cc
 
 namespace internal {
 class MapFieldPrinterHelper;  // text_format.cc
-}
-namespace util {
-class MessageDifferencer;
 }
 
 
@@ -365,9 +361,6 @@ class PROTOBUF_EXPORT Message : public MessageLite {
 
   inline explicit Message(Arena* arena) : MessageLite(arena) {}
 
-
- protected:
-  static size_t GetInvariantPerBuild(size_t salt);
 
  private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Message);
@@ -747,7 +740,8 @@ class PROTOBUF_EXPORT Reflection final {
   // long as the message is not destroyed.
   //
   // Note that to use this method users need to include the header file
-  // "reflection.h" (which defines the RepeatedFieldRef class templates).
+  // "net/proto2/public/reflection.h" (which defines the RepeatedFieldRef
+  // class templates).
   template <typename T>
   RepeatedFieldRef<T> GetRepeatedFieldRef(const Message& message,
                                           const FieldDescriptor* field) const;
@@ -759,7 +753,7 @@ class PROTOBUF_EXPORT Reflection final {
       Message* message, const FieldDescriptor* field) const;
 
   // DEPRECATED. Please use Get(Mutable)RepeatedFieldRef() for repeated field
-  // access. The following repeated field accessors will be removed in the
+  // access. The following repeated field accesors will be removed in the
   // future.
   //
   // Repeated field accessors  -------------------------------------------------
@@ -918,22 +912,6 @@ class PROTOBUF_EXPORT Reflection final {
   const internal::RepeatedFieldAccessor* RepeatedFieldAccessor(
       const FieldDescriptor* field) const;
 
-  // Lists all fields of the message which are currently set, except for unknown
-  // fields and stripped fields. See ListFields for details.
-  void ListFieldsOmitStripped(
-      const Message& message,
-      std::vector<const FieldDescriptor*>* output) const;
-
-  bool IsMessageStripped(const Descriptor* descriptor) const {
-    return schema_.IsMessageStripped(descriptor);
-  }
-
-  friend class TextFormat;
-
-  void ListFieldsMayFailOnStripped(
-      const Message& message, bool should_fail,
-      std::vector<const FieldDescriptor*>* output) const;
-
   const Descriptor* const descriptor_;
   const internal::ReflectionSchema schema_;
   const DescriptorPool* const descriptor_pool_;
@@ -952,7 +930,6 @@ class PROTOBUF_EXPORT Reflection final {
   friend class ::PROTOBUF_NAMESPACE_ID::AssignDescriptorsHelper;
   friend class DynamicMessageFactory;
   friend class python::MapReflectionFriend;
-  friend class util::MessageDifferencer;
 #define GOOGLE_PROTOBUF_HAS_CEL_MAP_REFLECTION_FRIEND
   friend class expr::CelMapReflectionFriend;
   friend class internal::MapFieldReflectionTest;
@@ -982,18 +959,9 @@ class PROTOBUF_EXPORT Reflection final {
 
   // If key is in map field: Saves the value pointer to val and returns
   // false. If key in not in map field: Insert the key into map, saves
-  // value pointer to val and returns true. Users are able to modify the
-  // map value by MapValueRef.
+  // value pointer to val and returns true.
   bool InsertOrLookupMapValue(Message* message, const FieldDescriptor* field,
                               const MapKey& key, MapValueRef* val) const;
-
-  // If key is in map field: Saves the value pointer to val and returns true.
-  // Returns false if key is not in map field. Users are NOT able to modify
-  // the value by MapValueConstRef.
-  bool LookupMapValue(const Message& message, const FieldDescriptor* field,
-                      const MapKey& key, MapValueConstRef* val) const;
-  bool LookupMapValue(const Message&, const FieldDescriptor*, const MapKey&,
-                      MapValueRef*) const = delete;
 
   // Delete and returns true if key is in the map field. Returns false
   // otherwise.
@@ -1037,18 +1005,14 @@ class PROTOBUF_EXPORT Reflection final {
   template <typename Type>
   const Type& DefaultRaw(const FieldDescriptor* field) const;
 
-  const Message* GetDefaultMessageInstance(const FieldDescriptor* field) const;
-
   inline const uint32* GetHasBits(const Message& message) const;
   inline uint32* MutableHasBits(Message* message) const;
   inline uint32 GetOneofCase(const Message& message,
                              const OneofDescriptor* oneof_descriptor) const;
   inline uint32* MutableOneofCase(
       Message* message, const OneofDescriptor* oneof_descriptor) const;
-  inline bool HasExtensionSet(const Message& /* message */) const {
-    return schema_.HasExtensionSet();
-  }
-  const internal::ExtensionSet& GetExtensionSet(const Message& message) const;
+  inline const internal::ExtensionSet& GetExtensionSet(
+      const Message& message) const;
   internal::ExtensionSet* MutableExtensionSet(Message* message) const;
   inline Arena* GetArena(Message* message) const;
 
